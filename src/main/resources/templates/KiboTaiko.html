@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <title>Kibo Taiko</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+        <link rel="stylesheet" href="CSS/style.css" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>	
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 noSpace" style="background:black">
+                    <img class="img-responsive" ng-src="Images/Bandrolle.jpg" style="max-height: 250px; width: 100%" alt="temp"/>
+                </div>
+            </div>
+            <div class="container-fluidwidth">
+                <div class="row" ng-Controller="navBarrController">
+                    <div class="col-xs-12 noSpace">
+                        <nav class="navbar navbar-inverse" style="border-radius: 0px !important" role="navigation">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>    
+                                <a class="navbar-brand" href="#/">Accueil</a>
+                            </div>
+                            <div class="navbar-collapse collapse" style="text-align: center">
+                                <ul class="nav navbar-nav" style="display: inline-block; float: none">
+                                    <li ng-repeat="n in navBarrItems">
+                                        <a class="nav-link" href="{{n.destination}}">{{n.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-view="">
+                <!--the view will apear here-->
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>
+
+        <!--Tous les controller seront ici a voir si on a besoin de les mettre aux bonnes places si le site devient trop gros-->
+        <script src="JS/TemplateKiboTaiko.js"></script>
+        <script src="JS/CalandrierController.js"></script>
+        <script src="JS/GalerieController.js"></script>
+        <script src="JS/HomeController.js"></script>
+        <script src="JS/AdminController.js"></script>
+        <script src="JS/ActiviteController.js"></script>
+
+    </body>
+</html>
