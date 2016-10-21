@@ -2,6 +2,13 @@
 app.controller('AdminController', function ($scope, $http) {
     $scope.name = 'AdminController';
     $scope.id;
+    $scope.calandrier = {
+        id: "",
+        imageAlt: "",
+        image: "",
+        titleText: "",
+        contenue: ""
+    };
     
     $http({
         method: 'GET',
@@ -10,15 +17,7 @@ app.controller('AdminController', function ($scope, $http) {
         $scope.calandrierList = response.data;
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');
-    });
-    
-    $scope.calandrier = {
-        id: "",
-        imageAlt: "",
-        image: "",
-        titleText: "",
-        contenue: ""
-    };
+    });    
     
     $scope.setEvenementEdit = function (data) {
         $scope.calandrier.id = data.id;
