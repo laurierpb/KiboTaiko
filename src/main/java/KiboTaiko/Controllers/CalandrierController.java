@@ -22,9 +22,15 @@ public class CalandrierController {
         return test;
     }
 
+    // bon il faut que je regarde ca de pourquoi le post marche pas
     @RequestMapping(method = RequestMethod.PUT)
     public Calandrier postCalandrier(@RequestBody Calandrier cal) {
         System.out.println("\nPost     : Calandrier");
+        System.out.println("ID       : " + cal.getId());
+        System.out.println("Contenue : " + cal.getContenue());
+        System.out.println("Image    : " + cal.getImage());
+        System.out.println("ImageAlt : " + cal.getImageAlt());
+        System.out.println("Title    : " + cal.getTitleText());
 
         if (cal.getId() <= 0) {
             System.out.println("Erreur pour le ID");
@@ -43,6 +49,10 @@ public class CalandrierController {
     @RequestMapping(method = RequestMethod.POST)
     public Calandrier putCalandrier(@RequestBody Calandrier cal) {
         System.out.println("\nPut     : Calandrier");
+        System.out.println("Contenue : " + cal.getContenue());
+        System.out.println("Image    : " + cal.getImage());
+        System.out.println("ImageAlt : " + cal.getImageAlt());
+        System.out.println("Title    : " + cal.getTitleText());
         
         String erreurCalandrier = validateCalandrier(cal);
         if(!erreurCalandrier.equals("")){
@@ -72,6 +82,7 @@ public class CalandrierController {
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteCalandrier(@RequestBody int id) {
         System.out.println("\nDelete     : Calandrier");
+        System.out.println("ID       : " + id);
 
         if (id <= 0) {
             System.out.println("Erreur pour le ID");

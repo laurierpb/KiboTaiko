@@ -17,4 +17,8 @@ public class Application {
     public JdbcTemplate jdbcTemplate;
 
     public static Application app;
+
+    public Application() {
+        app = this;
+    }
 }

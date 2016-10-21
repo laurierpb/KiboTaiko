@@ -20,7 +20,7 @@ CREATE TABLE public.Administrateur
     id SERIAL NOT NULL,
     username text NOT NULL,
     password text NOT NULL
-    CONSTRAINT Calandrier_pkey PRIMARY KEY (id)
+    CONSTRAINT Administrateur_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
