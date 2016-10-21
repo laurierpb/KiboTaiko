@@ -44,6 +44,16 @@ public class CalandrierRepo {
                 cal.getId()
         );
     }
+    
+    public static void deleteCalandrier(int id) {
+        String sqlString = "DELETE FROM calandrier\n"
+                + "WHERE id = ?;";
+
+        Application.app.jdbcTemplate.update(
+                sqlString,
+                id
+        );
+    }
 
     public static void insertCalandrier(Calandrier cal) {
         String sqlString = "INSERT INTO calandrier (image,imagealt,contenue,titletext)"

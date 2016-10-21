@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Calandrier")
 public class CalandrierController {
-
+    
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     List<Calandrier> getEvenement() {
@@ -77,5 +77,18 @@ public class CalandrierController {
             return "Erreur pour le Titre";
         }
         return "";
+    }
+    
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteCalandrier(@RequestBody int id) {
+        System.out.println("\nDelete     : Calandrier");
+        System.out.println("ID       : " + id);
+
+        if (id <= 0) {
+            System.out.println("Erreur pour le ID");
+            return;
+        }
+        
+        CalandrierRepo.deleteCalandrier(id);
     }
 }

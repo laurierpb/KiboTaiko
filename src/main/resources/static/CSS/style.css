@@ -20,8 +20,14 @@ body{
     margin: 0 !important;
 }
 input[type=text]{
-  border-radius:10px;
+    border-radius:10px;
 }
+.dropdown-menu{
+    margin-left:calc(50% - 80px);
+    margin-right:calc(50% - 80px);
+}
+
+
 
 
 
