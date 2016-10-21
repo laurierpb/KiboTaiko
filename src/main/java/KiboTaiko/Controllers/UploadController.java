@@ -34,6 +34,7 @@ public class UploadController {
             String filename = uploadfile.getOriginalFilename();
             String directory = "src/main/resources/static/Images";
             String filepath = Paths.get(directory, filename).toString();
+            System.out.println(filename);
 
             // Save the file locally
             BufferedOutputStream stream;

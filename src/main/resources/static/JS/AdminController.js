@@ -26,7 +26,6 @@ app.controller('AdminController', function ($scope, $http) {
 
         document.getElementById("imageCalandrierEdit").src = data.image;
     };
-
     $scope.deleteCalandrier = function () {
         $http({
             method: 'DELETE',
@@ -41,8 +40,8 @@ app.controller('AdminController', function ($scope, $http) {
             console.log('OMG post fail');
         });
     };
-
     $scope.uploadAdd = function () {
+        //il faut que je trouve un meilleur moyen que ca v
         uploadImage();
         $http({
             method: 'POST',
@@ -58,6 +57,7 @@ app.controller('AdminController', function ($scope, $http) {
         });
     };
     $scope.uploadUpdate = function () {
+        //il faut que je trouve un meilleur moyen que ca v
         uploadImage();
         $http({
             method: 'PUT',
@@ -98,10 +98,10 @@ app.controller('AdminController', function ($scope, $http) {
             contentType: false,
             cache: false,
             success: function () {
-                alert("File upload success");
+                console.log("File upload success");
             },
             error: function () {
-                alert("Failed to upload the file");
+                console.log("Failed to upload the file");
             }
         });
     }

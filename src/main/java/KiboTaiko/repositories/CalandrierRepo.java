@@ -20,13 +20,6 @@ public class CalandrierRepo {
                         rs.getString("titleText")
                 )
         );
-        for (int i = 0; i < result.size(); i++) {
-            System.out.println("ID : " + result.get(i).getId());
-            System.out.println("Image : " + result.get(i).getImage());
-            System.out.println("ImageAlt : " + result.get(i).getImageAlt());
-            System.out.println("Contenue : " + result.get(i).getContenue());
-            System.out.println("TitleText : " + result.get(i).getTitleText());
-        }
         return result;
     }
 

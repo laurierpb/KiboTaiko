@@ -12,3 +12,16 @@ CREATE TABLE public.Calandrier
 WITH (
   OIDS=FALSE
 );
+
+-- Table: public.admin
+DROP TABLE public.Administrateur;
+CREATE TABLE public.Administrateur
+(
+    id SERIAL NOT NULL,
+    username text NOT NULL,
+    password text NOT NULL
+    CONSTRAINT Calandrier_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
