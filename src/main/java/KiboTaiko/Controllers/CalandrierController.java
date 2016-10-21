@@ -22,7 +22,6 @@ public class CalandrierController {
         return test;
     }
 
-    // bon il faut que je regarde ca de pourquoi le post marche pas
     @RequestMapping(method = RequestMethod.PUT)
     public Calandrier postCalandrier(@RequestBody Calandrier cal) {
         System.out.println("\nPost     : Calandrier");

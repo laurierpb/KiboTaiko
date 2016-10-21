@@ -2,6 +2,13 @@
 app.controller('AdminController', function ($scope, $http) {
     $scope.name = 'AdminController';
     $scope.id;
+    $scope.calandrier = {
+        id: "",
+        imageAlt: "",
+        image: "",
+        titleText: "",
+        contenue: ""
+    };
     $http({
         method: 'GET',
         url: '/Calandrier'
@@ -10,15 +17,6 @@ app.controller('AdminController', function ($scope, $http) {
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');
     });
-
-    $scope.calandrier = {
-        id: "",
-        imageAlt: "",
-        image: "",
-        titleText: "",
-        contenue: ""
-    };
-
     $scope.setEvenementEdit = function (data) {
         $scope.calandrier.id = data.id;
         $scope.calandrier.imageAlt = data.imageAlt;
@@ -38,22 +36,14 @@ app.controller('AdminController', function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
-            console.log('post success');
-            console.log('data');
-            console.log(data.data);
+            location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG post fail');
         });
     };
 
     $scope.uploadAdd = function () {
-        console.log($scope.calandrier.imageAlt);
-        console.log($scope.calandrier.image);
-        console.log($scope.calandrier.titleText);
-        console.log($scope.calandrier.contenue);
-
         uploadImage();
-
         $http({
             method: 'POST',
             url: '/Calandrier',
@@ -67,16 +57,8 @@ app.controller('AdminController', function ($scope, $http) {
             console.log('OMG post fail');
         });
     };
-
     $scope.uploadUpdate = function () {
-        console.log($scope.calandrier.id);
-        console.log($scope.calandrier.imageAlt);
-        console.log($scope.calandrier.image);
-        console.log($scope.calandrier.titleText);
-        console.log($scope.calandrier.contenue);
-
         uploadImage();
-
         $http({
             method: 'PUT',
             url: '/Calandrier',
@@ -90,7 +72,6 @@ app.controller('AdminController', function ($scope, $http) {
             console.log('OMG post fail');
         });
     };
-    
     $scope.uploadDelete = function () {
         console.log($scope.calandrier.id);
 
@@ -107,8 +88,6 @@ app.controller('AdminController', function ($scope, $http) {
             console.log('OMG post fail');
         });
     };
-
-
     function uploadImage() {
         $.ajax({
             url: "/uploadFile",
@@ -126,12 +105,9 @@ app.controller('AdminController', function ($scope, $http) {
             }
         });
     }
-
     $("#upload-file-input").change(function () {
         readURL(this);
     });
-
-
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
