@@ -122,4 +122,12 @@ app.controller('AdminController', function ($scope, $http) {
             reader.readAsDataURL(input.files[0]);
         }
     }
+    $scope.addText = function(i, j){
+        var txtArea = document.getElementById("calandrierContenue");
+        var startIndex = txtArea.selectionStart;
+        var endIndex = txtArea.selectionEnd;
+        $scope.calandrier.contenue = $scope.calandrier.contenue.slice(0, startIndex) + i + 
+                $scope.calandrier.contenue.slice(startIndex, endIndex) + j + 
+                $scope.calandrier.contenue.slice(endIndex);
+    };
 });

@@ -64,15 +64,70 @@
                                ng-model="calandrier.imageAlt"/>
 
                         <label for="calandrierContenue">Contenue Calandrier</label>
+                        <br/>
+                        <button type="button" class="btn btn-default" ng-click="addText('<b>', '</b>')">
+                            <span class="glyphicon glyphicon-bold" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="addText('<i>', '</i>')">
+                            <span class="glyphicon glyphicon-italic" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="addText('<u>', '</u>')">
+                            <span class="glyphicon glyphicon-text-color" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-left\'>', '</div>')">
+                            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-center\'>', '</div>')">
+                            <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-center\'>', '</div>')">
+                            <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="addText('<br/\>', '')">
+                            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                        </button>
+                        
+                        <div style="display: inline-block;" align="center" class="dropdown" >
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                <b>Grosseur</b>
+                                <span class="caret"></span>
+                            </button>
+                            <ul float: right class="dropdown-menu" >
+                                <li>
+                                    <a role="button" ng-click="addText('<h1>', '</h1>')"><h1>Vraiment très grand</h1></a>
+                                </li>
+                                <li>
+                                    <a role="button" ng-click="addText('<h2>', '</h2>')"><h2>Très grand</h2></a>
+                                </li>
+                                <li>
+                                    <a role="button" ng-click="addText('<h3>', '</h3>')"><h3>Grand</h3></a>
+                                </li>
+                                <li>
+                                    <a role="button" ng-click="addText('<h4>', '</h4>')"><h4>Normal</h4></a>
+                                </li>
+                                <li>
+                                    <a role="button" ng-click="addText('<h5>', '</h5>')"><h5>Petit</h5></a>
+                                </li>
+                                <li>
+                                    <a role="button" ng-click="addText('<h6>', '</h6>')"><h6>Très petit</h6></a>
+                                </li>
+                            </ul>
+                        </div>
+                        
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <textarea id="calandrierContenue" class="form-control" rows="3" 
+                                    <textarea id="calandrierContenue" class="form-control" rows="10" 
                                               placeholder="Écrire la description en HTML" style="resize: none"
                                               ng-model="calandrier.contenue"></textarea>
                                 </div>
                             </div>
                         </div>
+                        
+                        
+                        
+                        
+                        
                         <button type="button" ng-click="uploadAdd()"    class="btn btn-primary">
                             Enregistrer Nouveau
                         </button>
