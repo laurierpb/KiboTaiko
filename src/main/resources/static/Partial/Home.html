@@ -1,9 +1,13 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="item in homeItems">
+    <div class="row" ng-repeat="item in homeItems">
+        <br/>
+        <div class="col-lg-offset-1 col-xs-12 col-sm-5 col-lg-3">
+            <img class="img-responsive img-rounded" style="width:100%; height: 100%" ng-src="{{item.img}}" alt="test"/>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-lg-7"    >
+
             <h1 class="center">{{item.titre}}</h1>
             <p>{{item.contenue}}</p>
-            <img class="img-responsive" ng-src="{{item.img}}" alt="test"/>
         </div>
     </div>
     <br/>

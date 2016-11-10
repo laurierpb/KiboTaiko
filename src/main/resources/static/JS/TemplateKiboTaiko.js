@@ -17,9 +17,15 @@ app.config(function ($routeProvider) {
                 templateUrl: 'Partial/Galerie.html',
                 controller: 'GalerieController'
             })
+            
             .when('/Admin', {
                 templateUrl: 'Partial/Admin.html',
                 controller: 'AdminController'
+            })
+            
+            .when('/Commandite', {
+                templateUrl: 'Partial/Commandite.html',
+                controller: 'CommanditeController'
             })
             .otherwise({
                 redirectTo: '/'
@@ -37,6 +43,9 @@ app.controller('navBarrController', function ($scope) {
         }, {
             name: "Galerie"
             , destination: "#/Galerie"
+        }, {
+            name: "Commandite"
+            , destination: "#/Commandite"
         }, {
             name: "Admin"
             , destination: "#/Admin"
