@@ -24,7 +24,7 @@ public class HomeRepo {
     }
     
     public static void insertHomeItems(HomeItem homeItem){
-        String query = "INSERT INTO homeItems (order, image, imageAlt, titre, contenue)\n" +
+        String query = "INSERT INTO homeItems (ordre, image, imageAlt, titre, contenue)\n" +
                         "VALUES (?, ?, ?, ?, ?);";
         Application.app.jdbcTemplate.update(
             query,
@@ -37,7 +37,7 @@ public class HomeRepo {
     }
     public static void updateHomeItems(HomeItem homeItem){
         String query = "UPDATE homeItems\n"
-                + "SET Order = ?, image = ?, ImageAlt = ?, Titre = ?, Contenue = ?\n"
+                + "SET Ordre = ?, image = ?, ImageAlt = ?, Titre = ?, Contenue = ?\n"
                 + "WHERE id = ?;";
         Application.app.jdbcTemplate.update(
             query,

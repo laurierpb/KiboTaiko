@@ -1,3 +1,4 @@
+$.getScript("JS/Utility/Upload.js", function(){});
 /* global app */
 app.controller('AdminCalandrierController', function ($scope, $http) {
     $scope.id;
@@ -89,26 +90,12 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
             console.log('OMG post fail');
         });
     };
-    function uploadImage() {
-        $.ajax({
-            url: "/uploadFile",
-            type: "POST",
-            data: new FormData($("#upload-file-form")[0]),
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function () {
-                console.log("File upload success");
-            },
-            error: function () {
-                console.log("Failed to upload the file");
-            }
-        });
-    }
-    $("#upload-file-input").change(function () {
+    
+    
+    $("#upload-file-input-calandrier").change(function () {
         readURL(this);
     });
+    
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -121,6 +108,7 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
             reader.readAsDataURL(input.files[0]);
         }
     }
+    
     $scope.addText = function(i, j){
         var txtArea = document.getElementById("calandrierContenue");
         var startIndex = txtArea.selectionStart;
