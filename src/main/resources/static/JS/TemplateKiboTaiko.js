@@ -33,6 +33,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('navBarrController', function ($scope) {
+    
     $scope.navBarrItems = [
         {
             name: "Activite"

@@ -1,8 +1,8 @@
 <div class="container-fluid">
-    <div class="row" ng-repeat="item in homeItems">
+    <div class="row" ng-repeat="item in homeItems | orderBy:'order'">
         <br/>
         <div class="col-lg-offset-1 col-xs-12 col-sm-5 col-lg-3">
-            <img class="img-responsive img-rounded" style="width:100%; height: 100%" ng-src="{{item.img}}" alt="test"/>
+            <img class="img-responsive img-rounded" style="width:100%; height: 100%" ng-src="{{item.image}}" alt="{{item.imageAlt}}"/>
         </div>
         <div class="col-xs-12 col-sm-5 col-lg-7"    >
 
