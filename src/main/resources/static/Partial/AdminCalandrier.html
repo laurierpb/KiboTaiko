@@ -3,140 +3,150 @@
         <div class="col-xs-12" style="text-align: center">
             <div class="panel panel-default">
                 <div class="panel-heading">
-
-                    <h4 style="display: inline-block; float: top">Calandrier</h4>
-                    <br/>
-                    <div style="display: inline-block;" align="center" class="dropdown" >
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Selection Evenement
-                            <span class="caret"></span>
-                        </button>
-                        <ul float: right class="dropdown-menu" >
-                            <li ng-repeat="evenement in calandrierList">
-                                <a role="button" ng-click="setEvenementEdit(evenement)">{{evenement.titleText}}</a>
-                            </li>
-                        </ul>
+                    <div class="panel-heading noSpace">
+                        <div class="container-fluid panel-contaner noSpace">
+                            <div data-toggle="collapse" data-parent="#accordion" data-target="#adminController">
+                                <h4 style="display: inline-block; float: top">Calandrier</h4>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                <div class="panel-body">
-                    <form id="upload-file-form">
-                        <div class="panel" style="text-align:left">
-                            <div class="panel-heading noSpace">
-                                <div class="container-fluid panel-contaner noSpace">
-                                    <div data-toggle="collapse" data-parent="#accordion" data-target="#textCollapse">
-                                        <div class="hovereffect">
-                                            <img id="imageCalandrierEdit" class="img-responsive calandrierMax" src="#" alt="Preview"/>
-                                            <div class="overlay">
-                                                <h2>{{calandrier.titleText}}</h2>
+
+                <div id="adminController" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div style="display: inline-block;" align="center" class="dropdown" >
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Selection Evenement
+                                <span class="caret"></span>
+                            </button>
+                            <ul float: right class="dropdown-menu" >
+                                <li ng-repeat="evenement in calandrierList">
+                                    <a role="button" ng-click="setEvenementEdit(evenement)">{{evenement.titleText}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <br/>
+                        <br/>
+                        <form id="upload-file-form">
+                            <div class="panel" style="text-align:left">
+                                <div class="panel-heading noSpace">
+                                    <div class="container-fluid panel-contaner noSpace">
+                                        <div data-toggle="collapse" data-parent="#accordion" data-target="#textCollapse">
+                                            <div class="hovereffect">
+                                                <img id="imageCalandrierEdit" class="img-responsive calandrierMax" src="#" alt="Preview"/>
+                                                <div class="overlay">
+                                                    <h2>{{calandrier.titleText}}</h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div id="textCollapse" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
+                                    <p ng-bind-html="calandrier.contenue"/></P>
+                                </div>
+
                             </div>
 
-                            <div id="textCollapse" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
-                                <p ng-bind-html="calandrier.contenue"/></P>
-                            </div>
+                            <br/>
+                            L'image doit avoir la grosseur 1024 X 127 pour bien parraitre sur le site
+                            <br/>
+                            <label for="upload-file-input" class="btn btn-default btn-file">
+                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
+                                Naviger <input id="upload-file-input" 
+                                               accept="image/*" 
+                                               type="file" 
+                                               name="uploadfile"
+                                               style="display: none;">
+                            </label>
 
-                        </div>
+                            <br/>
+                            <hr/>
+                            <label for="calandrierTitre">Titre calandrier</label>
+                            <input id="calandrierTitre" type="text" placeholder="Titre" class="form-control"
+                                   ng-model="calandrier.titleText"/>
 
-                        <br/>
-                        L'image doit avoir la grosseur 1024 X 127 pour bien parraitre sur le site
-                        <br/>
-                        <label for="upload-file-input" class="btn btn-default btn-file">
-                            <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
-                            Naviger <input id="upload-file-input" 
-                                           accept="image/*" 
-                                           type="file" 
-                                           name="uploadfile"
-                                           style="display: none;">
-                        </label>
+                            <label for="calandrierImageAlt">Image Alt</label>
+                            <input id="calandrierImageAlt" type="text" 
+                                   placeholder="Une description textuel de l'image" class="form-control"
+                                   ng-model="calandrier.imageAlt"/>
 
-                        <br/>
-                        <hr/>
-                        <label for="calandrierTitre">Titre calandrier</label>
-                        <input id="calandrierTitre" type="text" placeholder="Titre" class="form-control"
-                               ng-model="calandrier.titleText"/>
-
-                        <label for="calandrierImageAlt">Image Alt</label>
-                        <input id="calandrierImageAlt" type="text" 
-                               placeholder="Une description textuel de l'image" class="form-control"
-                               ng-model="calandrier.imageAlt"/>
-
-                        <label for="calandrierContenue">Contenue Calandrier</label>
-                        <br/>
-                        <button type="button" class="btn btn-default" ng-click="addText('<b>', '</b>')">
-                            <span class="glyphicon glyphicon-bold" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default" ng-click="addText('<i>', '</i>')">
-                            <span class="glyphicon glyphicon-italic" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default" ng-click="addText('<u>', '</u>')">
-                            <span class="glyphicon glyphicon-text-color" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-left\'>', '</div>')">
-                            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-center\'>', '</div>')">
-                            <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-center\'>', '</div>')">
-                            <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-default" ng-click="addText('<br/\>', '')">
-                            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                        </button>
-                        
-                        <div style="display: inline-block;" align="center" class="dropdown" >
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                                <b>Grosseur</b>
-                                <span class="caret"></span>
+                            <label for="calandrierContenue">Contenue Calandrier</label>
+                            <br/>
+                            <button type="button" class="btn btn-default" ng-click="addText('<b>', '</b>')">
+                                <span class="glyphicon glyphicon-bold" aria-hidden="true"></span>
                             </button>
-                            <ul float: right class="dropdown-menu" >
-                                <li>
-                                    <a role="button" ng-click="addText('<h1>', '</h1>')"><h1>Vraiment très grand</h1></a>
-                                </li>
-                                <li>
-                                    <a role="button" ng-click="addText('<h2>', '</h2>')"><h2>Très grand</h2></a>
-                                </li>
-                                <li>
-                                    <a role="button" ng-click="addText('<h3>', '</h3>')"><h3>Grand</h3></a>
-                                </li>
-                                <li>
-                                    <a role="button" ng-click="addText('<h4>', '</h4>')"><h4>Normal</h4></a>
-                                </li>
-                                <li>
-                                    <a role="button" ng-click="addText('<h5>', '</h5>')"><h5>Petit</h5></a>
-                                </li>
-                                <li>
-                                    <a role="button" ng-click="addText('<h6>', '</h6>')"><h6>Très petit</h6></a>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <textarea id="calandrierContenue" class="form-control" rows="10" 
-                                              placeholder="Écrire la description en HTML" style="resize: none"
-                                              ng-model="calandrier.contenue"></textarea>
+                            <button type="button" class="btn btn-default" ng-click="addText('<i>', '</i>')">
+                                <span class="glyphicon glyphicon-italic" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="addText('<u>', '</u>')">
+                                <span class="glyphicon glyphicon-text-color" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-left\'>', '</div>')">
+                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-center\'>', '</div>')">
+                                <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="addText('<div class=\'text-center\'>', '</div>')">
+                                <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="addText('<br/\>', '')">
+                                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                            </button>
+
+                            <div style="display: inline-block;" align="center" class="dropdown" >
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <b>Grosseur</b>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul float: right class="dropdown-menu" >
+                                    <li>
+                                        <a role="button" ng-click="addText('<h1>', '</h1>')"><h1>Vraiment très grand</h1></a>
+                                    </li>
+                                    <li>
+                                        <a role="button" ng-click="addText('<h2>', '</h2>')"><h2>Très grand</h2></a>
+                                    </li>
+                                    <li>
+                                        <a role="button" ng-click="addText('<h3>', '</h3>')"><h3>Grand</h3></a>
+                                    </li>
+                                    <li>
+                                        <a role="button" ng-click="addText('<h4>', '</h4>')"><h4>Normal</h4></a>
+                                    </li>
+                                    <li>
+                                        <a role="button" ng-click="addText('<h5>', '</h5>')"><h5>Petit</h5></a>
+                                    </li>
+                                    <li>
+                                        <a role="button" ng-click="addText('<h6>', '</h6>')"><h6>Très petit</h6></a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <textarea id="calandrierContenue" class="form-control" rows="10" 
+                                                  placeholder="Écrire la description en HTML" style="resize: none"
+                                                  ng-model="calandrier.contenue"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <button type="button" ng-click="uploadAdd()"    class="btn btn-primary">
-                            Enregistrer Nouveau
-                        </button>
-                        <button type="button" ng-click="uploadUpdate()" class="btn btn-success">
-                            <span class="glyphicon glyphicon-floppy-disk"></span> Updater
-                        </button>
-                        <button type="button" ng-click="uploadDelete()" class="btn btn-danger" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
-                        </button>
-                    </form>
+
+                            <button type="button" ng-click="uploadAdd()"    class="btn btn-primary">
+                                Enregistrer Nouveau
+                            </button>
+                            <button type="button" ng-click="uploadUpdate()" class="btn btn-success">
+                                <span class="glyphicon glyphicon-floppy-disk"></span> Updater
+                            </button>
+                            <button type="button" ng-click="uploadDelete()" class="btn btn-danger" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
+                            </button>
+                        </form>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-{{name}}

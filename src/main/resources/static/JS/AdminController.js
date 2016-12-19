@@ -1,3 +1,3 @@
 /* global app */
-app.controller('AdminController', function ($scope, $http) {
+app.controller('AdminController', function ($scope) {
 });

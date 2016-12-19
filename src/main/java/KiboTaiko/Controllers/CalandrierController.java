@@ -25,8 +25,6 @@ public class CalandrierController {
     // bon il faut que je regarde ca de pourquoi le post marche pas
     @RequestMapping(method = RequestMethod.PUT)
     public Calandrier postCalandrier(@RequestBody Calandrier cal) {
-        System.out.println("\nPost     : Calandrier");
-
         if (cal.getId() <= 0) {
             System.out.println("Erreur pour le ID");
             return null;
@@ -43,8 +41,6 @@ public class CalandrierController {
     
     @RequestMapping(method = RequestMethod.POST)
     public Calandrier putCalandrier(@RequestBody Calandrier cal) {
-        System.out.println("\nPut     : Calandrier");
-        
         String erreurCalandrier = validateCalandrier(cal);
         if(!erreurCalandrier.equals("")){
             System.out.println(erreurCalandrier);
@@ -52,6 +48,16 @@ public class CalandrierController {
             CalandrierRepo.insertCalandrier(cal);
         }
         return cal;
+    }
+    
+    
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteCalandrier(@RequestBody int id) {
+        if (id <= 0) {
+            System.out.println("Erreur pour le ID");
+            return;
+        }
+        CalandrierRepo.deleteCalandrier(id);
     }
     
     private String validateCalandrier(Calandrier cal){
@@ -68,17 +74,5 @@ public class CalandrierController {
             return "Erreur pour le Titre";
         }
         return "";
-    }
-    
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteCalandrier(@RequestBody int id) {
-        System.out.println("\nDelete     : Calandrier");
-
-        if (id <= 0) {
-            System.out.println("Erreur pour le ID");
-            return;
-        }
-        
-        CalandrierRepo.deleteCalandrier(id);
     }
 }
