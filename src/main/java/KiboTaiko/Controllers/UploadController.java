@@ -17,7 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/uploadFile")
 public class UploadController {
-
+    /**
+     * Ajoute le Fichier dans le repertoire images. 
+     * Lance une exception si le fichier existe déjà. 
+     * @param uploadfile, provient du controlleur web
+     * @return
+     */
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> uploadFile(

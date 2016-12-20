@@ -13,10 +13,10 @@ public class HomeRepo {
                 (rs, rowNum) -> new HomeItem(
                     rs.getInt("ID"),
                     rs.getInt("Ordre"),
-                    rs.getString("Contenue"),
-                    rs.getString("Titre"),
                     rs.getString("Image"),
-                    rs.getString("ImageAlt")
+                    rs.getString("ImageAlt"),
+                    rs.getString("Contenue"),
+                    rs.getString("Titre")
                 )
         );
         return result;
@@ -32,30 +32,30 @@ public class HomeRepo {
             homeItem.getOrder(),
             homeItem.getImage(),
             homeItem.getImageAlt(),
-            homeItem.getTitre(), 
-            homeItem.getContenue()
+            homeItem.getContenue(),
+            homeItem.getTitre()
         );
     }
     
     
     public static void updateHomeItems(HomeItem homeItem){
         String query = "UPDATE homeItems\n"
-                + "SET Ordre = ?, image = ?, ImageAlt = ?, Titre = ?, Contenue = ?\n"
-                + "WHERE id = ?;";
+                + "SET \"Ordre\" = ?, \"Image\" = ?, \"ImageAlt\" = ?, \"Contenue\" = ?, \"Titre\" = ?\n"
+                + "WHERE \"ID\" = ?;";
         Application.app.jdbcTemplate.update(
             query,
                 homeItem.getOrder(),
                 homeItem.getImage(),
                 homeItem.getImageAlt(),
-                homeItem.getTitre(), 
                 homeItem.getContenue(),
+                homeItem.getTitre(), 
                 homeItem.getId()
         );
         
     }
     public static void deleteHomeItems(int id){
         String sqlString = "DELETE FROM homeitems\n"
-                + "WHERE id = ?;";
+                + "WHERE \"ID\" = ?;";
 
         Application.app.jdbcTemplate.update(
                 sqlString,

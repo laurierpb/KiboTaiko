@@ -60,11 +60,6 @@
                                    ng-model="homeItemCurrent.order"/>
                             
                             
-                            
-                            
-                            
-                            
-                            
                             <label for="homeItemContenue">Contenue</label>
                             <br/>
                             <button type="button" class="btn btn-default" ng-click="addText('<b>', '</b>')">
@@ -129,10 +124,10 @@
                             <button type="button" ng-click="postHomeItem()" class="btn btn-primary">
                                 Enregistrer Nouveau
                             </button>
-                            <button type="button" ng-click="test1()" class="btn btn-success">
+                            <button type="button" ng-click="putHomeItem()" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-disk"></span> Updater
                             </button>
-                            <button type="button" ng-click="test2(homeItemCurrent.ID)" class="btn btn-danger" aria-label="Left Align">
+                            <button type="button" ng-click="deleteHomeItem()" class="btn btn-danger" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
                             </button>
                         </form>

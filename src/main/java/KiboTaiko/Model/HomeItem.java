@@ -16,13 +16,13 @@ public class HomeItem {
         this.imageAlt = "";
     }
 
-    public HomeItem(int id, int order, String contenue, String titre, String image, String imageAlt) {
+    public HomeItem(int id, int order, String image, String imageAlt, String contenue, String titre) {
         this.id = id;
         this.order = order;
-        this.contenue = contenue;
-        this.titre = titre;
         this.image = image;
         this.imageAlt = imageAlt;
+        this.contenue = contenue;
+        this.titre = titre;
     }
 
     public String getImageAlt() {

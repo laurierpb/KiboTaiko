@@ -4,11 +4,19 @@ app.controller('AdminHomeController', function ($scope, $http) {
     $scope.homeItemCurrent = {
       id : null,
       order : null,
-      contenue : "", 
       titre : "", 
+      contenue : "", 
       image : "", 
       imageAlt : ""
     };
+    $http({
+        method: 'GET',
+        url: '/HomeItems'
+    }).then(function successCallback(response) {
+        $scope.HomeItems = response.data;
+    }, function errorCallback(data, status, headers, config) {
+        console.log('Le GET vers la ressourse s\'est mal fait');
+    }); 
     
     $scope.loadHomeItem = function(data){
         console.log("ok");
@@ -21,26 +29,11 @@ app.controller('AdminHomeController', function ($scope, $http) {
         
         document.getElementById("imageHomeItemEdit").src = data.image;
     };
-    $http({
-        method: 'GET',
-        url: '/HomeItems'
-    }).then(function successCallback(response) {
-        $scope.HomeItems = response.data;
-    }, function errorCallback(data, status, headers, config) {
-        console.log('Le GET vers la ressourse s\'est mal fait');
-    }); 
     
     
-    $scope.test1 = function(){
-        console.log($scope.homeItemCurrent);
-    };
-    $scope.test2 = function(id){
-        console.log(id);
-    };
     $scope.postHomeItem = function(){
         //il faut que je trouve un meilleur moyen que ca v
         uploadImage();
-        /*
         $http({
             method: 'POST',
             url: '/HomeItems',
@@ -53,8 +46,50 @@ app.controller('AdminHomeController', function ($scope, $http) {
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG post fail');
         });
-        */
     };
+    $scope.putHomeItem = function(){
+        //il faut que je trouve un meilleur moyen que ca v
+        uploadImage();
+        $http({
+            method: 'PUT',
+            url: '/HomeItems/' + $scope.homeItemCurrent.id,
+            data: $scope.homeItemCurrent,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data, status, headers, config) {
+            location.reload();
+        }, function errorCallback(data, status, headers, config) {
+            console.log('OMG PUT fail');
+        });
+    };
+    $scope.deleteHomeItem = function(){
+        $http({
+            method: 'DELETE',
+            url: '/HomeItems/' + $scope.homeItemCurrent.id,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data, status, headers, config) {
+            location.reload();
+        }, function errorCallback(data, status, headers, config) {
+            console.log('OMG PUT fail');
+        });
+    };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     $("#upload-file-input-HomeItems").change(function () {
         readURL(this);

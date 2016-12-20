@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CalandrierRepo {
-
     public static List<Calandrier> getAllCalandrier() {
         String query = "select * from calandrier;";
 
