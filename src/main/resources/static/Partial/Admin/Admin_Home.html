@@ -52,10 +52,8 @@
                             <label for="homeItemTitre">Titre</label>
                             <input id="homeItemTitre" type="text" placeholder="Titre" class="form-control"
                                    ng-model="homeItemCurrent.titre"/>
-
                             <label for="homeItemImageAlt">Image Alt</label>
-                            <input id="homeItemImageAlt" type="text" 
-                                   placeholder="Une description textuel de l'image" class="form-control"
+                            <input id="homeItemImageAlt" type="text"  placeholder="Une description textuel de l'image" class="form-control"
                                    ng-model="homeItemCurrent.imageAlt"/>
                             <label for="homeItemOrder">Order</label>
                             <input id="homeItemOrder" type="text" placeholder="[0 - 9]" class="form-control"
@@ -128,13 +126,13 @@
                                 </div>
                             </div>
 
-                            <button type="button" ng-click="test1()"    class="btn btn-primary">
+                            <button type="button" ng-click="postHomeItem()" class="btn btn-primary">
                                 Enregistrer Nouveau
                             </button>
-                            <button type="button" ng-click="uploadUpdate()" class="btn btn-success">
+                            <button type="button" ng-click="test1()" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-disk"></span> Updater
                             </button>
-                            <button type="button" ng-click="uploadDelete()" class="btn btn-danger" aria-label="Left Align">
+                            <button type="button" ng-click="test2(homeItemCurrent.ID)" class="btn btn-danger" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
                             </button>
                         </form>

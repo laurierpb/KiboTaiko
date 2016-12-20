@@ -1,6 +1,4 @@
-$.getScript("JS/Utility/Upload.js", function(){
-    console.log("homeUpload");
-});
+$.getScript("JS/Utility/Upload.js", function(){});
 /* global app */
 app.controller('AdminHomeController', function ($scope, $http) {
     $scope.homeItemCurrent = {
@@ -23,9 +21,6 @@ app.controller('AdminHomeController', function ($scope, $http) {
         
         document.getElementById("imageHomeItemEdit").src = data.image;
     };
-    $scope.test1 = function(data){
-        console.log($scope.homeItemCurrent);
-    };
     $http({
         method: 'GET',
         url: '/HomeItems'
@@ -36,6 +31,30 @@ app.controller('AdminHomeController', function ($scope, $http) {
     }); 
     
     
+    $scope.test1 = function(){
+        console.log($scope.homeItemCurrent);
+    };
+    $scope.test2 = function(id){
+        console.log(id);
+    };
+    $scope.postHomeItem = function(){
+        //il faut que je trouve un meilleur moyen que ca v
+        uploadImage();
+        /*
+        $http({
+            method: 'POST',
+            url: '/HomeItems',
+            data: $scope.homeItemCurrent,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data, status, headers, config) {
+            location.reload();
+        }, function errorCallback(data, status, headers, config) {
+            console.log('OMG post fail');
+        });
+        */
+    };
     
     $("#upload-file-input-HomeItems").change(function () {
         readURL(this);

@@ -7,6 +7,15 @@ public class HomeItem {
     private String image;
     private String imageAlt;
 
+    public HomeItem() {
+        this.id = -1;
+        this.order = -1;
+        this.contenue = "";
+        this.titre = "";
+        this.image = "";
+        this.imageAlt = "";
+    }
+
     public HomeItem(int id, int order, String contenue, String titre, String image, String imageAlt) {
         this.id = id;
         this.order = order;
@@ -60,4 +69,15 @@ public class HomeItem {
         this.image = image;
     }
     
+    @Override
+    public String toString(){
+        String returnValue = "HomeItem : "
+                + "\nid       : " + this.getId()
+                + "\nOrder    : " + this.getOrder()
+                + "\nTitre    : " + this.getTitre()
+                + "\nContenue : " + this.getContenue()
+                + "\nImage    : " + this.getImage()
+                + "\nImageAlt : " + this.getImageAlt();
+        return returnValue;
+    }
 }

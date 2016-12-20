@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 public class HomeRepo {
     public static List<HomeItem> getHomeItems(){
         String query = "select * from HomeItems;";
-        System.out.println("1");
         List<HomeItem> result = Application.app.jdbcTemplate.query(query,
                 (rs, rowNum) -> new HomeItem(
                     rs.getInt("ID"),
@@ -24,17 +23,21 @@ public class HomeRepo {
     }
     
     public static void insertHomeItems(HomeItem homeItem){
-        String query = "INSERT INTO homeItems (ordre, image, imageAlt, titre, contenue)\n" +
-                        "VALUES (?, ?, ?, ?, ?);";
+        System.out.println(homeItem.toString());
+        String query = "INSERT INTO homeitems("
+            + "\"Ordre\", \"Image\", \"ImageAlt\", \"Contenue\", \"Titre\")"
+            + "VALUES (?, ?, ?, ?, ?);";
         Application.app.jdbcTemplate.update(
             query,
-                homeItem.getOrder(),
-                homeItem.getImage(),
-                homeItem.getImageAlt(),
-                homeItem.getTitre(), 
-                homeItem.getContenue()
+            homeItem.getOrder(),
+            homeItem.getImage(),
+            homeItem.getImageAlt(),
+            homeItem.getTitre(), 
+            homeItem.getContenue()
         );
     }
+    
+    
     public static void updateHomeItems(HomeItem homeItem){
         String query = "UPDATE homeItems\n"
                 + "SET Ordre = ?, image = ?, ImageAlt = ?, Titre = ?, Contenue = ?\n"

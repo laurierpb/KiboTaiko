@@ -33,6 +33,7 @@ public class UploadController {
             System.out.println(filename);
 
             // Save the file locally
+            // Lance une exception si une image porte le meme nom
             BufferedOutputStream stream;
             stream = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
             stream.write(uploadfile.getBytes());

@@ -9,7 +9,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         titleText: "",
         contenue: ""
     };
-    
     $http({
         method: 'GET',
         url: '/Calandrier'
@@ -17,8 +16,7 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         $scope.calandrierList = response.data;
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');
-    });    
-    
+    });  
     $scope.setEvenementEdit = function (data) {
         $scope.calandrier.id = data.id;
         $scope.calandrier.imageAlt = data.imageAlt;
@@ -28,69 +26,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
 
         document.getElementById("imageCalandrierEdit").src = data.image;
     };
-    $scope.deleteCalandrier = function () {
-        $http({
-            method: 'DELETE',
-            url: '/Calandrier',
-            data: $scope.id,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function successCallback(data, status, headers, config) {
-            location.reload();
-        }, function errorCallback(data, status, headers, config) {
-            console.log('OMG post fail');
-        });
-    };
-    $scope.uploadAdd = function () {
-        //il faut que je trouve un meilleur moyen que ca v
-        uploadImage();
-        $http({
-            method: 'POST',
-            url: '/Calandrier',
-            data: $scope.calandrier,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function successCallback(data, status, headers, config) {
-            location.reload();
-        }, function errorCallback(data, status, headers, config) {
-            console.log('OMG post fail');
-        });
-    };
-    $scope.uploadUpdate = function () {
-        //il faut que je trouve un meilleur moyen que ca v
-        uploadImage();
-        $http({
-            method: 'PUT',
-            url: '/Calandrier',
-            data: $scope.calandrier,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function successCallback(data, status, headers, config) {
-            location.reload();
-        }, function errorCallback(data, status, headers, config) {
-            console.log('OMG post fail');
-        });
-    };
-    $scope.uploadDelete = function () {
-        console.log($scope.calandrier.id);
-
-        $http({
-            method: 'DELETE',
-            url: '/Calandrier',
-            data: $scope.calandrier.id,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function successCallback(data, status, headers, config) {
-            location.reload();
-        }, function errorCallback(data, status, headers, config) {
-            console.log('OMG post fail');
-        });
-    };
-    
     
     $("#upload-file-input-calandrier").change(function () {
         readURL(this);
@@ -116,5 +51,52 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         $scope.calandrier.contenue = $scope.calandrier.contenue.slice(0, startIndex) + i + 
                 $scope.calandrier.contenue.slice(startIndex, endIndex) + j + 
                 $scope.calandrier.contenue.slice(endIndex);
+    };
+    
+    $scope.DeleteCalandrier = function () {
+        console.log("calandrier ID : " + $scope.calandrier.id);
+        $http({
+            method: 'DELETE',
+            url: '/Calandrier/' + $scope.calandrier.id,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data, status, headers, config) {
+            location.reload();
+        }, function errorCallback(data, status, headers, config) {
+            console.log('OMG post fail');
+        });
+    };
+    $scope.AddCalandrier = function () {
+        //il faut que je trouve un meilleur moyen que ca v
+        uploadImage();
+        $http({
+            method: 'POST',
+            url: '/Calandrier',
+            data: $scope.calandrier,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data, status, headers, config) {
+            location.reload();
+        }, function errorCallback(data, status, headers, config) {
+            console.log('OMG post fail');
+        });
+    };
+    $scope.UpdateCalandrier = function () {
+        //il faut que je trouve un meilleur moyen que ca v
+        uploadImage();
+        $http({
+            method: 'PUT',
+            url: '/Calandrier/'+ $scope.calandrier.id,
+            data: $scope.calandrier,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data, status, headers, config) {
+            location.reload();
+        }, function errorCallback(data, status, headers, config) {
+            console.log('OMG post fail');
+        });
     };
 });

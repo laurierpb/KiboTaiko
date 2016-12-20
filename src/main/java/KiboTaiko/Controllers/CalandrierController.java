@@ -1,8 +1,10 @@
 package KiboTaiko.Controllers;
 
+import KiboTaiko.Controllers.Helper.CalandrierControllerHelper;
 import KiboTaiko.Model.Calandrier;
 import KiboTaiko.repositories.CalandrierRepo;
 import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,15 +24,23 @@ public class CalandrierController {
         return test;
     }
 
-    // bon il faut que je regarde ca de pourquoi le post marche pas
-    @RequestMapping(method = RequestMethod.PUT)
-    public Calandrier postCalandrier(@RequestBody Calandrier cal) {
-        if (cal.getId() <= 0) {
+    /**
+     * /calandrier/{id}
+     * @param cal = calandrier du body
+     * @param calandrierId = /##
+     * @return le nouveau calandrier
+     */
+    @RequestMapping(method = RequestMethod.PUT, value = "/{calandrierId}")
+    public @ResponseBody Calandrier postCalandrier(
+            @RequestBody Calandrier cal, 
+            @PathVariable int calandrierId) {
+        System.out.println("\nCalandrier ID : " + calandrierId + "\n");
+        if (calandrierId <= 0) {
             System.out.println("Erreur pour le ID");
             return null;
         }
         
-        String erreurCalandrier = validateCalandrier(cal);
+        String erreurCalandrier = CalandrierControllerHelper.validateCalandrier(cal);
         if(!erreurCalandrier.equals("")){
             System.out.println(erreurCalandrier);
         }else{
@@ -40,8 +50,9 @@ public class CalandrierController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public Calandrier putCalandrier(@RequestBody Calandrier cal) {
-        String erreurCalandrier = validateCalandrier(cal);
+    public @ResponseBody Calandrier putCalandrier(
+            @RequestBody Calandrier cal) {
+        String erreurCalandrier = CalandrierControllerHelper.validateCalandrier(cal);
         if(!erreurCalandrier.equals("")){
             System.out.println(erreurCalandrier);
         }else{
@@ -50,29 +61,17 @@ public class CalandrierController {
         return cal;
     }
     
-    
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteCalandrier(@RequestBody int id) {
-        if (id <= 0) {
+    /**
+     * supprime l'evenement du calandrier
+     * @param calandrierId /calandrier/{calandrierID}
+     */
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{calandrierId}")
+    public void deleteCalandrier(
+            @PathVariable int calandrierId) {
+        if (calandrierId <= 0) {
             System.out.println("Erreur pour le ID");
             return;
         }
-        CalandrierRepo.deleteCalandrier(id);
-    }
-    
-    private String validateCalandrier(Calandrier cal){
-        if(cal.getContenue().equals("") || cal.getContenue() == null){
-            return "Erreur pour le contenue";
-        }
-        if(cal.getImage().equals("") || cal.getImage() == null){
-            return "Erreur pour le image";
-        }
-        if(cal.getImageAlt().equals("") || cal.getImageAlt()== null){
-            return "Erreur pour le Alt";
-        }
-        if(cal.getTitleText().equals("") || cal.getTitleText()== null){
-            return "Erreur pour le Titre";
-        }
-        return "";
+        CalandrierRepo.deleteCalandrier(calandrierId);
     }
 }
