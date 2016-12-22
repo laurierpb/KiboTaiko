@@ -1,8 +1,8 @@
-function uploadImage() {
+function uploadImage(controller) {
     $.ajax({
         url: "/Image",
         type: "POST",
-        data: new FormData($("#upload-file-form")[0]),
+        data: new FormData($("#upload-file-form" + "-" + controller)[0]),
         enctype: 'multipart/form-data',
         processData: false,
         contentType: false,

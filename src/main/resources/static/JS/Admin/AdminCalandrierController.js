@@ -61,12 +61,12 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         }).then(function successCallback(data, status, headers, config) {
             location.reload();
         }, function errorCallback(data, status, headers, config) {
-            console.log('OMG post fail');
+            console.log('OMG DELETE fail');
         });
     };
     $scope.AddCalandrier = function () {
         //il faut que je trouve un meilleur moyen que ca v
-        uploadImage();
+        uploadImage("calandrier");
         $http({
             method: 'POST',
             url: '/Calandrier',
@@ -77,12 +77,16 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         }).then(function successCallback(data, status, headers, config) {
             location.reload();
         }, function errorCallback(data, status, headers, config) {
-            console.log('OMG post fail');
+            console.log('OMG POST fail');
         });
+    };
+    $scope.setImage = function(data){
+        console.log(data);
+        $scope.calandrier.image = data; 
     };
     $scope.UpdateCalandrier = function () {
         //il faut que je trouve un meilleur moyen que ca v
-        uploadImage();
+        uploadImage("calandrier");
         $http({
             method: 'PUT',
             url: '/Calandrier/'+ $scope.calandrier.id,
@@ -93,7 +97,7 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         }).then(function successCallback(data, status, headers, config) {
             location.reload();
         }, function errorCallback(data, status, headers, config) {
-            console.log('OMG post fail');
+            console.log('OMG PUT fail');
         });
     };
 });

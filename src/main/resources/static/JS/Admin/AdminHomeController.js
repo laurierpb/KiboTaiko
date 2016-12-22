@@ -30,7 +30,7 @@ app.controller('AdminHomeController', function ($scope, $http) {
     
     $scope.postHomeItem = function(){
         //il faut que je trouve un meilleur moyen que ca v
-        uploadImage();
+        uploadImage("home");
         $http({
             method: 'POST',
             url: '/HomeItems',
@@ -46,7 +46,7 @@ app.controller('AdminHomeController', function ($scope, $http) {
     };
     $scope.putHomeItem = function(){
         //il faut que je trouve un meilleur moyen que ca v
-        uploadImage();
+        uploadImage("home");
         $http({
             method: 'PUT',
             url: '/HomeItems/' + $scope.homeItemCurrent.id,

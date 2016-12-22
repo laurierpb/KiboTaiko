@@ -51,7 +51,7 @@ public class HomeItemsController {
     public void deleteHomeItem(
             @PathVariable int homeItemID) {
         
-        System.out.println("HomeItem PUT : " + homeItemID);
+        System.out.println("HomeItem DELETE : " + homeItemID);
         HomeRepo.deleteHomeItems(homeItemID);
     }
 }

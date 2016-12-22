@@ -51,7 +51,8 @@ public class ImageController {
     public ResponseEntity<?> uploadFile(
            @RequestParam("uploadfile") MultipartFile uploadfile) {
         
-        System.out.println("Image Controller : POST");
+        System.out.println("Image Controller : POST => " + uploadfile.getOriginalFilename());
+        if(uploadfile.getOriginalFilename().equals("")) return new ResponseEntity<>(HttpStatus.OK);
         
         if(!Image_Tool.addFileToFileSystem(uploadfile))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

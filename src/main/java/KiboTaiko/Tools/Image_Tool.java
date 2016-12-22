@@ -44,7 +44,7 @@ public class Image_Tool {
             String filename = uploadfile.getOriginalFilename();
             String directory = "src/main/resources/static/Images";
             String filepath = Paths.get(directory, filename).toString();
-
+            
             // Save the file locally
             // Lance une exception si une image porte le meme nom
             BufferedOutputStream stream;

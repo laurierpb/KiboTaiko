@@ -28,7 +28,7 @@
                         </div>
                         <br/>
                         <br/>
-                        <form id="upload-file-form">
+                        <form id="upload-file-form-calandrier">
                             <div class="panel" style="text-align:left">
                                 <div class="panel-heading noSpace">
                                     <div class="container-fluid panel-contaner noSpace">
@@ -59,7 +59,20 @@
                                                name="uploadfile"
                                                style="display: none;">
                             </label>
-
+                            
+                            
+                            <div style="display: inline-block;" align="center" class="dropdown" >
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Selection Evenement
+                                    <span class="caret"></span>
+                                </button>
+                                <ul float: right class="dropdown-menu" >
+                                    <li ng-repeat="image in images">
+                                        <a role="button" ng-click="setImage(image)">{{image}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
                             <br/>
                             <hr/>
                             <label for="calandrierTitre">Titre calandrier</label>

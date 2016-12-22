@@ -13,6 +13,7 @@ app.controller('AdminImagesController', function ($scope, $http) {
             console.log('Le DELETE vers la ressourse s\'est mal fait');
         });
     };
+    
     function getImage(){
         $http({
             method: 'GET',
