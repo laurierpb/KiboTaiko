@@ -1,6 +1,6 @@
 package KiboTaiko.Controllers;
 
-import KiboTaiko.Controllers.Helper.CalandrierControllerHelper;
+import KiboTaiko.Controllers.Helper.CalandrierController_Helper;
 import KiboTaiko.Model.Calandrier;
 import KiboTaiko.repositories.CalandrierRepo;
 import java.util.List;
@@ -18,7 +18,7 @@ public class CalandrierController {
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     List<Calandrier> getEvenement() {
-        System.out.println("CalandrierController");
+        System.out.println("CalandrierController : GET");
 
         List<Calandrier> test = CalandrierRepo.getAllCalandrier();
         return test;
@@ -34,13 +34,13 @@ public class CalandrierController {
     public @ResponseBody Calandrier postCalandrier(
             @RequestBody Calandrier cal, 
             @PathVariable int calandrierId) {
-        System.out.println("\nCalandrier ID : " + calandrierId + "\n");
+        System.out.println("Calandrier Controller : PUT");
         if (calandrierId <= 0) {
             System.out.println("Erreur pour le ID");
             return null;
         }
         
-        String erreurCalandrier = CalandrierControllerHelper.validateCalandrier(cal);
+        String erreurCalandrier = CalandrierController_Helper.validateCalandrier(cal);
         if(!erreurCalandrier.equals("")){
             System.out.println(erreurCalandrier);
         }else{
@@ -52,7 +52,8 @@ public class CalandrierController {
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody Calandrier putCalandrier(
             @RequestBody Calandrier cal) {
-        String erreurCalandrier = CalandrierControllerHelper.validateCalandrier(cal);
+        
+        String erreurCalandrier = CalandrierController_Helper.validateCalandrier(cal);
         if(!erreurCalandrier.equals("")){
             System.out.println(erreurCalandrier);
         }else{
@@ -68,6 +69,7 @@ public class CalandrierController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{calandrierId}")
     public void deleteCalandrier(
             @PathVariable int calandrierId) {
+        
         if (calandrierId <= 0) {
             System.out.println("Erreur pour le ID");
             return;

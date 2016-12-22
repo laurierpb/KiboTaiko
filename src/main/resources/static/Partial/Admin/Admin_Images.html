@@ -1,0 +1,31 @@
+<div ng-controller="AdminImagesController">
+    <div class="row">
+        <div class="col-xs-12" style="text-align: center">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading noSpace">
+                        <div class="container-fluid panel-contaner noSpace">
+                            <div data-toggle="collapse" data-parent="#accordion" data-target="#ImagesController">
+                                <h4 style="display: inline-block; float: top">Images</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="ImagesController" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">   
+                        <div class="col-lg-4 col-sm-6 col-xs-12 noSpace" ng-repeat="image in images" style="border:solid">
+                            <img class="img-responsive img-rounded" ng-src="{{image}}"/>
+                            <br/>
+                            <button type="button" ng-click="deleteImage(image)" class="btn btn-danger" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

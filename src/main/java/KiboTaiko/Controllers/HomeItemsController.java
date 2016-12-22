@@ -1,14 +1,13 @@
 package KiboTaiko.Controllers;
 
 import KiboTaiko.Model.HomeItem;
-import KiboTaiko.Controllers.Helper.HomeControllerHelper;
+import KiboTaiko.Controllers.Helper.HomeController_Helper;
 import KiboTaiko.repositories.HomeRepo;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +18,7 @@ public class HomeItemsController {
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     List<HomeItem> getHomeItems() {
-        System.out.println("HomeItemsController : Get");
+        System.out.println("HomeItemsController : GET");
 
         List<HomeItem> homeItemsList = HomeRepo.getHomeItems();
         return homeItemsList;
@@ -27,7 +26,8 @@ public class HomeItemsController {
 
     @RequestMapping(method = RequestMethod.POST)
     public HomeItem postCalandrier(@RequestBody HomeItem homeItem) {
-        if(HomeControllerHelper.validateHomeItem(homeItem)){
+        
+        if(HomeController_Helper.validateHomeItem(homeItem)){
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
             HomeRepo.insertHomeItems(homeItem);
@@ -38,8 +38,9 @@ public class HomeItemsController {
     public HomeItem putCalandrier(
             @RequestBody HomeItem homeItem, 
             @PathVariable int homeItemID) {
+        
         System.out.println("HomeItem PUT : " + homeItemID);
-        if(HomeControllerHelper.validateHomeItem(homeItem)){
+        if(HomeController_Helper.validateHomeItem(homeItem)){
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
             HomeRepo.updateHomeItems(homeItem);
@@ -47,8 +48,9 @@ public class HomeItemsController {
         return homeItem;
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "/{homeItemID}")
-    public void putCalandrier(
+    public void deleteHomeItem(
             @PathVariable int homeItemID) {
+        
         System.out.println("HomeItem PUT : " + homeItemID);
         HomeRepo.deleteHomeItems(homeItemID);
     }

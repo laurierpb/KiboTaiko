@@ -8,7 +8,6 @@ public class KiboTaikoController {
 
     @RequestMapping("/")
     public String home() {
-        System.out.println("Home KiboTaiko");
         return "KiboTaiko";
     }
 }

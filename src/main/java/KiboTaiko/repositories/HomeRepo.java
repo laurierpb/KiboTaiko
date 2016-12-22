@@ -23,7 +23,6 @@ public class HomeRepo {
     }
     
     public static void insertHomeItems(HomeItem homeItem){
-        System.out.println(homeItem.toString());
         String query = "INSERT INTO homeitems("
             + "\"Ordre\", \"Image\", \"ImageAlt\", \"Contenue\", \"Titre\")"
             + "VALUES (?, ?, ?, ?, ?);";

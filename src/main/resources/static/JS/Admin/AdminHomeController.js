@@ -19,15 +19,12 @@ app.controller('AdminHomeController', function ($scope, $http) {
     }); 
     
     $scope.loadHomeItem = function(data){
-        console.log("ok");
         $scope.homeItemCurrent.id = data.id;
         $scope.homeItemCurrent.order = data.order;
         $scope.homeItemCurrent.contenue = data.contenue;
         $scope.homeItemCurrent.titre = data.titre;
         $scope.homeItemCurrent.image = data.image;
         $scope.homeItemCurrent.imageAlt = data.imageAlt;
-        
-        document.getElementById("imageHomeItemEdit").src = data.image;
     };
     
     
@@ -76,20 +73,6 @@ app.controller('AdminHomeController', function ($scope, $http) {
             console.log('OMG PUT fail');
         });
     };
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     $("#upload-file-input-HomeItems").change(function () {
         readURL(this);

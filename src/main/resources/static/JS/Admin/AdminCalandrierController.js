@@ -23,8 +23,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         $scope.calandrier.image = data.image;
         $scope.calandrier.titleText = data.titleText;
         $scope.calandrier.contenue = data.contenue;
-
-        document.getElementById("imageCalandrierEdit").src = data.image;
     };
     
     $("#upload-file-input-calandrier").change(function () {
@@ -53,8 +51,7 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
                 $scope.calandrier.contenue.slice(endIndex);
     };
     
-    $scope.DeleteCalandrier = function () {
-        console.log("calandrier ID : " + $scope.calandrier.id);
+    $scope.DeleteCalandrier = function () {;
         $http({
             method: 'DELETE',
             url: '/Calandrier/' + $scope.calandrier.id,

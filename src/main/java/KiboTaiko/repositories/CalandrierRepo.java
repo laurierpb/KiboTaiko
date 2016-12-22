@@ -26,7 +26,6 @@ public class CalandrierRepo {
         String sqlString = "UPDATE calandrier\n"
                 + "SET \"Image\" = ?, \"ImageAlt\" = ?, \"Contenue\" = ?, \"TitleText\" = ?\n"
                 + "WHERE \"Id\" = ?;";
-        System.out.println(sqlString);
         Application.app.jdbcTemplate.update(
                 sqlString,
                 cal.getImage(),
@@ -40,7 +39,6 @@ public class CalandrierRepo {
     public static void deleteCalandrier(int id) {
         String sqlString = "DELETE FROM calandrier\n"
                 + "WHERE \"Id\" = ?;";
-        System.out.println("\n" + sqlString + "\n");
         Application.app.jdbcTemplate.update(
                 sqlString,
                 id
@@ -51,7 +49,6 @@ public class CalandrierRepo {
         String sqlString = "INSERT INTO calandrier ("
                 +"\"Image\",\"ImageAlt\",\"Contenue\",\"TitleText\")"
                 + "VALUES (?,?,?,?);";
-        System.out.println(sqlString);
         Application.app.jdbcTemplate.update(
                 sqlString,
                 cal.getImage(),

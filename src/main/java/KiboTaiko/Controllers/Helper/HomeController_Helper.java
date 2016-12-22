@@ -4,7 +4,7 @@ import KiboTaiko.Model.HomeItem;
 
 
 
-public class HomeControllerHelper {
+public class HomeController_Helper {
     /**
      * Validate if the item is properly formated. 
      * @param homeItem, Object that is gona be verified

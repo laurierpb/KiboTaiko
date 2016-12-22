@@ -2,7 +2,7 @@ package KiboTaiko.Controllers.Helper;
 
 import KiboTaiko.Model.Calandrier;
 
-public class CalandrierControllerHelper {
+public class CalandrierController_Helper {
     public static String validateCalandrier(Calandrier cal){
         if(cal.getContenue().equals("") || cal.getContenue() == null){
             return "Erreur pour le contenue";

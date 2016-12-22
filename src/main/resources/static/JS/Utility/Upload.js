@@ -1,7 +1,6 @@
 function uploadImage() {
-    console.log(new FormData($("#upload-file-form")[0]));
     $.ajax({
-        url: "/uploadFile",
+        url: "/Image",
         type: "POST",
         data: new FormData($("#upload-file-form")[0]),
         enctype: 'multipart/form-data',
