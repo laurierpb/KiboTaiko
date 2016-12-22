@@ -16,7 +16,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         $scope.calandrier.titleText = data.titleText;
         $scope.calandrier.contenue = data.contenue;
     };
-    
     $("#upload-file-input-calandrier").change(function () {
         readURL(this);
     });
@@ -40,7 +39,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
                 $scope.calandrier.contenue.slice(startIndex, endIndex) + j + 
                 $scope.calandrier.contenue.slice(endIndex);
     };
-    
     $scope.setImage = function(data){
         console.log(data);
         $scope.calandrier.image = data; 
@@ -69,7 +67,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         });
     };
     $scope.AddCalandrier = function () {
-        //il faut que je trouve un meilleur moyen que ca v
         $http({
             method: 'POST',
             url: '/Calandrier',
@@ -85,7 +82,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         });
     };
     $scope.UpdateCalandrier = function () {
-        //il faut que je trouve un meilleur moyen que ca v
         $http({
             method: 'PUT',
             url: '/Calandrier/'+ $scope.calandrier.id,

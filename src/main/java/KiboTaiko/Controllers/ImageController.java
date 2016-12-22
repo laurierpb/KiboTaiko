@@ -1,7 +1,6 @@
 package KiboTaiko.Controllers;
 
 import KiboTaiko.Tools.Image_Tool;
-import java.io.File;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

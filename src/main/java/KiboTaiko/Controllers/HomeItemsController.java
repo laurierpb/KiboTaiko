@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/HomeItems")
 public class HomeItemsController {
-
+    
+    /**
+     * retourne une liste de tous les home items
+     * @return une liste de tous les home items
+     */
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     List<HomeItem> getHomeItems() {
@@ -23,7 +27,12 @@ public class HomeItemsController {
         List<HomeItem> homeItemsList = HomeRepo.getHomeItems();
         return homeItemsList;
     }
-
+    
+    /**
+     * Insert un nouveau home item
+     * @param homeItem
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.POST)
     public HomeItem postCalandrier(@RequestBody HomeItem homeItem) {
         
@@ -34,6 +43,13 @@ public class HomeItemsController {
         }
         return homeItem;
     }
+    
+    /**
+     * update un home item passé en paramètre
+     * @param homeItem
+     * @param homeItemID
+     * @return
+     */
     @RequestMapping(method = RequestMethod.PUT, value = "/{homeItemID}")
     public HomeItem putCalandrier(
             @RequestBody HomeItem homeItem, 
@@ -47,6 +63,11 @@ public class HomeItemsController {
         }
         return homeItem;
     }
+    
+    /**
+     * Supprime un home item de la base de données
+     * @param homeItemID
+     */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{homeItemID}")
     public void deleteHomeItem(
             @PathVariable int homeItemID) {

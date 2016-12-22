@@ -18,6 +18,10 @@ public class Image_Tool {
 
     private static final String PATH_NAME = "src/main/resources/static/Images";
 
+    /**
+     * return a list of all the file in the folder Images
+     * @return a list of all the file in the folder Images
+     */
     public static List<String> getAllFileNameFromRootFolderName() {
         File folder = new File(PATH_NAME);
         List<String> liste = new ArrayList<>();
@@ -33,7 +37,6 @@ public class Image_Tool {
 
     /**
      * Add the image to the file system to the correct folder
-     *
      * @param uploadfile data from web form
      * @return true if file was added correctly or false if it failed
      */
@@ -59,6 +62,10 @@ public class Image_Tool {
         return true;
     }
 
+    /**
+     * Delete the file passed in parameter from Image folder
+     * @param fileName
+     */
     public static void deleteFileFromFileSystem(String fileName) {
         Path path = FileSystems.getDefault().getPath(PATH_NAME, fileName);
         try {

@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Calandrier")
 public class CalandrierController {
-    
+    /**
+     * Retourne une liste de calandrier.
+     * @return calandrierList
+     */
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     List<Calandrier> getEvenement() {
         System.out.println("CalandrierController : GET");
 
-        List<Calandrier> test = CalandrierRepo.getAllCalandrier();
-        return test;
+        List<Calandrier> calandrierList = CalandrierRepo.getAllCalandrier();
+        return calandrierList;
     }
 
     /**
@@ -49,17 +52,22 @@ public class CalandrierController {
         return cal;
     }
     
+    /**
+     * Ajoute un calandrier. 
+     * @param calandrier
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody Calandrier putCalandrier(
-            @RequestBody Calandrier cal) {
+            @RequestBody Calandrier calandrier) {
         
-        String erreurCalandrier = CalandrierController_Helper.validateCalandrier(cal);
+        String erreurCalandrier = CalandrierController_Helper.validateCalandrier(calandrier);
         if(!erreurCalandrier.equals("")){
             System.out.println(erreurCalandrier);
         }else{
-            CalandrierRepo.insertCalandrier(cal);
+            CalandrierRepo.insertCalandrier(calandrier);
         }
-        return cal;
+        return calandrier;
     }
     
     /**
