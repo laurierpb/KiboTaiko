@@ -27,7 +27,7 @@ public class CalandrierController {
     /**
      * /calandrier/{id}
      * @param cal = calandrier du body
-     * @param calandrierId = /##
+     * @param calandrierId = calandrier/{calandrierId}
      * @return le nouveau calandrier
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{calandrierId}")

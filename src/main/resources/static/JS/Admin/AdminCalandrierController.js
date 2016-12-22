@@ -9,14 +9,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         titleText: "",
         contenue: ""
     };
-    $http({
-        method: 'GET',
-        url: '/Calandrier'
-    }).then(function successCallback(response) {
-        $scope.calandrierList = response.data;
-    }, function errorCallback(data, status, headers, config) {
-        console.log('Le GET vers la ressourse s\'est mal fait');
-    });  
     $scope.setEvenementEdit = function (data) {
         $scope.calandrier.id = data.id;
         $scope.calandrier.imageAlt = data.imageAlt;
@@ -28,7 +20,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
     $("#upload-file-input-calandrier").change(function () {
         readURL(this);
     });
-    
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -41,7 +32,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
     $scope.addText = function(i, j){
         var txtArea = document.getElementById("calandrierContenue");
         var startIndex = txtArea.selectionStart;
@@ -51,6 +41,20 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
                 $scope.calandrier.contenue.slice(endIndex);
     };
     
+    $scope.setImage = function(data){
+        console.log(data);
+        $scope.calandrier.image = data; 
+    };
+    
+    
+    $http({
+        method: 'GET',
+        url: '/Calandrier'
+    }).then(function successCallback(response) {
+        $scope.calandrierList = response.data;
+    }, function errorCallback(data, status, headers, config) {
+        console.log('Le GET vers la ressourse s\'est mal fait');
+    });  
     $scope.DeleteCalandrier = function () {;
         $http({
             method: 'DELETE',
@@ -66,7 +70,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
     };
     $scope.AddCalandrier = function () {
         //il faut que je trouve un meilleur moyen que ca v
-        uploadImage("calandrier");
         $http({
             method: 'POST',
             url: '/Calandrier',
@@ -75,18 +78,14 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
+            uploadImage("calandrier");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG POST fail');
         });
     };
-    $scope.setImage = function(data){
-        console.log(data);
-        $scope.calandrier.image = data; 
-    };
     $scope.UpdateCalandrier = function () {
         //il faut que je trouve un meilleur moyen que ca v
-        uploadImage("calandrier");
         $http({
             method: 'PUT',
             url: '/Calandrier/'+ $scope.calandrier.id,
@@ -95,6 +94,7 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
+            uploadImage("calandrier");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG PUT fail');

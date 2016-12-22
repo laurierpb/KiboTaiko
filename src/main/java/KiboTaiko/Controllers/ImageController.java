@@ -54,8 +54,10 @@ public class ImageController {
         System.out.println("Image Controller : POST => " + uploadfile.getOriginalFilename());
         if(uploadfile.getOriginalFilename().equals("")) return new ResponseEntity<>(HttpStatus.OK);
         
-        if(!Image_Tool.addFileToFileSystem(uploadfile))
+        if(!Image_Tool.addFileToFileSystem(uploadfile)){
+            System.out.println("bad-request");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
