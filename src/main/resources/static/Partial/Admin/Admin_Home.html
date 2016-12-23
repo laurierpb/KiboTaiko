@@ -46,7 +46,18 @@
                                 Naviger 
                                 <input id="upload-file-input-HomeItems" accept="image/*" type="file" name="uploadfile"style="display: none;" />
                             </label>
-
+                            <div style="display: inline-block;" align="center" class="dropdown" >
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Selection Images
+                                    <span class="caret"></span>
+                                </button>
+                                <ul float: right class="dropdown-menu" >
+                                    <li ng-repeat="image in images">
+                                        <a role="button" ng-click="setImage(image)">{{image}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
                             <br/>
                             <hr/>
                             <label for="homeItemTitre">Titre</label>

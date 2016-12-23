@@ -15,12 +15,52 @@
 
                 <div id="ImagesController" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">   
-                        <div class="col-lg-4 col-sm-6 col-xs-12 noSpace" ng-repeat="image in images" style="border:solid">
-                            <img class="img-responsive img-rounded" ng-src="{{image}}"/>
+
+                        <form id="upload-file-form-newImage">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <img id="imageImagesEdit" class="img-responsive img-rounded" src="{{image}}"/>
+                                </div>
+                            </div>
                             <br/>
-                            <button type="button" ng-click="deleteImage(image)" class="btn btn-danger" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
-                            </button>
+                            <br/>
+                            <div class="row">
+                                <div class="col-xs-12 center">
+                                    <label for="upload-file-input-Images" class="btn btn-default btn-file">
+                                        <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
+                                        Naviger 
+                                        <input id="upload-file-input-Images" accept="image/*" type="file" name="uploadfile"style="display: none;" />
+                                    </label>
+                                    <label class="btn btn-success btn-file">
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                        Sauvegarder 
+                                        <input ng-click="uploadImage()" type="button" style="display: none;" />
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+                        <br/>
+                        <br/> 
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6 col-xs-12 noSpace" ng-repeat="image in images" style="border:solid">
+                                <img class="img-responsive img-rounded" ng-src="{{image}}"/>
+                                <br/>
+                                <button type="button" ng-click="deleteImage(image)" class="btn btn-danger" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

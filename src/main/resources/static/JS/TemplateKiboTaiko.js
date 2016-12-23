@@ -33,9 +33,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('navBarrController', function ($scope) {
-    
-    $scope.navBarrItems = [
-        {
+    $scope.navBarrItems = [{
             name: "Activite"
             , destination: "#/Activite"
         }, {
@@ -50,6 +48,5 @@ app.controller('navBarrController', function ($scope) {
         }, {
             name: "Admin"
             , destination: "#/Admin"
-        }
-    ];
+        }];
 });

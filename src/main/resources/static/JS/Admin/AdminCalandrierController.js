@@ -40,7 +40,6 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
                 $scope.calandrier.contenue.slice(endIndex);
     };
     $scope.setImage = function(data){
-        console.log(data);
         $scope.calandrier.image = data; 
     };
     

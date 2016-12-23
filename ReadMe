@@ -1,0 +1,47 @@
+--------------------------------------------------------------------------------
+---------------------------    TABLE DES MATIÈRES    ---------------------------
+--------------------------------------------------------------------------------
+1. Variables globales client side
+10. Interface rest
+
+
+--------------------------------------------------------------------------------
+---------------------    VARIABLES GLOBALES CLIENT SIEE    ---------------------
+--------------------------------------------------------------------------------
+1- Variables globales client side
+    1.1 - $rootScope.image
+        Sont tous les images présent à l'utilisateur dans avoir besoin de 
+        l'enregistrer sur le serveur. 
+    
+    1.2 - app
+        C'est le module qui contient les controleurs de l'application client 
+        side
+        angular.module('myApp', ['ngRoute', 'ngSanitize']);
+
+
+
+--------------------------------------------------------------------------------
+----------------------------    INTERFACE REST    ------------------------------
+--------------------------------------------------------------------------------
+10- interfaces rest
+    10.1 Calandrier
+        /Calandrier
+            GET : renvoir un object js correspondant à tous les calandrier 
+                    présent dans la bd
+            POST : Ajouet un nouveau calandrier dans la BD. 
+            PUT : Update le calandrier qui possède le même ID.
+                /{calandrierID}
+                @requestBody object Calandrier. 
+            DELETE : Supprime un calandrier de la BD. 
+                /{calandrierID}
+
+    10.2 HomeItems
+        /HomeItems
+            GET : renvoir un object js correspondant à tous les HomeItems 
+                    présent dans la bd
+            POST : Ajouet un nouveau HomeItems dans la BD. 
+            PUT : Update le HomeItems qui possède le même ID.
+                /{HomeItemsID}
+                @requestBody object HomeItems. 
+            DELETE : Supprime un calandrier de la BD. 
+                /{HomeItemsID}

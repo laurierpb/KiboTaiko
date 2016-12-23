@@ -1,4 +1,4 @@
 /* global app */
 app.controller('CommanditeController', function ($scope, $http) {
-    $scope.name = 'CommanditeController';
+    $scope.name = 'Super Commandite Controller';
 });

@@ -1,8 +1,7 @@
 ---------------------------------------
----------------------------------------
 ----        Create des tables      ----
 ---------------------------------------
----------------------------------------
+
      -- Table: public.calandrier
     DROP TABLE public.Calandrier;
     CREATE TABLE public.Calandrier
@@ -38,10 +37,9 @@
 
 
 -----------------------------------------
------------------------------------------
 ----        Autres informations      ----
 -----------------------------------------
------------------------------------------
+
     -- Table: public.admin
     DROP TABLE public.Administrateur;
     CREATE TABLE public.Administrateur
