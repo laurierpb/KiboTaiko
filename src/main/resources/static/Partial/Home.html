@@ -6,7 +6,7 @@
         </div>
         <div class="col-xs-12 col-sm-7 col-lg-8">
             <h1 class="center">{{item.titre}}</h1>
-            <p>{{item.contenue}}</p>
+            <p ng-bind-html="item.contenue"></p>
         </div>
     </div>
     <br/>

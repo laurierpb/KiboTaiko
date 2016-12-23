@@ -1,5 +1,4 @@
 function uploadImage(controller) {
-    console.log($("#upload-file-form" + "-" + controller)[0]);
     $.ajax({
         url: "/Image",
         type: "POST",

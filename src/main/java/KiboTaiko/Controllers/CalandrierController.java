@@ -34,7 +34,7 @@ public class CalandrierController {
      * @return le nouveau calandrier
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{calandrierId}")
-    public @ResponseBody Calandrier postCalandrier(
+    public @ResponseBody Calandrier putCalandrier(
             @RequestBody Calandrier cal, 
             @PathVariable int calandrierId) {
         System.out.println("Calandrier Controller : PUT");
@@ -58,7 +58,7 @@ public class CalandrierController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody Calandrier putCalandrier(
+    public @ResponseBody Calandrier postCalandrier(
             @RequestBody Calandrier calandrier) {
         
         String erreurCalandrier = CalandrierController_Helper.validateCalandrier(calandrier);
