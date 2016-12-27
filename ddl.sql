@@ -6,12 +6,12 @@
     DROP TABLE public.Calandrier;
     CREATE TABLE public.Calandrier
     (
-      id SERIAL NOT NULL,
-      image text NOT NULL,
-      imageAlt text NOT NULL,
-      contenue text NOT NULL,
-      titleText text NOT NULL,
-      CONSTRAINT Calandrier_pkey PRIMARY KEY (id)
+      Id SERIAL NOT NULL,
+      Image text NOT NULL,
+      ImageAlt text NOT NULL,
+      Contenue text NOT NULL,
+      TitleText text NOT NULL,
+      CONSTRAINT Calandrier_pkey PRIMARY KEY (Id)
     )
     WITH (
       OIDS=FALSE
