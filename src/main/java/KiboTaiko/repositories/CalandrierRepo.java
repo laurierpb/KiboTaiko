@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CalandrierRepo {
+
+    /**
+     * retourne une liste de tous les calandrier présent dans la base de données. 
+     * @return une liste de tous les calandrier dans la base de données. 
+     */
     public static List<Calandrier> getAllCalandrier() {
         String query = "select * from calandrier;";
 
@@ -22,6 +27,10 @@ public class CalandrierRepo {
         return result;
     }
 
+    /**
+     * Update le calandrier qui correspond au calandrier passé en paramêtre
+     * @param cal calandrier
+     */
     public static void updateCalandrier(Calandrier cal) {
         String sqlString = "UPDATE calandrier\n"
                 + "SET Image = ?, ImageAlt = ?, Contenue = ?, TitleText = ?\n"
@@ -36,6 +45,11 @@ public class CalandrierRepo {
         );
     }
     
+    /**
+     * Supprime un calandrier de la base de données par rapport au ID passé
+     * en paramêtre. 
+     * @param id
+     */
     public static void deleteCalandrier(int id) {
         String sqlString = "DELETE FROM calandrier WHERE Id = ?;";
         Application.app.jdbcTemplate.update(
@@ -44,6 +58,11 @@ public class CalandrierRepo {
         );
     }
 
+    /**
+     * Insert un nouveau calandrier par rapport au calandrier passé en 
+     * paramêtre. 
+     * @param cal
+     */
     public static void insertCalandrier(Calandrier cal) {
         String sqlString = "INSERT INTO \n"
                 + "calandrier (Image, ImageAlt, Contenue,TitleText) \n"

@@ -21,13 +21,13 @@
     DROP TABLE public.homeitems;
     CREATE TABLE public.homeitems
     (
-      "ID" SERIAL NOT NULL,
-      "Ordre" integer,
-      "Image" text NOT NULL,
-      "ImageAlt" text NOT NULL,
-      "Contenue" text NOT NULL,
-      "Titre" text NOT NULL,
-      CONSTRAINT homeitems_pkey PRIMARY KEY ("ID")
+      ID SERIAL NOT NULL,
+      Ordre integer,
+      Image text NOT NULL,
+      ImageAlt text NOT NULL,
+      Contenue text NOT NULL,
+      Titre text NOT NULL,
+      CONSTRAINT homeitems_pkey PRIMARY KEY (Id)
     )
     WITH (
       OIDS=FALSE
