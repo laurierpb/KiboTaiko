@@ -3,6 +3,9 @@
 --------------------------------------------------------------------------------
 1. Variables globales client side
 10. Interface rest
+    10.1 Calandrier
+    10.2 Home items
+    10.3 Images
 
 
 --------------------------------------------------------------------------------
@@ -45,3 +48,12 @@
                 @requestBody object HomeItems. 
             DELETE : Supprime un calandrier de la BD. 
                 /{HomeItemsID}
+
+    10.3 Image
+        /Image
+            GET : renvoir un object js correspondant à tous les Images 
+                    présent dans la le système de fichier
+            POST : Ajouet une nouvel image dans le system de fichier dans la BD. 
+            DELETE : Supprime une image du système de fichier avec le nom passé
+                        en paramêtre. 
+                /{imageName}
