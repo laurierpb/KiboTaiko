@@ -1,8 +1,5 @@
 /* global app */
-app.controller('AdminController', function ($scope, $http) {
-    
-});
-app.run(function($rootScope, $http) {
+app.controller('AdminController', function ($rootScope, $scope, $http) {
     $http({
         method: 'GET',
         url: '/Image'

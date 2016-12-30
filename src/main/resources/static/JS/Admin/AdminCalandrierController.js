@@ -7,7 +7,7 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         imageAlt: "",
         image: "",
         titleText: "",
-        contenue: ""
+        contenue: ""    
     };
     $scope.setEvenementEdit = function (data) {
         $scope.calandrier.id = data.id;

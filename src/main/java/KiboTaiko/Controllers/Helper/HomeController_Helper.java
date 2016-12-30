@@ -24,7 +24,7 @@ public class HomeController_Helper {
     /**
      * if word parameter is null or equal to "" return false
      * @param word
-     * @return 
+     * @return true if the word is null or empty
      */
     private static boolean isNullOrEmpty(String word){
         return !(word == null || word.equals(""));

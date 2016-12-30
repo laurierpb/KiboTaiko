@@ -5,7 +5,7 @@ app.controller('CalandrierController', function ($scope, $http) {
         url: '/Calandrier'
     }).then(function successCallback(response) {        
         $scope.schedule = response.data;
-    }, function errorCallback(data, status, headers, config) {
+    }, function errorCallback() {
         console.log('Le GET vers la ressourse s\'est mal fait');
     });
 });
