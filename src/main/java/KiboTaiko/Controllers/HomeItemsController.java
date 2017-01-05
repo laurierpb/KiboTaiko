@@ -22,15 +22,11 @@ public class HomeItemsController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    List<HomeItem> getHomeItems() {
-
+    void getHomeItems() {
+        System.out.println("HomeItemsController : GET");
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         System.out.println("\n\n\n\n\n"+dbUrl+"\n\n\n\n\n");
-
-        System.out.println("HomeItemsController : GET");
-
-        List<HomeItem> homeItemsList = HomeRepo.getHomeItems();
-        return homeItemsList;
+        
     }
 
     /**
