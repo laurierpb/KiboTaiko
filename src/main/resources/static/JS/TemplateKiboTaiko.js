@@ -9,9 +9,9 @@ app.config(function ($routeProvider) {
                 templateUrl: 'Partial/Activite.html',
                 controller: 'ActiviteController'
             })
-            .when('/Calandrier', {
-                templateUrl: 'Partial/Calandrier.html',
-                controller: 'CalandrierController'
+            .when('/Calendrier', {
+                templateUrl: 'Partial/Calendrier.html',
+                controller: 'CalendrierController'
             })
             .when('/Galerie', {
                 templateUrl: 'Partial/Galerie.html',
@@ -37,8 +37,8 @@ app.controller('navBarrController', function ($scope) {
             name: "Activite"
             , destination: "#/Activite"
         }, {
-            name: "Calandrier"
-            , destination: "#/Calandrier"
+            name: "Calendrier"
+            , destination: "#/Calendrier"
         }, {
             name: "Galerie"
             , destination: "#/Galerie"

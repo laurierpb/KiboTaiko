@@ -1,8 +1,8 @@
 /* global app */
-app.controller('CalandrierController', function ($scope, $http) {
+app.controller('CalendrierController', function ($scope, $http) {
     $http({
         method: 'GET',
-        url: '/Calandrier'
+        url: '/Calendrier'
     }).then(function successCallback(response) {        
         $scope.schedule = response.data;
     }, function errorCallback(data, status, headers, config) {

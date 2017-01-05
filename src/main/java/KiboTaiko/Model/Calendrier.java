@@ -1,6 +1,6 @@
 package KiboTaiko.Model;
 
-public class Calandrier {
+public class Calendrier {
 
     private int id;
     private String image;
@@ -9,7 +9,7 @@ public class Calandrier {
     private String titleText;
 
     
-    public Calandrier(int id, String image, String imageAlt, String contenue, String titleText) {
+    public Calendrier(int id, String image, String imageAlt, String contenue, String titleText) {
         this.id = id;
         this.image = image;
         this.imageAlt = imageAlt;
@@ -17,7 +17,7 @@ public class Calandrier {
         this.titleText = titleText;
     }
 
-    public Calandrier(){
+    public Calendrier(){
         this.id = -1;
         this.image = "";
         this.imageAlt = "";

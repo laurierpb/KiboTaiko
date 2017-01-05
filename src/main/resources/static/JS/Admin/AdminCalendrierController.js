@@ -1,8 +1,8 @@
 $.getScript("JS/Utility/Upload.js", function(){});
 /* global app */
-app.controller('AdminCalandrierController', function ($scope, $http) {
+app.controller('AdminCalendrierController', function ($scope, $http) {
     $scope.id;
-    $scope.calandrier = {
+    $scope.calendrier = {
         id: "",
         imageAlt: "",
         image: "",
@@ -10,13 +10,13 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
         contenue: ""    
     };
     $scope.setEvenementEdit = function (data) {
-        $scope.calandrier.id = data.id;
-        $scope.calandrier.imageAlt = data.imageAlt;
-        $scope.calandrier.image = data.image;
-        $scope.calandrier.titleText = data.titleText;
-        $scope.calandrier.contenue = data.contenue;
+        $scope.calendrier.id = data.id;
+        $scope.calendrier.imageAlt = data.imageAlt;
+        $scope.calendrier.image = data.image;
+        $scope.calendrier.titleText = data.titleText;
+        $scope.calendrier.contenue = data.contenue;
     };
-    $("#upload-file-input-calandrier").change(function () {
+    $("#upload-file-input-calendrier").change(function () {
         readURL(this);
     });
     function readURL(input) {
@@ -24,38 +24,38 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#imageCalandrierEdit').attr('src', e.target.result);
+                $('#imageCalendrierEdit').attr('src', e.target.result);
             };
 
-            $scope.calandrier.image = "Images/" + input.files[0].name;
+            $scope.calendrier.image = "Images/" + input.files[0].name;
             reader.readAsDataURL(input.files[0]);
         }
     }
     $scope.addText = function(i, j){
-        var txtArea = document.getElementById("calandrierContenue");
+        var txtArea = document.getElementById("calendrierContenue");
         var startIndex = txtArea.selectionStart;
         var endIndex = txtArea.selectionEnd;
-        $scope.calandrier.contenue = $scope.calandrier.contenue.slice(0, startIndex) + i + 
-                $scope.calandrier.contenue.slice(startIndex, endIndex) + j + 
-                $scope.calandrier.contenue.slice(endIndex);
+        $scope.calendrier.contenue = $scope.calendrier.contenue.slice(0, startIndex) + i + 
+                $scope.calendrier.contenue.slice(startIndex, endIndex) + j + 
+                $scope.calendrier.contenue.slice(endIndex);
     };
     $scope.setImage = function(data){
-        $scope.calandrier.image = data; 
+        $scope.calendrier.image = data; 
     };
     
     
     $http({
         method: 'GET',
-        url: '/Calandrier'
+        url: '/Calendrier'
     }).then(function successCallback(response) {
-        $scope.calandrierList = response.data;
+        $scope.calendrierList = response.data;
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');
     });  
-    $scope.DeleteCalandrier = function () {;
+    $scope.DeleteCalendrier = function () {;
         $http({
             method: 'DELETE',
-            url: '/Calandrier/' + $scope.calandrier.id,
+            url: '/Calendrier/' + $scope.calendrier.id,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -65,31 +65,31 @@ app.controller('AdminCalandrierController', function ($scope, $http) {
             console.log('OMG DELETE fail');
         });
     };
-    $scope.AddCalandrier = function () {
+    $scope.AddCalendrier = function () {
         $http({
             method: 'POST',
-            url: '/Calandrier',
-            data: $scope.calandrier,
+            url: '/Calendrier',
+            data: $scope.calendrier,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
-            uploadImage("calandrier");
+            uploadImage("calendrier");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG POST fail');
         });
     };
-    $scope.UpdateCalandrier = function () {
+    $scope.UpdateCalendrier = function () {
         $http({
             method: 'PUT',
-            url: '/Calandrier/'+ $scope.calandrier.id,
-            data: $scope.calandrier,
+            url: '/Calendrier/'+ $scope.calendrier.id,
+            data: $scope.calendrier,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
-            uploadImage("calandrier");
+            uploadImage("calendrier");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG PUT fail');

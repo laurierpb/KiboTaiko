@@ -1,21 +1,21 @@
 package KiboTaiko.repositories;
 
 import KiboTaiko.Application;
-import KiboTaiko.Model.Calandrier;
+import KiboTaiko.Model.Calendrier;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CalandrierRepo {
+public class CalendrierRepo {
 
     /**
-     * retourne une liste de tous les calandrier présent dans la base de données. 
-     * @return une liste de tous les calandrier dans la base de données. 
+     * retourne une liste de tous les calendrier présent dans la base de données. 
+     * @return une liste de tous les calendrier dans la base de données. 
      */
-    public static List<Calandrier> getAllCalandrier() {
-        String query = "select * from calandrier;";
-        List<Calandrier> result = Application.app.jdbcTemplate.query(query,
-                (rs, rowNum) -> new Calandrier(
+    public static List<Calendrier> getAllCalendrier() {
+        String query = "select * from calendrier;";
+        List<Calendrier> result = Application.app.jdbcTemplate.query(query,
+                (rs, rowNum) -> new Calendrier(
                         rs.getInt("id"),
                         rs.getString("image"),
                         rs.getString("imageAlt"),
@@ -27,11 +27,11 @@ public class CalandrierRepo {
     }
 
     /**
-     * Update le calandrier qui correspond au calandrier passé en paramêtre
-     * @param cal calandrier
+     * Update le calendrier qui correspond au calendrier passé en paramêtre
+     * @param cal calendrier
      */
-    public static void updateCalandrier(Calandrier cal) {
-        String sqlString = "UPDATE calandrier\n"
+    public static void updateCalendrier(Calendrier cal) {
+        String sqlString = "UPDATE calendrier\n"
                 + "SET Image = ?, ImageAlt = ?, Contenue = ?, TitleText = ?\n"
                 + "WHERE Id = ?;";
         Application.app.jdbcTemplate.update(
@@ -45,12 +45,12 @@ public class CalandrierRepo {
     }
     
     /**
-     * Supprime un calandrier de la base de données par rapport au ID passé
+     * Supprime un calendrier de la base de données par rapport au ID passé
      * en paramêtre. 
      * @param id
      */
-    public static void deleteCalandrier(int id) {
-        String sqlString = "DELETE FROM calandrier WHERE Id = ?;";
+    public static void deleteCalendrier(int id) {
+        String sqlString = "DELETE FROM calendrier WHERE Id = ?;";
         Application.app.jdbcTemplate.update(
                 sqlString,
                 id
@@ -58,13 +58,13 @@ public class CalandrierRepo {
     }
 
     /**
-     * Insert un nouveau calandrier par rapport au calandrier passé en 
+     * Insert un nouveau calendrier par rapport au calendrier passé en 
      * paramêtre. 
      * @param cal
      */
-    public static void insertCalandrier(Calandrier cal) {
+    public static void insertCalendrier(Calendrier cal) {
         String sqlString = "INSERT INTO \n"
-                + "calandrier (Image, ImageAlt, Contenue,TitleText) \n"
+                + "calendrier (Image, ImageAlt, Contenue, TitleText) \n"
                 + "VALUES (?,?,?,?);";
         Application.app.jdbcTemplate.update(
                 sqlString,

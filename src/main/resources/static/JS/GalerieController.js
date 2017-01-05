@@ -2,7 +2,7 @@
 app.controller('GalerieController', function ($scope, $http) {
     $http({
         method: "GET",
-        url: "/Calandrier"
+        url: "/Calendrier"
     }).then(function successCallback(response) {
         $scope.annees = response.data;
     }, function errorCallback(response) {

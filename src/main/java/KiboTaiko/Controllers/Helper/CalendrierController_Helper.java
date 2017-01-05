@@ -1,17 +1,17 @@
 package KiboTaiko.Controllers.Helper;
 
-import KiboTaiko.Model.Calandrier;
+import KiboTaiko.Model.Calendrier;
 
-public class CalandrierController_Helper {
+public class CalendrierController_Helper {
 
     /**
-     * valide si un calandrier est bien construit selon les stendard d'acceptation
+     * valide si un calendrier est bien construit selon les stendard d'acceptation
      * de la base de données. 
      * @param cal
-     * @return une string vide si le calandrier est OK
-     *         une string pleine si le calandrier comporte des erreurs. 
+     * @return une string vide si le calendrier est OK
+     *         une string pleine si le calendrier comporte des erreurs. 
      */
-    public static String validateCalandrier(Calandrier cal){
+    public static String validateCalendrier(Calendrier cal){
         if(cal.getContenue().equals("") || cal.getContenue() == null){
             return "Erreur pour le contenue";
         }

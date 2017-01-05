@@ -34,7 +34,7 @@ public class HomeItemsController {
      * @return 
      */
     @RequestMapping(method = RequestMethod.POST)
-    public HomeItem postCalandrier(@RequestBody HomeItem homeItem) {
+    public HomeItem postCalendrier(@RequestBody HomeItem homeItem) {
         
         if(HomeController_Helper.validateHomeItem(homeItem)){
             System.out.println("Erreur dans l'entree du HomeItem");
@@ -45,13 +45,13 @@ public class HomeItemsController {
     }
     
     /**
-     * update un home item passé en paramètre
+     * update un home item passÃ© en paramÃ¨tre
      * @param homeItem
      * @param homeItemID
      * @return
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{homeItemID}")
-    public HomeItem putCalandrier(
+    public HomeItem putCalendrier(
             @RequestBody HomeItem homeItem, 
             @PathVariable int homeItemID) {
         
@@ -65,7 +65,7 @@ public class HomeItemsController {
     }
     
     /**
-     * Supprime un home item de la base de données
+     * Supprime un home item de la base de donnÃ©es
      * @param homeItemID
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{homeItemID}")
