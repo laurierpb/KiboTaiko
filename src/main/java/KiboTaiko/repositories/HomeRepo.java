@@ -2,9 +2,6 @@ package KiboTaiko.repositories;
 
 import KiboTaiko.Application;
 import KiboTaiko.Model.HomeItem;
-import KiboTaiko.repositories.tools.Helper;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -16,29 +13,18 @@ public class HomeRepo {
      * @return une liste de tous les home items de la base de données. 
      */
     public static List<HomeItem> getHomeItems(){
-        try {
-        Connection connection = Helper.getConnection();
-        Statement stmt = connection.createStatement();
         String query = "select * from HomeItems;";
-        ResultSet rs = stmt.executeQuery(query);
-        StringBuilder sb = new StringBuilder();
-        List homeItems = new ArrayList<>();
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            int order = rs.getInt("order");
-            String contenue = rs.getString("contenue");
-            String titre = rs.getString("titre");
-            String image = rs.getString("image");
-            String imageAlt = rs.getString("imageAlt");
-            HomeItem hi = new HomeItem(id, order, contenue, titre, image, imageAlt); 
-            homeItems.add(hi);
-            System.out.println("\n\n\n\n\nHomeItem : "+hi.toString()+"\n\n\n\n\n");
-        }
-        
-        return homeItems;
-    } catch (Exception e) {
-        return new ArrayList<>();
-    }
+        List<HomeItem> result = Application.app.jdbcTemplate.query(query,
+                (rs, rowNum) -> new HomeItem(
+                    rs.getInt("ID"),
+                    rs.getInt("Ordre"),
+                    rs.getString("Image"),
+                    rs.getString("ImageAlt"),
+                    rs.getString("Contenue"),
+                    rs.getString("Titre")
+                )
+        );
+        return result;
     }
     
     /**
@@ -77,6 +63,7 @@ public class HomeRepo {
                 homeItem.getTitre(), 
                 homeItem.getId()
         );
+        
     }
     /**
      * Delete un home item de la base de données
