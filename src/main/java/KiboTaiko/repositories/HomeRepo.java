@@ -63,7 +63,6 @@ public class HomeRepo {
                 homeItem.getTitre(), 
                 homeItem.getId()
         );
-        
     }
     /**
      * Delete un home item de la base de données

@@ -14,7 +14,6 @@ public class CalandrierRepo {
      */
     public static List<Calandrier> getAllCalandrier() {
         String query = "select * from calandrier;";
-
         List<Calandrier> result = Application.app.jdbcTemplate.query(query,
                 (rs, rowNum) -> new Calandrier(
                         rs.getInt("id"),
