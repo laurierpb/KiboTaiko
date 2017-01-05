@@ -21,7 +21,6 @@ public class HomeRepo {
         Statement stmt = connection.createStatement();
         String query = "select * from HomeItems;";
         ResultSet rs = stmt.executeQuery(query);
-            System.out.println("\n\n\n\n\nResult Set : "+rs.toString()+"\n\n\n\n\n");
         StringBuilder sb = new StringBuilder();
         List homeItems = new ArrayList<>();
         while (rs.next()) {
@@ -31,8 +30,9 @@ public class HomeRepo {
             String titre = rs.getString("titre");
             String image = rs.getString("image");
             String imageAlt = rs.getString("imageAlt");
-            
-            homeItems.add(new HomeItem(id, order, contenue, titre, image, imageAlt));
+            HomeItem hi = new HomeItem(id, order, contenue, titre, image, imageAlt); 
+            homeItems.add(hi);
+            System.out.println("\n\n\n\n\nHomeItem : "+hi.toString()+"\n\n\n\n\n");
         }
         
         return homeItems;
