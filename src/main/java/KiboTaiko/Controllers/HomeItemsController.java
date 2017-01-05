@@ -25,7 +25,7 @@ public class HomeItemsController {
     List<HomeItem> getHomeItems() {
 
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
-        System.out.println(dbUrl);
+        System.out.println("\n\n\n\n\n"+dbUrl+"\n\n\n\n\n");
 
         System.out.println("HomeItemsController : GET");
 
