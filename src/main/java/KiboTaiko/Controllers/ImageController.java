@@ -1,7 +1,6 @@
 package KiboTaiko.Controllers;
 
 import KiboTaiko.Tools.Image_Tool;
-import KiboTaiko.repositories.tools.Helper;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +23,6 @@ public class ImageController {
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     List<String> getImages() {
-        try{
-        Helper.getConnection();}catch(Exception e){System.out.println(e);}
         System.out.println("ImagesController : GET");
         return Image_Tool.getAllFileNameFromRootFolderName();
     }
