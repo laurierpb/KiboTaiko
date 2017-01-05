@@ -1,19 +1,19 @@
-<div ng-controller="AdminCalandrierController">
+<div ng-controller="AdminCalendrierController">
     <div class="row">
         <div class="col-xs-12" style="text-align: center">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-heading noSpace">
                         <div class="container-fluid panel-contaner noSpace">
-                            <div data-toggle="collapse" data-parent="#accordion" data-target="#CalandrierController">
-                                <h4 style="display: inline-block; float: top">Calandrier</h4>
+                            <div data-toggle="collapse" data-parent="#accordion" data-target="#CalendrierController">
+                                <h4 style="display: inline-block; float: top">Calendrier</h4>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                <div id="CalandrierController" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
+                <div id="CalendrierController" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">
                         <div style="display: inline-block;" align="center" class="dropdown" >
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -21,22 +21,22 @@
                                 <span class="caret"></span>
                             </button>
                             <ul float: right class="dropdown-menu" >
-                                <li ng-repeat="evenement in calandrierList">
+                                <li ng-repeat="evenement in calendrierList">
                                     <a role="button" ng-click="setEvenementEdit(evenement)">{{evenement.titleText}}</a>
                                 </li>
                             </ul>
                         </div>
                         <br/>
                         <br/>
-                        <form id="upload-file-form-calandrier">
+                        <form id="upload-file-form-calendrier">
                             <div class="panel" style="text-align:left">
                                 <div class="panel-heading noSpace">
                                     <div class="container-fluid panel-contaner noSpace">
                                         <div data-toggle="collapse" data-parent="#accordion" data-target="#textCollapse">
                                             <div class="hovereffect">
-                                                <img id="imageCalandrierEdit" class="img-responsive calandrierMax" src="{{calandrier.image}}" alt="Preview"/>
+                                                <img id="imageCalendrierEdit" class="img-responsive calendrierMax" src="{{calendrier.image}}" alt="Preview"/>
                                                 <div class="overlay">
-                                                    <h2>{{calandrier.titleText}}</h2>
+                                                    <h2>{{calendrier.titleText}}</h2>
                                                 </div>
                                             </div>
                                         </div>
@@ -44,16 +44,16 @@
                                 </div>
 
                                 <div id="textCollapse" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
-                                    <p ng-bind-html="calandrier.contenue"/></P>
+                                    <p ng-bind-html="calendrier.contenue"/></P>
                                 </div>
                             </div>
 
                             <br/>
                             L'image doit avoir la grosseur 1024 X 127 pour bien parraitre sur le site
                             <br/>
-                            <label for="upload-file-input-calandrier" class="btn btn-default btn-file">
+                            <label for="upload-file-input-calendrier" class="btn btn-default btn-file">
                                 <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
-                                Naviger <input id="upload-file-input-calandrier" 
+                                Naviger <input id="upload-file-input-calendrier" 
                                                accept="image/*" 
                                                type="file" 
                                                name="uploadfile"
@@ -75,16 +75,16 @@
                             
                             <br/>
                             <hr/>
-                            <label for="calandrierTitre">Titre calandrier</label>
-                            <input id="calandrierTitre" type="text" placeholder="Titre" class="form-control"
-                                   ng-model="calandrier.titleText"/>
+                            <label for="calendrierTitre">Titre calendrier</label>
+                            <input id="calendrierTitre" type="text" placeholder="Titre" class="form-control"
+                                   ng-model="calendrier.titleText"/>
 
-                            <label for="calandrierImageAlt">Image Alt</label>
-                            <input id="calandrierImageAlt" type="text" 
+                            <label for="calendrierImageAlt">Image Alt</label>
+                            <input id="calendrierImageAlt" type="text" 
                                    placeholder="Une description textuel de l'image" class="form-control"
-                                   ng-model="calandrier.imageAlt"/>
+                                   ng-model="calendrier.imageAlt"/>
 
-                            <label for="calandrierContenue">Contenue Calandrier</label>
+                            <label for="calendrierContenue">Contenue Calendrier</label>
                             <br/>
                             <button type="button" class="btn btn-default" ng-click="addText('<b>', '</b>')">
                                 <span class="glyphicon glyphicon-bold" aria-hidden="true"></span>
@@ -138,20 +138,20 @@
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <textarea id="calandrierContenue" class="form-control" rows="10" 
+                                        <textarea id="calendrierContenue" class="form-control" rows="10" 
                                                   placeholder="Écrire la description en HTML" style="resize: none"
-                                                  ng-model="calandrier.contenue"></textarea>
+                                                  ng-model="calendrier.contenue"></textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="button" ng-click="AddCalandrier()"    class="btn btn-primary">
+                            <button type="button" ng-click="AddCalendrier()"    class="btn btn-primary">
                                 Enregistrer Nouveau
                             </button>
-                            <button type="button" ng-click="UpdateCalandrier()" class="btn btn-success">
+                            <button type="button" ng-click="UpdateCalendrier()" class="btn btn-success">
                                 <span class="glyphicon glyphicon-floppy-disk"></span> Updater
                             </button>
-                            <button type="button" ng-click="DeleteCalandrier()" class="btn btn-danger" aria-label="Left Align">
+                            <button type="button" ng-click="DeleteCalendrier()" class="btn btn-danger" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
                             </button>
                         </form>
