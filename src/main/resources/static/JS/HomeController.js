@@ -2,7 +2,7 @@
 app.controller('HomeController', function ($scope, $http) {
     $http({
         method: 'GET',
-        url: 'HomeItems.json'
+        url: 'HomeItems'
     }).then(function successCallback(response) {
         $scope.homeItems = response.data;
     }, function errorCallback(response) {
