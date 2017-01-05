@@ -32,6 +32,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+            <version>1.4.1.RELEASE</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
