@@ -4,6 +4,7 @@ import KiboTaiko.Controllers.Helper.CalandrierController_Helper;
 import KiboTaiko.Model.Calandrier;
 import KiboTaiko.repositories.CalandrierRepo;
 import java.util.List;
+import KiboTaiko.repositories.tools.Helper;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,8 @@ public class CalandrierController {
     public @ResponseBody
     List<Calandrier> getEvenement() {
         System.out.println("CalandrierController : GET");
-
+        try{
+        Helper.getConnection();}catch(Exception e){System.out.println(e);}
         List<Calandrier> calandrierList = CalandrierRepo.getAllCalandrier();
         return calandrierList;
     }
