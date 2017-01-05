@@ -23,8 +23,6 @@ public class CalandrierController {
     public @ResponseBody
     List<Calandrier> getEvenement() {
         System.out.println("CalandrierController : GET");
-        try{
-        Helper.getConnection();}catch(Exception e){System.out.println(e);}
         List<Calandrier> calandrierList = CalandrierRepo.getAllCalandrier();
         return calandrierList;
     }
