@@ -25,17 +25,7 @@ public class HomeItemsController {
     void getHomeItems() {
         System.out.println("HomeItemsController : GET");
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
-        
-        String jdbc = dbUrl.split("?")[0];
-        String usernamePassword = dbUrl.split("?")[1];
-        String totalUserName = usernamePassword.split("&")[0];
-        String toatlPassWord = usernamePassword.split("&")[1];
-        
-        System.out.println("\n\n\n\n\n" + 
-                "jsbc            : " + jdbc +
-                "total user name : " + totalUserName +
-                "total password  : " + toatlPassWord +
-                "\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n"+dbUrl+"\n\n\n\n\n");
         
     }
 
