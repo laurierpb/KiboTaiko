@@ -4,6 +4,7 @@ app.controller('AdminController', function ($rootScope, $scope, $http) {
         method: 'GET',
         url: '/Image'
     }).then(function successCallback(response) {
+        console.log(response.data);
         $rootScope.images = response.data;
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');

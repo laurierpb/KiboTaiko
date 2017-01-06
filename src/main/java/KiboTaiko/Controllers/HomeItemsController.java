@@ -64,7 +64,7 @@ public class HomeItemsController {
         return homeItem;
     }
     
-    /**
+    /** 
      * Supprime un home item de la base de données
      * @param homeItemID
      */

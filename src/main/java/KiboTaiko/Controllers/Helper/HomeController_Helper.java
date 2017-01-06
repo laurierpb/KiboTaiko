@@ -14,8 +14,7 @@ public class HomeController_Helper {
         boolean retValue = true;
         
         if(isNullOrEmpty(homeItem.getContenue())) retValue = false;
-        if(isNullOrEmpty(homeItem.getImage())) retValue = false;
-        if(isNullOrEmpty(homeItem.getImageAlt())) retValue = false;
+        if(homeItem.getImage() == null) retValue = false;
         if(isNullOrEmpty(homeItem.getTitre())) retValue = false;
         if(homeItem.getOrder() < 0) retValue = false;
         

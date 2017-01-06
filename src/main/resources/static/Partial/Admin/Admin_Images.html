@@ -39,25 +39,14 @@
                                 </div>
                             </div>
                         </form>
-
-
-
-
-
-
-
-
-
-
-
-
+                        
                         <br/>
                         <br/> 
                         <div class="row">
                             <div class="col-lg-4 col-sm-6 col-xs-12 noSpace" ng-repeat="image in images" style="border:solid">
-                                <img class="img-responsive img-rounded" ng-src="{{image}}"/>
+                                <img class="img-responsive img-rounded" ng-src="data:image/JPEG;base64,{{image.image}}"/>
                                 <br/>
-                                <button type="button" ng-click="deleteImage(image)" class="btn btn-danger" aria-label="Left Align">
+                                <button type="button" ng-click="deleteImage(image.id)" class="btn btn-danger" aria-label="Left Align">
                                     <span class="glyphicon glyphicon-remove-circle"></span> Supprimer
                                 </button>
                             </div>

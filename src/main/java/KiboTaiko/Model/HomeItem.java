@@ -4,35 +4,25 @@ public class HomeItem {
     private int order;
     private String contenue;
     private String titre;
-    private String image;
-    private String imageAlt;
+    private Image image;
 
     public HomeItem() {
         this.id = -1;
         this.order = -1;
         this.contenue = "";
         this.titre = "";
-        this.image = "";
-        this.imageAlt = "";
+        this.image = null;
     }
 
-    public HomeItem(int id, int order, String image, String imageAlt, String contenue, String titre) {
+    public HomeItem(int id, int order, Image image, String contenue, String titre) {
         this.id = id;
         this.order = order;
         this.image = image;
-        this.imageAlt = imageAlt;
         this.contenue = contenue;
         this.titre = titre;
     }
 
-    public String getImageAlt() {
-        return imageAlt;
-    }
-
-    public void setImageAlt(String imageAlt) {
-        this.imageAlt = imageAlt;
-    }
-
+    
     public int getId() {
         return id;
     }
@@ -61,11 +51,11 @@ public class HomeItem {
         this.titre = titre;
     }
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Image image) {
         this.image = image;
     }
     
@@ -76,8 +66,7 @@ public class HomeItem {
                 + "\nOrder    : " + this.getOrder()
                 + "\nTitre    : " + this.getTitre()
                 + "\nContenue : " + this.getContenue()
-                + "\nImage    : " + this.getImage()
-                + "\nImageAlt : " + this.getImageAlt();
+                + "\nImage    : " + this.getImage().getName();
         return returnValue;
     }
 }

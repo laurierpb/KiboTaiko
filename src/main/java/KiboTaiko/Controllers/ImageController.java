@@ -1,6 +1,8 @@
 package KiboTaiko.Controllers;
 
-import KiboTaiko.Tools.Image_Tool;
+import KiboTaiko.Model.Image;
+import KiboTaiko.repositories.ImageRepo;
+import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +24,22 @@ public class ImageController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
-    List<String> getImages() {
+    List<Image> getImages() {
         System.out.println("ImagesController : GET");
-        return Image_Tool.getAllFileNameFromRootFolderName();
+        return ImageRepo.getImages();
     }
     
     /**
      * Delete the image from the file system
-     * @param imageName "image/{imageName}"
+     * @param imageId "image/{imageId}"
      */
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{imageName:.+}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{imageId}")
     public @ResponseBody 
         void deleteImage(
-            @PathVariable String imageName) {
-            System.out.println("Image Controller : DELETE => " + imageName);
-            Image_Tool.deleteFileFromFileSystem(imageName);
+            @PathVariable int imageId) {
+            System.out.println("Image DELETE : " + imageId);
+            ImageRepo.deleteImage(imageId);
+            
     }
         
     /**
@@ -49,12 +52,18 @@ public class ImageController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> uploadFile(
            @RequestParam("uploadfile") MultipartFile uploadfile) {
-        
         System.out.println("Image Controller : POST => " + uploadfile.getOriginalFilename());
         if(uploadfile.getOriginalFilename().equals("")) return new ResponseEntity<>(HttpStatus.OK);
         
-        if(!Image_Tool.addFileToFileSystem(uploadfile)){
-            System.out.println("bad-request");
+        try{
+            Image image = new Image();
+            byte [] byteArr = uploadfile.getBytes();
+            String imageName = uploadfile.getOriginalFilename();
+            
+            image.setImage(byteArr);
+            image.setname(imageName);
+            ImageRepo.postImage(image);
+        }catch(IOException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);

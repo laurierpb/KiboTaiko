@@ -2,6 +2,7 @@ package KiboTaiko.repositories;
 
 import KiboTaiko.Application;
 import KiboTaiko.Model.HomeItem;
+import KiboTaiko.Model.Image;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -13,13 +14,18 @@ public class HomeRepo {
      * @return une liste de tous les home items de la base de données. 
      */
     public static List<HomeItem> getHomeItems(){
-        String query = "select * from HomeItems;";
+        String query = "select images.id, ordre, contenue, titre, images.image, images.name, imagealt\n" +
+                       "from homeitems\n" +
+                       "left join images on homeitems.image = images.id;";
+        
         List<HomeItem> result = Application.app.jdbcTemplate.query(query,
                 (rs, rowNum) -> new HomeItem(
                     rs.getInt("ID"),
                     rs.getInt("Ordre"),
-                    rs.getString("Image"),
-                    rs.getString("ImageAlt"),
+                    new Image(-1, 
+                            rs.getBytes("image"), 
+                            rs.getString("name"),
+                            rs.getString("imagealt")),
                     rs.getString("Contenue"),
                     rs.getString("Titre")
                 )
@@ -40,7 +46,6 @@ public class HomeRepo {
             query,
             homeItem.getOrder(),
             homeItem.getImage(),
-            homeItem.getImageAlt(),
             homeItem.getContenue(),
             homeItem.getTitre()
         );
@@ -58,7 +63,6 @@ public class HomeRepo {
             query,
                 homeItem.getOrder(),
                 homeItem.getImage(),
-                homeItem.getImageAlt(),
                 homeItem.getContenue(),
                 homeItem.getTitre(), 
                 homeItem.getId()
