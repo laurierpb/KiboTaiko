@@ -5,7 +5,7 @@
                 <div class="container-fluid panel-contaner noSpace">
                     <div data-toggle="collapse" data-parent="#accordion" data-target="#{{annee.id}}">
                         <div class="hovereffect">
-                            <img class="img-responsive calendrierMax" ng-src="{{annee.image}}" alt="{{annee.imageAlt}}"/>
+                            <img class="img-responsive calendrierMax" ng-src="data:image/JPEG;base64,{{annee.image.image}}" alt="{{annee.image.imageAlt}}"/>
                             <div class="overlay">
                                 <h2>{{annee.titleText}}</h2>
                             </div>
@@ -18,7 +18,7 @@
                 <div class="container-fluid row">
                     <div class="col-xs-12">
                         <h3>{{annee.textDescriptif}}</h3>
-                        <img class="img-responsive imgCenter" ng-src="{{annee.imageGroup}}" alt="{{annee.imageAlt}}"/>
+                        <img class="img-responsive imgCenter" ng-src="data:image/JPEG;base64,{{annee.image.image}}" alt="{{annee.image.imageAlt}}"/>
                         <br/>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-lg-3" ng-repeat="personne in annee.personnes">

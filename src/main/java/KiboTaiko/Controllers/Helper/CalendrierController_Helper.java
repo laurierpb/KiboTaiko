@@ -15,11 +15,8 @@ public class CalendrierController_Helper {
         if(cal.getContenue().equals("") || cal.getContenue() == null){
             return "Erreur pour le contenue";
         }
-        if(cal.getImage().equals("") || cal.getImage() == null){
+        if(cal.getImage() == null){
             return "Erreur pour le image";
-        }
-        if(cal.getImageAlt().equals("") || cal.getImageAlt()== null){
-            return "Erreur pour le Alt";
         }
         if(cal.getTitleText().equals("") || cal.getTitleText()== null){
             return "Erreur pour le Titre";

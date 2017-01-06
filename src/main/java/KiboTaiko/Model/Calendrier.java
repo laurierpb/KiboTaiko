@@ -3,24 +3,21 @@ package KiboTaiko.Model;
 public class Calendrier {
 
     private int id;
-    private String image;
-    private String imageAlt;
+    private Image image;
     private String contenue;
     private String titleText;
 
     
-    public Calendrier(int id, String image, String imageAlt, String contenue, String titleText) {
+    public Calendrier(int id, Image image, String contenue, String titleText) {
         this.id = id;
         this.image = image;
-        this.imageAlt = imageAlt;
         this.contenue = contenue;
         this.titleText = titleText;
     }
 
     public Calendrier(){
         this.id = -1;
-        this.image = "";
-        this.imageAlt = "";
+        this.image = null;
         this.contenue = "";
         this.titleText = "";
     }
@@ -33,20 +30,12 @@ public class Calendrier {
         this.id = id;
     }
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Image image) {
         this.image = image;
-    }
-
-    public String getImageAlt() {
-        return imageAlt;
-    }
-
-    public void setImageAlt(String imageAlt) {
-        this.imageAlt = imageAlt;
     }
 
     public String getContenue() {

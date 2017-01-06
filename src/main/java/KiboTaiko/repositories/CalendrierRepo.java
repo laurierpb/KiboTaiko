@@ -2,6 +2,7 @@ package KiboTaiko.repositories;
 
 import KiboTaiko.Application;
 import KiboTaiko.Model.Calendrier;
+import KiboTaiko.Model.Image;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -9,16 +10,23 @@ import org.springframework.stereotype.Repository;
 public class CalendrierRepo {
 
     /**
-     * retourne une liste de tous les calendrier présent dans la base de données. 
-     * @return une liste de tous les calendrier dans la base de données. 
+     * retourne une liste de tous les calendrier présent dans la base de
+     * données.
+     *
+     * @return une liste de tous les calendrier dans la base de données.
      */
     public static List<Calendrier> getAllCalendrier() {
-        String query = "select * from calendrier;";
+        String query = "SELECT calendrier.id, calendrier.image, titleText, contenue, images.image as imagebytea, name, imagealt\n"
+                + "FROM calendrier\n"
+                + "LEFT JOIN images ON calendrier.image = images.id;";
         List<Calendrier> result = Application.app.jdbcTemplate.query(query,
                 (rs, rowNum) -> new Calendrier(
                         rs.getInt("id"),
-                        rs.getString("image"),
-                        rs.getString("imageAlt"),
+                        new Image(rs.getInt("image"),
+                                rs.getBytes("imagebytea"),
+                                rs.getString("name"),
+                                rs.getString("imageAlt")
+                        ),
                         rs.getString("contenue"),
                         rs.getString("titleText")
                 )
@@ -28,25 +36,26 @@ public class CalendrierRepo {
 
     /**
      * Update le calendrier qui correspond au calendrier passé en paramêtre
+     *
      * @param cal calendrier
      */
     public static void updateCalendrier(Calendrier cal) {
         String sqlString = "UPDATE calendrier\n"
-                + "SET Image = ?, ImageAlt = ?, Contenue = ?, TitleText = ?\n"
+                + "SET Image = ?, Contenue = ?, TitleText = ?\n"
                 + "WHERE Id = ?;";
         Application.app.jdbcTemplate.update(
                 sqlString,
-                cal.getImage(),
-                cal.getImageAlt(),
+                cal.getImage().getID(),
                 cal.getContenue(),
                 cal.getTitleText(),
                 cal.getId()
         );
     }
-    
+
     /**
-     * Supprime un calendrier de la base de données par rapport au ID passé
-     * en paramêtre. 
+     * Supprime un calendrier de la base de données par rapport au ID passé en
+     * paramêtre.
+     *
      * @param id
      */
     public static void deleteCalendrier(int id) {
@@ -58,8 +67,9 @@ public class CalendrierRepo {
     }
 
     /**
-     * Insert un nouveau calendrier par rapport au calendrier passé en 
-     * paramêtre. 
+     * Insert un nouveau calendrier par rapport au calendrier passé en
+     * paramêtre.
+     *
      * @param cal
      */
     public static void insertCalendrier(Calendrier cal) {
@@ -69,7 +79,6 @@ public class CalendrierRepo {
         Application.app.jdbcTemplate.update(
                 sqlString,
                 cal.getImage(),
-                cal.getImageAlt(),
                 cal.getContenue(),
                 cal.getTitleText()
         );
