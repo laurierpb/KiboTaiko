@@ -4,54 +4,42 @@ app.controller('AdminHomeController', function ($scope, $http) {
         id: null,
         order: null,
         titre: "",
-        contenue: ""
+        contenue: "",
+        image: {
+            id: -1,
+            image: "",
+            imageAlt: "",
+            name: ""
+        }
     };
-    $scope.homeItemImage = {
-        id:-1,
-        image:"",
-        imageAlt:"",
-        name:""
-    };
-    
+
     $http({
         method: 'GET',
         url: '/HomeItems'
     }).then(function successCallback(response) {
-        console.log("HomeItem get: " );
+        console.log("HomeItem get: ");
         console.log(response.data);
         $scope.HomeItems = response.data;
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');
     });
-    $("#upload-file-input-HomeItems").change(function () {
-        readURL(this);
-    });
-    
-    $scope.imageChange = function(input){
+
+    $scope.imageChange = function (input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.readAsDataURL(input.files[0]);
             reader.onload = function (e) {
-                $scope.homeItemImage.image = e.target.result.substring(e.target.result.indexOf(",")+1);
+                $scope.homeItemCurrent.image.image = e.target.result.substring(e.target.result.indexOf(",") + 1);
             };
-            $scope.homeItemImage.name = input.files[0].name;
-            setTimeout(function(){console.log(
-                $scope.currentImage);
+            $scope.homeItemCurrent.image.name = input.files[0].name;
+            setTimeout(function () {
+                console.log(
+                        $scope.currentImage);
                 $scope.$apply();
             }, 1000);
         }
     };
-    
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#imageHomeItemEdit').attr('src', e.target.result);
-            };
-            $scope.homeItemCurrent.image = "Images/" + input.files[0].name;
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+
     $scope.addText = function (i, j) {
         var txtArea = document.getElementById("homeItemContenue");
         var startIndex = txtArea.selectionStart;
@@ -61,19 +49,13 @@ app.controller('AdminHomeController', function ($scope, $http) {
                 $scope.homeItemCurrent.contenue.slice(endIndex);
     };
     $scope.loadHomeItem = function (data) {
-        $scope.homeItemCurrent.id = data.id;
-        $scope.homeItemCurrent.order = data.order;
-        $scope.homeItemCurrent.contenue = data.contenue;
-        $scope.homeItemCurrent.titre = data.titre;
-        $scope.homeItemCurrent.image = data.image;
-        $scope.homeItemCurrent.imageAlt = data.imageAlt;
+        $scope.homeItemCurrent = data;
     };
-    $scope.setImage = function(data){
-        $scope.homeItemImage = data; 
+    $scope.setImage = function (data) {
+        console.log(data);
+        $scope.homeItemCurrent.image = data;
     };
-    
-    
-    
+
     $scope.postHomeItem = function () {
         $http({
             method: 'POST',
@@ -83,14 +65,14 @@ app.controller('AdminHomeController', function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
-            uploadImage("home");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG post fail');
         });
     };
     $scope.putHomeItem = function () {
-        //il faut que je trouve un meilleur moyen que ca v
+        console.log($scope.homeItemCurrent);
+        $scope.homeItemCurrent.image.image.split("");
         $http({
             method: 'PUT',
             url: '/HomeItems/' + $scope.homeItemCurrent.id,
@@ -99,7 +81,6 @@ app.controller('AdminHomeController', function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
-            uploadImage("home");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG PUT fail');

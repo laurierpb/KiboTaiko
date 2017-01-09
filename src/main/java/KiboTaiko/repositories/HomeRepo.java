@@ -47,7 +47,7 @@ public class HomeRepo {
         Application.app.jdbcTemplate.update(
                 query,
                 homeItem.getOrder(),
-                homeItem.getImage(),
+                homeItem.getImage().getID(),
                 homeItem.getContenue(),
                 homeItem.getTitre()
         );
@@ -65,7 +65,7 @@ public class HomeRepo {
         Application.app.jdbcTemplate.update(
                 query,
                 homeItem.getOrder(),
-                homeItem.getImage(),
+                homeItem.getImage().getID(),
                 homeItem.getContenue(),
                 homeItem.getTitre(),
                 homeItem.getId()

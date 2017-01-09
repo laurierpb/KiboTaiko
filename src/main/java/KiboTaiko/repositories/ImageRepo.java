@@ -43,6 +43,21 @@ public class ImageRepo {
     }
     
     /**
+     *  Update les informations de la bd avec le id comme reference de l'image
+     * @param image l'image a ajouter a la bd
+     */
+    public static void putImage(Image image){
+        String query = "UPDATE images "
+                + "SET imageAlt=?"
+                + "WHERE id = ?";
+        Application.app.jdbcTemplate.update(
+            query,
+            image.getImageAlt(),
+            image.getID()
+        );
+    }
+    
+    /**
      *  supprime une image par rapport a son ID
      * @param id 
      */

@@ -2,13 +2,13 @@ package KiboTaiko.Model;
 
 public class Image {
 
-    private int ID;
+    private int id;
     private String name;
     private byte[] image;
     private String imageAlt;
 
     public Image(int ID, byte[] image, String name, String imageAlt) {
-        this.ID = ID;
+        this.id = ID;
         this.image = image;
         this.name = name;
         this.imageAlt = imageAlt;
@@ -18,7 +18,7 @@ public class Image {
     }
 
     public int getID() {
-        return ID;
+        return id;
     }
 
     public String getName() {
@@ -41,7 +41,7 @@ public class Image {
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.id = ID;
     }
     public void setImageAlt(String imageAlt){
         this.imageAlt = imageAlt;

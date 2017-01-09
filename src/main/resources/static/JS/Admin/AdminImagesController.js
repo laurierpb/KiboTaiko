@@ -29,7 +29,7 @@ app.controller('AdminImagesController', function ($rootScope, $scope, $http) {
             }, 1000);
         }
     };
-
+    
     function getImage() {
         console.log("get image");
         $http({

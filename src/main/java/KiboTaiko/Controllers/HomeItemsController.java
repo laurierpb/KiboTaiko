@@ -3,6 +3,7 @@ package KiboTaiko.Controllers;
 import KiboTaiko.Model.HomeItem;
 import KiboTaiko.Controllers.Helper.HomeController_Helper;
 import KiboTaiko.repositories.HomeRepo;
+import KiboTaiko.repositories.ImageRepo;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,12 +41,18 @@ public class HomeItemsController {
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
             HomeRepo.insertHomeItems(homeItem);
+            if(homeItem.getImage().getID() > 0){
+                ImageRepo.putImage(homeItem.getImage());
+            }else{
+                ImageRepo.postImage(homeItem.getImage());
+            }
         }
         return homeItem;
     }
     
     /**
-     * update un home item passé en paramètre
+     * update un home item passé en paramètre et l'image qui lui est associé 
+     * si besoin. 
      * @param homeItem
      * @param homeItemID
      * @return
@@ -60,6 +67,11 @@ public class HomeItemsController {
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
             HomeRepo.updateHomeItems(homeItem);
+            if(homeItem.getImage().getID() > 0){
+                ImageRepo.putImage(homeItem.getImage());
+            }else{
+                ImageRepo.postImage(homeItem.getImage());
+            }
         }
         return homeItem;
     }

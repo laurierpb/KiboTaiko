@@ -22,7 +22,7 @@
                                 <span class="caret"></span>
                             </button>
                             <ul float: right class="dropdown-menu" >
-                                <li ng-repeat="Item in HomeItems | orderBy:'order'">
+                                <li ng-repeat="Item in HomeItems| orderBy:'order'">
                                     <a role="button" ng-click="loadHomeItem(Item)">{{Item.titre}}</a>
                                 </li>
                             </ul>
@@ -32,7 +32,7 @@
                             <div class="panel" style="text-align:left">
                                 <div class="row">
                                     <div class="col-lg-offset-1 col-xs-12 col-sm-5 col-lg-3">
-                                        <img class="img-responsive img-rounded" ng-src="data:image/JPEG;base64,{{homeItemImage.image}}"/>
+                                        <img class="img-responsive img-rounded evenement" ng-src="data:image/JPEG;base64,{{homeItemCurrent.image.image}}" imageAlt="{{homeItemCurrent.image.imageAlt}}"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-5 col-lg-7">
                                         <h1 class="center">{{homeItemCurrent.titre}}</h1>
@@ -41,11 +41,14 @@
                                 </div>
                                 <br>
                             </div>
-                            <label for="upload-file-input-HomeItems" class="btn btn-default btn-file">
+                            
+                            <label for="upload-file-input-Images" class="btn btn-default btn-file">
                                 <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
                                 Naviger 
-                                <input id="upload-file-input-HomeItems" accept="image/*" type="file" name="uploadfile"style="display: none;" />
+                                <input id="upload-file-input-Images" accept="image/*" type="file" name="uploadfile"style="display: none;" 
+                                       onchange="angular.element(this).scope().imageChange(this)"/>
                             </label>
+                            
                             <div style="display: inline-block;" align="center" class="dropdown" >
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                                     Selection Images
@@ -57,7 +60,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            
+
                             <br/>
                             <hr/>
                             <label for="homeItemTitre">Titre</label>
@@ -65,12 +68,12 @@
                                    ng-model="homeItemCurrent.titre"/>
                             <label for="homeItemImageAlt">Image Alt</label>
                             <input id="homeItemImageAlt" type="text"  placeholder="Une description textuel de l'image" class="form-control"
-                                   ng-model="homeItemImage.imageAlt"/>
+                                   ng-model="homeItemCurrent.image.imageAlt"/>
                             <label for="homeItemOrder">Order</label>
                             <input id="homeItemOrder" type="text" placeholder="[0 - 9]" class="form-control"
                                    ng-model="homeItemCurrent.order"/>
-                            
-                            
+
+
                             <label for="homeItemContenue">Contenue</label>
                             <br/>
                             <button type="button" class="btn btn-default" ng-click="addText('<b>', '</b>')">
