@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Calendrier")
 public class CalendrierController {
+
     /**
      * Retourne une liste de calendrier.
+     *
      * @return calendrierList
      */
     @RequestMapping(method = RequestMethod.GET)
@@ -28,55 +30,60 @@ public class CalendrierController {
 
     /**
      * /calendrier/{id}
+     *
      * @param cal = calendrier du body
      * @param calendrierId = calendrier/{calendrierId}
      * @return le nouveau calendrier
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{calendrierId}")
-    public @ResponseBody Calendrier putCalendrier(
-            @RequestBody Calendrier cal, 
+    public @ResponseBody
+    Calendrier putCalendrier(
+            @RequestBody Calendrier cal,
             @PathVariable int calendrierId) {
         System.out.println("Calendrier Controller : PUT");
         if (calendrierId <= 0) {
             System.out.println("Erreur pour le ID");
             return null;
         }
-        
+
         String erreurCalendrier = CalendrierController_Helper.validateCalendrier(cal);
-        if(!erreurCalendrier.equals("")){
+        if (!erreurCalendrier.equals("")) {
             System.out.println(erreurCalendrier);
-        }else{
+        } else {
             CalendrierRepo.updateCalendrier(cal);
         }
         return cal;
     }
-    
+
     /**
-     * Ajoute un calendrier. 
+     * Ajoute un calendrier.
+     *
      * @param calendrier
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public @ResponseBody Calendrier postCalendrier(
+    public @ResponseBody
+    Calendrier postCalendrier(
             @RequestBody Calendrier calendrier) {
-        
+
         String erreurCalendrier = CalendrierController_Helper.validateCalendrier(calendrier);
-        if(!erreurCalendrier.equals("")){
+        if (!erreurCalendrier.equals("")) {
             System.out.println(erreurCalendrier);
-        }else{
+        } else {
             CalendrierRepo.insertCalendrier(calendrier);
         }
         return calendrier;
     }
-    
+
     /**
      * supprime l'evenement du calendrier
+     *
      * @param calendrierId /calendrier/{calendrierID}
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{calendrierId}")
     public void deleteCalendrier(
             @PathVariable int calendrierId) {
-        
+
         if (calendrierId <= 0) {
             System.out.println("Erreur pour le ID");
             return;

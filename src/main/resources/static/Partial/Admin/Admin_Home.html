@@ -32,7 +32,7 @@
                             <div class="panel" style="text-align:left">
                                 <div class="row">
                                     <div class="col-lg-offset-1 col-xs-12 col-sm-5 col-lg-3">
-                                        <img id="imageHomeItemEdit" class="img-responsive img-rounded" style="width:100%; height: 100%" src="{{homeItemCurrent.image}}" alt="Preview"/>
+                                        <img class="img-responsive img-rounded" ng-src="data:image/JPEG;base64,{{homeItemImage.image}}"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-5 col-lg-7">
                                         <h1 class="center">{{homeItemCurrent.titre}}</h1>
@@ -53,7 +53,7 @@
                                 </button>
                                 <ul float: right class="dropdown-menu" >
                                     <li ng-repeat="image in images">
-                                        <a role="button" ng-click="setImage(image)">{{image}}</a>
+                                        <a role="button" ng-click="setImage(image)">{{image.name}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -65,7 +65,7 @@
                                    ng-model="homeItemCurrent.titre"/>
                             <label for="homeItemImageAlt">Image Alt</label>
                             <input id="homeItemImageAlt" type="text"  placeholder="Une description textuel de l'image" class="form-control"
-                                   ng-model="homeItemCurrent.imageAlt"/>
+                                   ng-model="homeItemImage.imageAlt"/>
                             <label for="homeItemOrder">Order</label>
                             <input id="homeItemOrder" type="text" placeholder="[0 - 9]" class="form-control"
                                    ng-model="homeItemCurrent.order"/>

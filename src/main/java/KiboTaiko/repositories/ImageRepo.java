@@ -32,12 +32,13 @@ public class ImageRepo {
      */
     public static void postImage(Image image){
         String query = "INSERT INTO images("
-            + "image, name) "
-            + "VALUES (?, ?);";
+            + "image, name, imagealt) "
+            + "VALUES (?, ?, ?);";
         Application.app.jdbcTemplate.update(
             query,
             ((byte[])image.getImage()),
-            image.getName()
+            image.getName(),
+            image.getImageAlt()
         );
     }
     

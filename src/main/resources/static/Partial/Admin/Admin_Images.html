@@ -12,29 +12,35 @@
                     </div>
 
                 </div>
-
                 <div id="ImagesController" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">   
 
                         <form id="upload-file-form-newImage">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <img id="imageImagesEdit" class="img-responsive img-rounded" src="{{image}}"/>
+                                    <img class="img-responsive img-rounded" ng-src="data:image/JPEG;base64,{{currentImage.image}}"/>
                                 </div>
                             </div>
                             <br/>
                             <br/>
                             <div class="row">
+                                <div class="col-xs-12">
+                                    <label for="imageAltUpload">
+                                        Image alt
+                                        <input id="imageAltUpload" type="text" ng-model="currentImage.imageAlt">
+                                    </label>
+                                </div>
                                 <div class="col-xs-12 center">
                                     <label for="upload-file-input-Images" class="btn btn-default btn-file">
                                         <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
                                         Naviger 
-                                        <input id="upload-file-input-Images" accept="image/*" type="file" name="uploadfile"style="display: none;" />
+                                        <input id="upload-file-input-Images" accept="image/*" type="file" name="uploadfile"style="display: none;" 
+                                               onchange="angular.element(this).scope().imageChange(this)"/>
                                     </label>
                                     <label class="btn btn-success btn-file">
                                         <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                         Sauvegarder 
-                                        <input ng-click="uploadImage()" type="button" style="display: none;" />
+                                        <input ng-click="uploadImage(currentImage)" type="button" style="display: none;" />
                                     </label>
                                 </div>
                             </div>
@@ -53,7 +59,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

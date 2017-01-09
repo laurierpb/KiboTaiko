@@ -1,4 +1,3 @@
-$.getScript("JS/Utility/Upload.js", function () {});
 /* global app */
 app.controller('AdminHomeController', function ($scope, $http) {
     $scope.homeItemCurrent = {
@@ -6,6 +5,12 @@ app.controller('AdminHomeController', function ($scope, $http) {
         order: null,
         titre: "",
         contenue: ""
+    };
+    $scope.homeItemImage = {
+        id:-1,
+        image:"",
+        imageAlt:"",
+        name:""
     };
     
     $http({
@@ -21,6 +26,22 @@ app.controller('AdminHomeController', function ($scope, $http) {
     $("#upload-file-input-HomeItems").change(function () {
         readURL(this);
     });
+    
+    $scope.imageChange = function(input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.readAsDataURL(input.files[0]);
+            reader.onload = function (e) {
+                $scope.homeItemImage.image = e.target.result.substring(e.target.result.indexOf(",")+1);
+            };
+            $scope.homeItemImage.name = input.files[0].name;
+            setTimeout(function(){console.log(
+                $scope.currentImage);
+                $scope.$apply();
+            }, 1000);
+        }
+    };
+    
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -48,7 +69,7 @@ app.controller('AdminHomeController', function ($scope, $http) {
         $scope.homeItemCurrent.imageAlt = data.imageAlt;
     };
     $scope.setImage = function(data){
-        $scope.homeItemCurrent.image = data; 
+        $scope.homeItemImage = data; 
     };
     
     

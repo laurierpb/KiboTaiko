@@ -1,26 +1,35 @@
-$.getScript("JS/Utility/Upload.js", function () {});
 /* global app */
 app.controller('AdminImagesController', function ($rootScope, $scope, $http) {
+    $scope.currentImage = {
+        image:"",
+        imageAlt:"",
+        name:""
+    };
     $scope.deleteImage = function (data) {
-        console.log(data);
         $http({
             method: 'DELETE',
-            url: '/Image/' + data
+            url: data
         }).then(function successCallback(response) {
             getImage();
         }, function errorCallback(data, status, headers, config) {
             console.log('Le DELETE vers la ressourse s\'est mal fait');
         });
     };
-    
-    $scope.uploadImage = function () {
-        uploadImage("newImage");
-        setTimeout(function () {
-            getImage();
-            $('#imageImagesEdit').attr('src', null);
-        }, 2000);
+    $scope.imageChange = function(input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.readAsDataURL(input.files[0]);
+            reader.onload = function (e) {
+                $scope.currentImage.image = e.target.result.substring(e.target.result.indexOf(",")+1);
+            };
+            $scope.currentImage.name = input.files[0].name;
+            setTimeout(function(){console.log(
+                $scope.currentImage);
+                $scope.$apply();
+            }, 1000);
+        }
     };
-    
+
     function getImage() {
         console.log("get image");
         $http({
@@ -32,18 +41,4 @@ app.controller('AdminImagesController', function ($rootScope, $scope, $http) {
             console.log('Le GET vers la ressourse s\'est mal fait');
         });
     }
-    
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#imageImagesEdit').attr('src', e.target.result);
-            };
-            $scope.newImages = "Images/" + input.files[0].name;
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#upload-file-input-Images").change(function () {
-        readURL(this);
-    });
 });

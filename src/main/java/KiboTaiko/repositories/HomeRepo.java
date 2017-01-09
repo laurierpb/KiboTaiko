@@ -60,7 +60,7 @@ public class HomeRepo {
      */
     public static void updateHomeItems(HomeItem homeItem) {
         String query = "UPDATE homeItems "
-                + "SET Ordre = ?, Image = ?, ImageAlt = ?, Contenue = ?, Titre = ? "
+                + "SET Ordre = ?, Image = ?, Contenue = ?, Titre = ? "
                 + "WHERE id = ?;";
         Application.app.jdbcTemplate.update(
                 query,

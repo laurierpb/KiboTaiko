@@ -1,13 +1,17 @@
-$.getScript("JS/Utility/Upload.js", function(){});
 /* global app */
 app.controller('AdminCalendrierController', function ($scope, $http) {
     $scope.id;
     $scope.calendrier = {
         id: "",
-        imageAlt: "",
-        image: "",
+        image: $scope.imageCalandrier,
         titleText: "",
         contenue: ""    
+    };
+    $scope.imageCalandrier = {
+        id: -1,
+        image:null,
+        imageAlt: "",
+        name: ""
     };
     $scope.setEvenementEdit = function (data) {
         $scope.calendrier.id = data.id;
@@ -19,18 +23,23 @@ app.controller('AdminCalendrierController', function ($scope, $http) {
     $("#upload-file-input-calendrier").change(function () {
         readURL(this);
     });
+    
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
                 $('#imageCalendrierEdit').attr('src', e.target.result);
+                $scope.imageCalandrier.image = e.target.result;
+                $scope.imageCalandrier.name = input.files[0].name;
+                console.log($scope.imageCalandrier);
             };
 
             $scope.calendrier.image = "Images/" + input.files[0].name;
             reader.readAsDataURL(input.files[0]);
         }
     }
+    
     $scope.addText = function(i, j){
         var txtArea = document.getElementById("calendrierContenue");
         var startIndex = txtArea.selectionStart;

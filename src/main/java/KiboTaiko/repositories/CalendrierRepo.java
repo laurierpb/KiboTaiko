@@ -74,8 +74,8 @@ public class CalendrierRepo {
      */
     public static void insertCalendrier(Calendrier cal) {
         String sqlString = "INSERT INTO \n"
-                + "calendrier (Image, ImageAlt, Contenue, TitleText) \n"
-                + "VALUES (?,?,?,?);";
+                + "calendrier (Image, Contenue, TitleText) \n"
+                + "VALUES (?,?,?);";
         Application.app.jdbcTemplate.update(
                 sqlString,
                 cal.getImage(),
