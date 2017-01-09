@@ -24,7 +24,8 @@ app.controller('AdminHomeController', function ($scope, $http) {
         console.log('Le GET vers la ressourse s\'est mal fait');
     });
 
-    $scope.imageChange = function (input) {
+    $scope.imageChangeHome = function (input) {
+        console.log("homeItem");
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.readAsDataURL(input.files[0]);
@@ -32,6 +33,7 @@ app.controller('AdminHomeController', function ($scope, $http) {
                 $scope.homeItemCurrent.image.image = e.target.result.substring(e.target.result.indexOf(",") + 1);
             };
             $scope.homeItemCurrent.image.name = input.files[0].name;
+            $scope.homeItemCurrent.image.id = -1;
             setTimeout(function () {
                 console.log(
                         $scope.currentImage);
@@ -48,11 +50,12 @@ app.controller('AdminHomeController', function ($scope, $http) {
                 $scope.homeItemCurrent.contenue.slice(startIndex, endIndex) + j +
                 $scope.homeItemCurrent.contenue.slice(endIndex);
     };
+    
     $scope.loadHomeItem = function (data) {
         $scope.homeItemCurrent = data;
     };
+    
     $scope.setImage = function (data) {
-        console.log(data);
         $scope.homeItemCurrent.image = data;
     };
 
@@ -70,6 +73,7 @@ app.controller('AdminHomeController', function ($scope, $http) {
             console.log('OMG post fail');
         });
     };
+    
     $scope.putHomeItem = function () {
         console.log($scope.homeItemCurrent);
         $scope.homeItemCurrent.image.image.split("");
@@ -86,6 +90,7 @@ app.controller('AdminHomeController', function ($scope, $http) {
             console.log('OMG PUT fail');
         });
     };
+    
     $scope.deleteHomeItem = function () {
         $http({
             method: 'DELETE',

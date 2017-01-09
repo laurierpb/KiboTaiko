@@ -1,7 +1,6 @@
 package KiboTaiko.repositories;
 
 import KiboTaiko.Application;
-import KiboTaiko.Model.HomeItem;
 import KiboTaiko.Model.Image;
 import java.util.List;
 import org.springframework.stereotype.Repository;

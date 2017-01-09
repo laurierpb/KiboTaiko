@@ -3,6 +3,7 @@ package KiboTaiko.Controllers;
 import KiboTaiko.Controllers.Helper.CalendrierController_Helper;
 import KiboTaiko.Model.Calendrier;
 import KiboTaiko.repositories.CalendrierRepo;
+import KiboTaiko.repositories.ImageRepo;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,6 +52,11 @@ public class CalendrierController {
             System.out.println(erreurCalendrier);
         } else {
             CalendrierRepo.updateCalendrier(cal);
+            if(cal.getImage().getID() > 0){
+                ImageRepo.putImage(cal.getImage());
+            }else{
+                ImageRepo.postImage(cal.getImage());
+            }
         }
         return cal;
     }
@@ -71,6 +77,11 @@ public class CalendrierController {
             System.out.println(erreurCalendrier);
         } else {
             CalendrierRepo.insertCalendrier(calendrier);
+            if(calendrier.getImage().getID() > 0){
+                ImageRepo.putImage(calendrier.getImage());
+            }else{
+                ImageRepo.postImage(calendrier.getImage());
+            }
         }
         return calendrier;
     }

@@ -34,7 +34,7 @@
                                     <div class="container-fluid panel-contaner noSpace">
                                         <div data-toggle="collapse" data-parent="#accordion" data-target="#textCollapse">
                                             <div class="hovereffect">
-                                                <img class="img-responsive img-rounded evenement" ng-src="data:image/JPEG;base64,{{calendrier.image.image}}" imageAlt="{{calendrier.image.imageAlt}}"/>
+                                                <img class="img-responsive img-rounded calendrierMax" ng-src="data:image/JPEG;base64,{{calendrier.image.image}}" imageAlt="{{calendrier.image.imageAlt}}"/>
                                                 <div class="overlay">
                                                     <h2>{{calendrier.titleText}}</h2>
                                                 </div>
@@ -51,11 +51,11 @@
                             <br/>
                             L'image doit avoir la grosseur 1024 X 127 pour bien parraitre sur le site
                             <br/>
-                            <label for="upload-file-input-Images" class="btn btn-default btn-file">
+                            <label for="uploadImageCalendrier" class="btn btn-default btn-file">
                                 <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
                                 Naviger 
-                                <input id="upload-file-input-Images" accept="image/*" type="file" name="uploadfile"style="display: none;" 
-                                       onchange="angular.element(this).scope().imageChange(this)"/>
+                                <input id="uploadImageCalendrier" accept="image/*" type="file" name="uploadfile"style="display: none;" 
+                                       onchange="angular.element(this).scope().imageChangeCalendrier(this)"/>
                             </label>
 
 

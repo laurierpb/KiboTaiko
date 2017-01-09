@@ -14,11 +14,10 @@ app.controller('AdminCalendrierController', function ($scope, $http) {
     };
     $scope.setEvenementEdit = function (data) {
         $scope.calendrier = data;
-        $scope.calendrier.image = data.image;
     };
-
-
-    $scope.imageChange = function (input) {
+    
+    $scope.imageChangeCalendrier = function (input) {
+        console.log("calendrier");
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.readAsDataURL(input.files[0]);
@@ -26,6 +25,7 @@ app.controller('AdminCalendrierController', function ($scope, $http) {
                 $scope.calendrier.image.image = e.target.result.substring(e.target.result.indexOf(",") + 1);
             };
             $scope.calendrier.image.name = input.files[0].name;
+            $scope.calendrier.image.id = -1;
             setTimeout(function () {
                 console.log(
                         $scope.currentImage);
@@ -69,6 +69,7 @@ app.controller('AdminCalendrierController', function ($scope, $http) {
             console.log('OMG DELETE fail');
         });
     };
+    
     $scope.AddCalendrier = function () {
         $http({
             method: 'POST',
@@ -78,12 +79,12 @@ app.controller('AdminCalendrierController', function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
-            uploadImage("calendrier");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG POST fail');
         });
     };
+    
     $scope.UpdateCalendrier = function () {
         $http({
             method: 'PUT',
@@ -93,7 +94,6 @@ app.controller('AdminCalendrierController', function ($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data, status, headers, config) {
-            uploadImage("calendrier");
             location.reload();
         }, function errorCallback(data, status, headers, config) {
             console.log('OMG PUT fail');

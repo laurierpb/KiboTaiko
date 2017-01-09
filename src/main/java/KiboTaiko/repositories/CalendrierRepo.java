@@ -78,7 +78,7 @@ public class CalendrierRepo {
                 + "VALUES (?,?,?);";
         Application.app.jdbcTemplate.update(
                 sqlString,
-                cal.getImage(),
+                cal.getImage().getID(),
                 cal.getContenue(),
                 cal.getTitleText()
         );

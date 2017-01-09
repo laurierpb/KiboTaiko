@@ -32,7 +32,7 @@
                             <div class="panel" style="text-align:left">
                                 <div class="row">
                                     <div class="col-lg-offset-1 col-xs-12 col-sm-5 col-lg-3">
-                                        <img class="img-responsive img-rounded evenement" ng-src="data:image/JPEG;base64,{{homeItemCurrent.image.image}}" imageAlt="{{homeItemCurrent.image.imageAlt}}"/>
+                                        <img class="img-responsive img-rounded" ng-src="data:image/JPEG;base64,{{homeItemCurrent.image.image}}" imageAlt="{{homeItemCurrent.image.imageAlt}}"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-5 col-lg-7">
                                         <h1 class="center">{{homeItemCurrent.titre}}</h1>
@@ -42,11 +42,11 @@
                                 <br>
                             </div>
                             
-                            <label for="upload-file-input-Images" class="btn btn-default btn-file">
+                            <label for="uploadImageHomeItem" class="btn btn-default btn-file">
                                 <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
                                 Naviger 
-                                <input id="upload-file-input-Images" accept="image/*" type="file" name="uploadfile"style="display: none;" 
-                                       onchange="angular.element(this).scope().imageChange(this)"/>
+                                <input id="uploadImageHomeItem" accept="image/*" type="file" name="uploadfile"style="display: none;" 
+                                       onchange="angular.element(this).scope().imageChangeHome(this)"/>
                             </label>
                             
                             <div style="display: inline-block;" align="center" class="dropdown" >

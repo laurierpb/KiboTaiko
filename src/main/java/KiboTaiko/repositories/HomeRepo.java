@@ -70,7 +70,6 @@ public class HomeRepo {
                 homeItem.getTitre(),
                 homeItem.getId()
         );
-
     }
 
     /**

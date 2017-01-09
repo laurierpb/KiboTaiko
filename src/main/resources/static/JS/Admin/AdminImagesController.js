@@ -8,7 +8,7 @@ app.controller('AdminImagesController', function ($rootScope, $scope, $http) {
     $scope.deleteImage = function (data) {
         $http({
             method: 'DELETE',
-            url: data
+            url: "/Image/" + data
         }).then(function successCallback(response) {
             getImage();
         }, function errorCallback(data, status, headers, config) {
