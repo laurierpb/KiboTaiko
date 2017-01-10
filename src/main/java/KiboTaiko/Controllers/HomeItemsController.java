@@ -5,12 +5,7 @@ import KiboTaiko.Controllers.Helper.HomeController_Helper;
 import KiboTaiko.repositories.HomeRepo;
 import KiboTaiko.repositories.ImageRepo;
 import java.util.List;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/HomeItems")
@@ -40,12 +35,13 @@ public class HomeItemsController {
         if(HomeController_Helper.validateHomeItem(homeItem)){
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
-            HomeRepo.insertHomeItems(homeItem);
             if(homeItem.getImage().getID() > 0){
                 ImageRepo.putImage(homeItem.getImage());
             }else{
-                ImageRepo.postImage(homeItem.getImage());
+                int imageID = ImageRepo.postImage(homeItem.getImage());
+                homeItem.getImage().setID(imageID);
             }
+            HomeRepo.updateHomeItems(homeItem);
         }
         return homeItem;
     }
@@ -66,12 +62,13 @@ public class HomeItemsController {
         if(HomeController_Helper.validateHomeItem(homeItem)){
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
-            HomeRepo.updateHomeItems(homeItem);
             if(homeItem.getImage().getID() > 0){
                 ImageRepo.putImage(homeItem.getImage());
             }else{
-                ImageRepo.postImage(homeItem.getImage());
+                int imageID = ImageRepo.postImage(homeItem.getImage());
+                homeItem.getImage().setID(imageID);
             }
+            HomeRepo.updateHomeItems(homeItem);
         }
         return homeItem;
     }

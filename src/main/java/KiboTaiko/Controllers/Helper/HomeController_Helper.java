@@ -1,7 +1,7 @@
 package KiboTaiko.Controllers.Helper;
 
 import KiboTaiko.Model.HomeItem;
-
+import KiboTaiko.GlobalHelper.Helper;
 
 
 public class HomeController_Helper {
@@ -13,19 +13,11 @@ public class HomeController_Helper {
     public static boolean validateHomeItem(HomeItem homeItem){
         boolean retValue = true;
         
-        if(isNullOrEmpty(homeItem.getContenue())) retValue = false;
+        if(Helper.isNullOrEmpty(homeItem.getContenue())) retValue = false;
         if(homeItem.getImage() == null) retValue = false;
-        if(isNullOrEmpty(homeItem.getTitre())) retValue = false;
+        if(Helper.isNullOrEmpty(homeItem.getTitre())) retValue = false;
         if(homeItem.getOrder() < 0) retValue = false;
         
         return retValue;
-    }
-    /**
-     * if word parameter is null or equal to "" return false
-     * @param word
-     * @return true if the word is null or empty
-     */
-    private static boolean isNullOrEmpty(String word){
-        return !(word == null || word.equals(""));
     }
 }

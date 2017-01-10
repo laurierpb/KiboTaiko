@@ -2,16 +2,10 @@ package KiboTaiko.Controllers;
 
 import KiboTaiko.Model.Image;
 import KiboTaiko.repositories.ImageRepo;
-import java.io.IOException;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/Image")
@@ -19,7 +13,6 @@ public class ImageController {
 
     /**
      * return a list of all the image on the server.
-     *
      * @return a list of all image on the server
      */
     @RequestMapping(method = RequestMethod.GET)

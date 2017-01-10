@@ -43,6 +43,8 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
+            <version>4.3.3.RELEASE</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
