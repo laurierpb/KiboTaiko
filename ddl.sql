@@ -3,7 +3,7 @@
 
 CREATE TABLE public.images
 (
-  id integer NOT NULL DEFAULT nextval('images_id_seq'::regclass),
+  id SERIAL NOT NULL,
   image bytea,
   name text,
   imagealt text,
@@ -21,7 +21,7 @@ ALTER TABLE public.images
 
 CREATE TABLE public.homeitems
 (
-  id integer NOT NULL DEFAULT nextval('homeitems_id_seq'::regclass),
+  id SERIAL NOT NULL,
   ordre integer,
   contenue text NOT NULL,
   titre text NOT NULL,
@@ -55,7 +55,7 @@ CREATE INDEX fki_homeitems_fkey_image
 
 CREATE TABLE public.calendrier
 (
-  id integer NOT NULL DEFAULT nextval('calendrier_id_seq'::regclass),
+  id SERIAL NOT NULL,
   contenue text NOT NULL,
   titletext text NOT NULL,
   image integer,
