@@ -41,7 +41,7 @@ public class HomeItemsController {
                 int imageID = ImageRepo.postImage(homeItem.getImage());
                 homeItem.getImage().setID(imageID);
             }
-            HomeRepo.updateHomeItems(homeItem);
+            HomeRepo.insertHomeItems(homeItem);
         }
         return homeItem;
     }

@@ -52,7 +52,7 @@ public class CalendrierController {
                 int imageID = ImageRepo.postImage(calendrier.getImage());
                 calendrier.getImage().setID(imageID);
             }
-            CalendrierRepo.insertCalendrier(calendrier);
+            CalendrierRepo.updateCalendrier(calendrier);
         }
         return calendrier;
     }

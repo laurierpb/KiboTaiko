@@ -1,53 +1,71 @@
----------------------------------------
-----        Create des tables      ----
----------------------------------------
--- Table: public.calandrier
-DROP TABLE public.Calandrier;
-CREATE TABLE public.Calandrier
+-- Table: public.images
+-- DROP TABLE public.images;
+
+CREATE TABLE public.images
 (
-    Id SERIAL NOT NULL,
-    Image text NOT NULL,
-    ImageAlt text NOT NULL,
-    Contenue text NOT NULL,
-    TitleText text NOT NULL,
-    CONSTRAINT Calandrier_pkey PRIMARY KEY (Id)
+  id integer NOT NULL DEFAULT nextval('images_id_seq'::regclass),
+  image bytea,
+  name text,
+  imagealt text,
+  CONSTRAINT image_pkey PRIMARY KEY (id)
 )
 WITH (
-    OIDS=FALSE
+  OIDS=FALSE
 );
+ALTER TABLE public.images
+  OWNER TO postgres;
+
 
 -- Table: public.homeitems
-DROP TABLE public.homeitems;
+-- DROP TABLE public.homeitems;
+
 CREATE TABLE public.homeitems
 (
-    ID SERIAL NOT NULL,
-    Ordre integer,
-    Image text NOT NULL,
-    ImageAlt text NOT NULL,
-    Contenue text NOT NULL,
-    Titre text NOT NULL,
-    CONSTRAINT homeitems_pkey PRIMARY KEY (Id)
+  id integer NOT NULL DEFAULT nextval('homeitems_id_seq'::regclass),
+  ordre integer,
+  contenue text NOT NULL,
+  titre text NOT NULL,
+  image integer,
+  CONSTRAINT homeitems_pkey PRIMARY KEY (id),
+  CONSTRAINT homeitems_fkey_image FOREIGN KEY (image)
+      REFERENCES public.images (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
-    OIDS=FALSE
+  OIDS=FALSE
 );
 ALTER TABLE public.homeitems
-    OWNER TO postgres;
+  OWNER TO postgres;
+
+-- Index: public.fki_homeitems_fkey_image
+-- DROP INDEX public.fki_homeitems_fkey_image;
+
+CREATE INDEX fki_homeitems_fkey_image
+  ON public.homeitems
+  USING btree
+  (image);
 
 
------------------------------------------
-----        Autres informations      ----
------------------------------------------
 
--- Table: public.admin
-DROP TABLE public.Administrateur;
-CREATE TABLE public.Administrateur
+
+
+
+-- Table: public.calendrier
+-- DROP TABLE public.calendrier;
+
+CREATE TABLE public.calendrier
 (
-    id SERIAL NOT NULL,
-    username text NOT NULL,
-    password text NOT NULL
-    CONSTRAINT Administrateur_pkey PRIMARY KEY (id)
+  id integer NOT NULL DEFAULT nextval('calendrier_id_seq'::regclass),
+  contenue text NOT NULL,
+  titletext text NOT NULL,
+  image integer,
+  CONSTRAINT calendrier_pkey PRIMARY KEY (id),
+  CONSTRAINT "fk-calendrier_image" FOREIGN KEY (image)
+      REFERENCES public.images (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
-    OIDS=FALSE
+  OIDS=FALSE
 );
+ALTER TABLE public.calendrier
+  OWNER TO postgres;
