@@ -3,14 +3,14 @@
         <div class="panel" style="background: gray" ng-repeat="annee in annees | orderBy:'-id'">
             <div class="panel-heading noSpace">
                 <div class="container-fluid panel-contaner noSpace">
-                    <a data-toggle="collapse" data-parent="#accordion" data-target="#{{annee.id}}">
+                    <div data-toggle="collapse" data-parent="#accordion" data-target="#{{annee.id}}">
                         <div class="hovereffect">
                             <img class="img-responsive calendrierMax" ng-src="data:image/JPEG;base64,{{annee.image.image}}" alt="{{annee.image.imageAlt}}"/>
                             <div class="overlay">
                                 <h2>{{annee.titleText}}</h2>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
 

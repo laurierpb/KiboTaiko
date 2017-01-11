@@ -4,14 +4,14 @@
         <div class="panel" ng-repeat="day in schedule | orderBy:'-id'" style="background: gray">
             <div class="panel-heading noSpace">
                 <div class="container-fluid panel-contaner noSpace">
-                    <a data-toggle="collapse" data-parent="#accordion" data-target="#{{day.id}}">
+                    <div data-toggle="collapse" data-parent="#accordion" data-target="#{{day.id}}">
                         <div class="hovereffect">
                             <img class="img-responsive calendrierMax" ng-src="data:image/JPEG;base64,{{day.image.image}}" alt="{{day.image.imageAlt}}"/>
                             <div class="overlay">
                                 <h2>{{day.titleText}}</h2>
                             </div>
                         </div>  
-                    </a>
+                    </div>
                 </div>
             </div>
 
