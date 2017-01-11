@@ -26,7 +26,10 @@ input[type=text]{
     margin-left:calc(50% - 80px);
     margin-right:calc(50% - 80px);
 }
-
+.clickable-div 
+{
+    cursor: pointer;
+}
 
 
 

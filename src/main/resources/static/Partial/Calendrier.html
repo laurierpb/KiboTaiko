@@ -1,24 +1,20 @@
 <div class="container-fluidwidth">
-    <div id="accordion" role="tablist" aria-multiselectable="true">
-
-        <div class="panel" ng-repeat="day in schedule | orderBy:'-id'" style="background: gray">
+    <div id="accordion">
+        <div class="panel" ng-repeat="day in schedule| orderBy:'-id'" style="background: gray">
             <div class="panel-heading noSpace">
-                <div class="container-fluid panel-contaner noSpace">
-                    <div role="button" data-toggle="collapse" data-parent="#accordion" data-target="#{{day.id}}">
-                        <div class="hovereffect">
-                            <img class="img-responsive calendrierMax" ng-src="data:image/JPEG;base64,{{day.image.image}}" alt="{{day.image.imageAlt}}"/>
-                            <div class="overlay">
-                                <h2>{{day.titleText}}</h2>
-                            </div>
-                        </div>  
-                    </div>
+                <div class="container-fluid panel-contaner noSpace clickable-div"role="button" data-toggle="collapse" data-parent="#accordion" data-target="#{{day.id}}">
+                    <div class="hovereffect">
+                        <img class="img-responsive calendrierMax" ng-src="data:image/JPEG;base64,{{day.image.image}}" alt="{{day.image.imageAlt}}"/>
+                        <div class="overlay">
+                            <h2>{{day.titleText}}</h2>
+                        </div>
+                    </div>  
                 </div>
             </div>
 
-            <div id="{{day.id}}" class="panel-collapse collapse noSpace" role="tabpanel" aria-labelledby="headingOne">
+            <div id="{{day.id}}" class="panel-collapse collapse noSpace" aria-labelledby="headingOne">
                 <p ng-bind-html="day.contenue"/></P>
             </div>
-
         </div>
     </div>
 </div>
