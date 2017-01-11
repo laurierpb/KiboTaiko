@@ -13,9 +13,9 @@ public class HomeController_Helper {
     public static boolean validateHomeItem(HomeItem homeItem){
         boolean retValue = true;
         
-        if(Helper.isNullOrEmpty(homeItem.getContenue())) retValue = false;
+        if(Helper.isNotNullOrEmpty(homeItem.getContenue())) retValue = false;
         if(homeItem.getImage() == null) retValue = false;
-        if(Helper.isNullOrEmpty(homeItem.getTitre())) retValue = false;
+        if(Helper.isNotNullOrEmpty(homeItem.getTitre())) retValue = false;
         if(homeItem.getOrder() < 0) retValue = false;
         
         return retValue;

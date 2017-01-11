@@ -1,5 +1,6 @@
 package KiboTaiko.Controllers.Helper;
 
+import KiboTaiko.GlobalHelper.Helper;
 import KiboTaiko.Model.Calendrier;
 
 public class CalendrierController_Helper {
@@ -12,7 +13,10 @@ public class CalendrierController_Helper {
      *         une string pleine si le calendrier comporte des erreurs. 
      */
     public static String validateCalendrier(Calendrier cal){
-        if(cal.getContenue().equals("") || cal.getContenue() == null){
+        if(cal == null){
+            return "Erreur, le calandrier est null";
+        }
+        if(!Helper.isNotNullOrEmpty(cal.getContenue())){
             return "Erreur pour le contenue";
         }
         if(cal.getImage() == null){

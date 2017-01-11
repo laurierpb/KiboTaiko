@@ -15,8 +15,8 @@ public class ImageController_Helper {
         boolean returnValue = true;
         
         if(image.getImage() == null)returnValue = false;
-        if(Helper.isNullOrEmpty(image.getImageAlt()))returnValue = false;
-        if(Helper.isNullOrEmpty(image.getName()))returnValue = false;
+        if(Helper.isNotNullOrEmpty(image.getImageAlt()))returnValue = false;
+        if(Helper.isNotNullOrEmpty(image.getName()))returnValue = false;
         
         return returnValue;
     }
