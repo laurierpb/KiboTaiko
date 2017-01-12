@@ -4,8 +4,8 @@ import KiboTaiko.Model.HomeItem;;
 import KiboTaiko.Model.Calendrier;
 import KiboTaiko.repositories.CalendrierRepo;
 import KiboTaiko.repositories.HomeRepo;
+import KiboTaiko.Controllers.Helper.kiboTaikoRestController_Helper;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.web.bind.annotation.*;
@@ -25,27 +25,15 @@ public class kiboTaikoRestController {
         ArrayList<String> listHomeItemName = new ArrayList<>();
         ArrayList<String> listCalendrierName = new ArrayList<>();
         ArrayList<Map> listRetour = new ArrayList<>();
+        
         homeItemList.stream().forEach((homeItem) -> {
             listHomeItemName.add(homeItem.getTitre());
         });
         calendrierList.stream().forEach((calendrier) -> {
             listCalendrierName.add(calendrier.getTitleText());
         });
-        Map mapHomeItems = new HashMap() {
-            {
-                put("name", "HomeItems");
-                put("list", listHomeItemName);
-                put("reference", "#/");
-            }
-        };
-        Map mapCalendrierItems = new HashMap() {
-            {
-                put("name", "CalendrierItems");
-                put("list", listCalendrierName);
-                put("reference", "#/Calendrier");
-            }
-        };
-        
+        Map mapHomeItems = kiboTaikoRestController_Helper.generateHashMapForFotter("HomeItems", listHomeItemName, "#/");
+        Map mapCalendrierItems = kiboTaikoRestController_Helper.generateHashMapForFotter("CalendrierItems", listCalendrierName, "#/Calendrier");        
         
         listRetour.add(mapHomeItems);
         listRetour.add(mapCalendrierItems);

@@ -45,9 +45,6 @@ app.controller('navBarrController', function ($scope) {
         }, {
             name: "Commandite"
             , destination: "#/Commandite"
-        }, {
-            name: "Admin"
-            , destination: "#/Admin"
         }];
 });
 app.controller('footerController', function ($rootScope, $scope, $http) {
