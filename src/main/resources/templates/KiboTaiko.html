@@ -53,23 +53,34 @@
             <div ng-view="">
                 <!--the view will apear here-->
             </div>
-            <footer style="position:static ;bottom:0px;left:0;right:0;height:30px;padding-top: 100px;">
+            <footer class="footer" ng-controller="footerController">
                 <div class="container-fluid noSpace">
-                    <div class="row">
-                        <div class="col-xs-12 noSpace" style="background-color:black; min-height: 200px;">
-                            <div class="pull-right" style="padding:10px">
-                                <button type="button" class="btn btn-primary" aria-label="Left Align">
-                                    <span class="glyphicon social social-facebook"></span>
-                                    <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-default" aria-label="Left Align">
-                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default" aria-label="Left Align">
-                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-                                </button>
+                    <div class="row" style="background-color:black; padding-top: 25px; padding-bottom: 25px">
+                        <div id="inSiteReference" class="col-sm-10 col-xs-12">
+                            <div class="row">
+                                <div class="col-lg-2 col-sm-4 col-xs-6" ng-repeat="footer in footerItems">
+                                    <h4 style="color: gray">{{footer.name}}</h4>
+                                    <div ng-repeat="footerItemList in footer.list track by $index">
+                                        <a class="clickable-div" style="color: whitesmoke" href="{{footer.reference}}">{{footerItemList}}</a>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        <div id="footerReferenceDiv" class="col-md-2 col-xs-12">
+                            <button type="button" class="btn btn-primary" aria-label="Left Align">
+                                <span class="glyphicon social social-facebook"></span>
+                                <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </div>
                 </div>

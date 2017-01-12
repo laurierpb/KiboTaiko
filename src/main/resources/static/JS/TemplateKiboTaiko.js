@@ -17,12 +17,12 @@ app.config(function ($routeProvider) {
                 templateUrl: 'Partial/Galerie.html',
                 controller: 'GalerieController'
             })
-            
+
             .when('/Admin', {
                 templateUrl: 'Partial/Admin.html',
                 controller: 'AdminController'
             })
-            
+
             .when('/Commandite', {
                 templateUrl: 'Partial/Commandite.html',
                 controller: 'CommanditeController'
@@ -49,4 +49,24 @@ app.controller('navBarrController', function ($scope) {
             name: "Admin"
             , destination: "#/Admin"
         }];
+});
+app.controller('footerController', function ($rootScope, $scope, $http) {
+    $http({
+        method: 'GET',
+        url: '/AllItemsName'
+    }).then(function successCallback(response) {
+        console.log(response.data);
+        $scope.footerItems = response.data;
+    }, function errorCallback(data, status, headers, config) {
+        console.log('Le GET vers la ressourse s\'est mal fait');
+    });
+    $scope.setFocus = function (target) {
+        $rootScope.target = target;
+    };
+
+    if ($rootScope.target !== "" && $rootScope.target !== null) {
+        console.log("RootScope target" + $rootScope.target);
+        window.scroll(0, document.getElementById($rootScope.target).getBoundingClientRect().top);
+        $rootScope = null;
+    }
 });

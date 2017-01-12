@@ -1,6 +1,7 @@
 <div class="container-fluidwidth">
     <div id="accordion">
-        <div class="panel" ng-repeat="day in schedule| orderBy:'-id'" style="background: gray">
+        
+        <div id="{{day.titleText}}" class="panel" ng-repeat="day in schedule| orderBy:'-id'" style="background: gray">
             <div class="panel-heading noSpace">
                 <div class="container-fluid panel-contaner noSpace clickable-div"role="button" data-toggle="collapse" data-parent="#accordion" data-target="#{{day.id}}">
                     <div class="hovereffect">
@@ -16,5 +17,6 @@
                 <p ng-bind-html="day.contenue"/></P>
             </div>
         </div>
+        
     </div>
 </div>
