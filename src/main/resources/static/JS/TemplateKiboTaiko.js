@@ -60,13 +60,4 @@ app.controller('footerController', function ($rootScope, $scope, $http) {
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');
     });
-    $scope.setFocus = function (target) {
-        $rootScope.target = target;
-    };
-
-    if ($rootScope.target !== "" && $rootScope.target !== null) {
-        console.log("RootScope target" + $rootScope.target);
-        window.scroll(0, document.getElementById($rootScope.target).getBoundingClientRect().top);
-        $rootScope = null;
-    }
 });
