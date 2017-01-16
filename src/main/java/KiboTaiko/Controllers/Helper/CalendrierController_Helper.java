@@ -22,7 +22,7 @@ public class CalendrierController_Helper {
         if(cal.getImage() == null){
             return "Erreur pour le image";
         }
-        if(cal.getTitleText().equals("") || cal.getTitleText()== null){
+        if(cal.getTitre().equals("") || cal.getTitre()== null){
             return "Erreur pour le Titre";
         }
         return "";

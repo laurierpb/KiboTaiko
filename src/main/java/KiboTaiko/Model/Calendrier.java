@@ -46,7 +46,7 @@ public class Calendrier {
         this.contenue = contenue;
     }
 
-    public String getTitleText() {
+    public String getTitre() {
         return titleText;
     }
 

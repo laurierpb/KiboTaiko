@@ -1,11 +1,5 @@
 package KiboTaiko.Controllers;
 
-import KiboTaiko.Model.*;
-import KiboTaiko.repositories.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,6 +14,11 @@ public class KiboTaikoController {
     @RequestMapping("/")
     public String home() {
         return "KiboTaiko";
+    }
+    
+    @RequestMapping("/*/")
+    public String test() {
+        return "Test";
     }
 
 }

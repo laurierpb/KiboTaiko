@@ -17,15 +17,13 @@ app.config(function ($routeProvider) {
                 templateUrl: 'Partial/Galerie.html',
                 controller: 'GalerieController'
             })
-
-            .when('/Admin', {
-                templateUrl: 'Partial/Admin.html',
-                controller: 'AdminController'
-            })
-
             .when('/Commandite', {
                 templateUrl: 'Partial/Commandite.html',
                 controller: 'CommanditeController'
+            })
+            .when('/Admin', {
+                templateUrl: 'Partial/Admin.html',
+                controller: 'AdminController'
             })
             .otherwise({
                 redirectTo: '/'

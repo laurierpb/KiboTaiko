@@ -47,7 +47,7 @@ public class CalendrierRepo {
                 sqlString,
                 cal.getImage().getID(),
                 cal.getContenue(),
-                cal.getTitleText(),
+                cal.getTitre(),
                 cal.getId()
         );
     }
@@ -80,7 +80,7 @@ public class CalendrierRepo {
                 sqlString,
                 cal.getImage().getID(),
                 cal.getContenue(),
-                cal.getTitleText()
+                cal.getTitre()
         );
     }
 }

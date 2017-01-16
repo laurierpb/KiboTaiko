@@ -30,7 +30,7 @@ public class kiboTaikoRestController {
             listHomeItemName.add(homeItem.getTitre());
         });
         calendrierList.stream().forEach((calendrier) -> {
-            listCalendrierName.add(calendrier.getTitleText());
+            listCalendrierName.add(calendrier.getTitre());
         });
         Map mapHomeItems = kiboTaikoRestController_Helper.generateHashMapForFotter("HomeItems", listHomeItemName, "#/");
         Map mapCalendrierItems = kiboTaikoRestController_Helper.generateHashMapForFotter("CalendrierItems", listCalendrierName, "#/Calendrier");        

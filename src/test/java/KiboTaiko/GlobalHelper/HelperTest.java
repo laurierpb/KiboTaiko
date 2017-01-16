@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package KiboTaiko.GlobalHelper;
 
 import org.junit.After;
@@ -46,6 +41,7 @@ public class HelperTest {
         String word = "";
         boolean expResult = false;
         boolean result = Helper.isNotNullOrEmpty(word);
+        
         assertEquals(expResult, result);
     }
     @Test
@@ -54,6 +50,7 @@ public class HelperTest {
         String word = null;
         boolean expResult = false;
         boolean result = Helper.isNotNullOrEmpty(word);
+        
         assertEquals(expResult, result);
     }
     @Test
@@ -62,6 +59,7 @@ public class HelperTest {
         String word = "superTest";
         boolean expResult = true;
         boolean result = Helper.isNotNullOrEmpty(word);
+        
         assertEquals(expResult, result);
     }
     

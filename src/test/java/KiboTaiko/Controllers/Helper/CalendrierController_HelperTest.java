@@ -63,6 +63,22 @@ public class CalendrierController_HelperTest {
     }
 
     @Test
+    public void testValidateCalendrierImageNull() {
+        System.out.println("validateCalendrier : Contenue");
+        byte[] bytes = new byte[100];
+        Arrays.fill(bytes, (byte) 0);
+        Calendrier cal = new Calendrier(1,
+                null,
+                "ContenueTest",
+                "TestTitre"
+        );
+
+        String expResult = "Erreur pour le image";
+        String result = CalendrierController_Helper.validateCalendrier(cal);
+        assertEquals(expResult, result);
+    }
+
+    @Test
     public void testValidateCalendrierNull() {
         System.out.println("validateCalendrier : null");
         Calendrier cal = null;
@@ -88,7 +104,7 @@ public class CalendrierController_HelperTest {
         String result = CalendrierController_Helper.validateCalendrier(cal);
         assertEquals(expResult, result);
     }
-    
+
     @Test
     public void testValidateCalendrierContenue2() {
         System.out.println("validateCalendrier : Contenue");
@@ -102,7 +118,6 @@ public class CalendrierController_HelperTest {
                 "",
                 "TestTitre"
         );
-
         String expResult = "Erreur pour le contenue";
         String result = CalendrierController_Helper.validateCalendrier(cal);
         assertEquals(expResult, result);

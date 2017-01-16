@@ -4,38 +4,27 @@ import KiboTaiko.Controllers.Helper.CalendrierController_Helper;
 import KiboTaiko.Model.Calendrier;
 import KiboTaiko.repositories.CalendrierRepo;
 import KiboTaiko.repositories.ImageRepo;
+import KiboTaiko.Controllers.Interface.CalendrierController_Interface;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/Calendrier")
-public class CalendrierController {
+public class CalendrierController implements CalendrierController_Interface {
 
-    /**
-     * Retourne une liste de calendrier.
-     *
-     * @return calendrierList
-     */
-    @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
+    @Override
     List<Calendrier> getEvenement() {
         System.out.println("CalendrierController : GET");
-        List<Calendrier> calendrierList = CalendrierRepo.getAllCalendrier();
-        return calendrierList;
+        return CalendrierRepo.getAllCalendrier();
     }
 
-    /**
-     * /calendrier/{id}
-     *
-     * @param calendrier = calendrier du body
-     * @param calendrierId = calendrier/{calendrierId}
-     * @return le nouveau calendrier
-     */
-    @RequestMapping(method = RequestMethod.PUT, value = "/{calendrierId}")
     public @ResponseBody
+    @Override
     Calendrier putCalendrier(
             @RequestBody Calendrier calendrier,
             @PathVariable int calendrierId) {
+        
         System.out.println("Calendrier Controller : PUT");
         if (calendrierId <= 0) {
             System.out.println("Erreur pour le ID");
@@ -46,9 +35,9 @@ public class CalendrierController {
         if (!erreurCalendrier.equals("")) {
             System.out.println(erreurCalendrier);
         } else {
-            if(calendrier.getImage().getID() > 0){
+            if (calendrier.getImage().getID() > 0) {
                 ImageRepo.putImage(calendrier.getImage());
-            }else{
+            } else {
                 int imageID = ImageRepo.postImage(calendrier.getImage());
                 calendrier.getImage().setID(imageID);
             }
@@ -57,24 +46,19 @@ public class CalendrierController {
         return calendrier;
     }
 
-    /**
-     * Ajoute un calendrier.
-     *
-     * @param calendrier
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
+    @Override
     Calendrier postCalendrier(
             @RequestBody Calendrier calendrier) {
 
+        System.out.println("Calendrier Controller : POST");
         String erreurCalendrier = CalendrierController_Helper.validateCalendrier(calendrier);
         if (!erreurCalendrier.equals("")) {
             System.out.println(erreurCalendrier);
         } else {
-            if(calendrier.getImage().getID() > 0){
+            if (calendrier.getImage().getID() > 0) {
                 ImageRepo.putImage(calendrier.getImage());
-            }else{
+            } else {
                 int imageID = ImageRepo.postImage(calendrier.getImage());
                 calendrier.getImage().setID(imageID);
             }
@@ -83,15 +67,11 @@ public class CalendrierController {
         return calendrier;
     }
 
-    /**
-     * supprime l'evenement du calendrier
-     *
-     * @param calendrierId /calendrier/{calendrierID}
-     */
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{calendrierId}")
+    @Override
     public void deleteCalendrier(
             @PathVariable int calendrierId) {
 
+        System.out.println("Calendrier Controller : DELETE");
         if (calendrierId <= 0) {
             System.out.println("Erreur pour le ID");
             return;
