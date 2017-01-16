@@ -11,9 +11,9 @@ public class ImageController_Helper {
      * @param image
      * @return
      */
-    public boolean isImageOk(Image image){
+    public static boolean validteImage(Image image){
         boolean returnValue = true;
-        
+        if(image == null) return false;
         if(image.getImage() == null)returnValue = false;
         if(Helper.isNotNullOrEmpty(image.getImageAlt()))returnValue = false;
         if(Helper.isNotNullOrEmpty(image.getName()))returnValue = false;
