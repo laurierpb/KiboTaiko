@@ -16,7 +16,7 @@ public class CalendrierRepo {
      * @return une liste de tous les calendrier dans la base de données.
      */
     public static List<Calendrier> getAllCalendrier() {
-        String query = "SELECT calendrier.id, calendrier.image, titleText, contenue, images.image as imagebytea, name, imagealt\n"
+        String query = "SELECT calendrier.id, calendrier.image, Titre, contenue, images.image as imagebytea, name, imagealt\n"
                 + "FROM calendrier\n"
                 + "LEFT JOIN images ON calendrier.image = images.id;";
         List<Calendrier> result = Application.app.jdbcTemplate.query(query,
@@ -28,7 +28,7 @@ public class CalendrierRepo {
                                 rs.getString("imageAlt")
                         ),
                         rs.getString("contenue"),
-                        rs.getString("titleText")
+                        rs.getString("Titre")
                 )
         );
         return result;
@@ -41,7 +41,7 @@ public class CalendrierRepo {
      */
     public static void updateCalendrier(Calendrier cal) {
         String sqlString = "UPDATE calendrier\n"
-                + "SET Image = ?, Contenue = ?, TitleText = ?\n"
+                + "SET Image = ?, Contenue = ?, Titre = ?\n"
                 + "WHERE Id = ?;";
         Application.app.jdbcTemplate.update(
                 sqlString,
@@ -74,7 +74,7 @@ public class CalendrierRepo {
      */
     public static void insertCalendrier(Calendrier cal) {
         String sqlString = "INSERT INTO \n"
-                + "calendrier (Image, Contenue, TitleText) \n"
+                + "calendrier (Image, Contenue, Titre) \n"
                 + "VALUES (?,?,?);";
         Application.app.jdbcTemplate.update(
                 sqlString,
