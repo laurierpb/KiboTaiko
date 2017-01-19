@@ -17,7 +17,7 @@ public class ImageRepo {
      *
      * @return une liste de tous les images de la bd
      */
-    public static List<Image> getImages() {
+    public static List<Image> getItems() {
         String query = "select * from images;";
         List<Image> result = Application.app.jdbcTemplate.query(query,
                 (rs, rowNum) -> new Image(
@@ -36,7 +36,7 @@ public class ImageRepo {
      * @param image l'image a ajouter a la bd
      * @return The primary key
      */
-    public static int postImage(Image image) {
+    public static int insertItem(Image image) {
         String query = "INSERT INTO images("
                 + "image, name, imagealt) "
                 + "VALUES (?, ?, ?);";
@@ -57,7 +57,7 @@ public class ImageRepo {
      *
      * @param image l'image a ajouter a la bd
      */
-    public static void putImage(Image image) {
+    public static void updateItem(Image image) {
         String query = "UPDATE images "
                 + "SET imageAlt=?"
                 + "WHERE id = ?";
@@ -73,7 +73,7 @@ public class ImageRepo {
      *
      * @param id
      */
-    public static void deleteImage(int id) {
+    public static void deleteItem(int id) {
         String sqlString = "DELETE FROM images \n"
                 + "WHERE id = ?;";
 

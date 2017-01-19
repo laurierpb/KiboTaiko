@@ -23,8 +23,8 @@ public class kiboTaikoRestController {
     @RequestMapping(method = RequestMethod.GET)
     public @ResponseBody
     List<Map> getAllItemsName() {
-        List<HomeItem> homeItemList = HomeRepo.getHomeItems();
-        List<Calendrier> calendrierList = CalendrierRepo.getAllCalendrier();
+        List<HomeItem> homeItemList = HomeRepo.getItems();
+        List<Calendrier> calendrierList = CalendrierRepo.getItems();
         ArrayList<String> listHomeItemName = new ArrayList<>();
         ArrayList<String> listCalendrierName = new ArrayList<>();
         ArrayList<Map> listRetour = new ArrayList<>();

@@ -18,15 +18,4 @@ app.controller('ActiviteController', function ($scope, $http) {
             content:"super test 4"
         }
     ];
-    
-    /*
-    $scope.toggle = function (element) {
-        element.toggle = element.toggle === false ? true: false;
-        for(var i = 0 ; i < $scope.activites.length ; i++){
-            if($scope.activites[i] !== element){
-               $scope.activites[i].toggle = true; 
-            }
-        }
-    };
-    */
 });

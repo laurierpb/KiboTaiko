@@ -5,21 +5,21 @@ public class Calendrier {
     private int id;
     private Image image;
     private String contenue;
-    private String titleText;
+    private String titre;
 
     
     public Calendrier(int id, Image image, String contenue, String titleText) {
         this.id = id;
         this.image = image;
         this.contenue = contenue;
-        this.titleText = titleText;
+        this.titre = titleText;
     }
 
     public Calendrier(){
         this.id = -1;
         this.image = null;
         this.contenue = "";
-        this.titleText = "";
+        this.titre = "";
     }
     
     public int getId() {
@@ -47,11 +47,11 @@ public class Calendrier {
     }
 
     public String getTitre() {
-        return titleText;
+        return titre;
     }
 
     public void setTitleText(String titleText) {
-        this.titleText = titleText;
+        this.titre = titleText;
     }
 
     

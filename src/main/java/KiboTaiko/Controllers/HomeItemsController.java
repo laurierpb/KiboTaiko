@@ -20,7 +20,7 @@ public class HomeItemsController {
     List<HomeItem> getHomeItems() {
         System.out.println("HomeItemsController : GET");
 
-        List<HomeItem> homeItemsList = HomeRepo.getHomeItems();
+        List<HomeItem> homeItemsList = HomeRepo.getItems();
         return homeItemsList;
     }
     
@@ -36,12 +36,12 @@ public class HomeItemsController {
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
             if(homeItem.getImage().getID() > 0){
-                ImageRepo.putImage(homeItem.getImage());
+                ImageRepo.updateItem(homeItem.getImage());
             }else{
-                int imageID = ImageRepo.postImage(homeItem.getImage());
+                int imageID = ImageRepo.insertItem(homeItem.getImage());
                 homeItem.getImage().setID(imageID);
             }
-            HomeRepo.insertHomeItems(homeItem);
+            HomeRepo.insertItem(homeItem);
         }
         return homeItem;
     }
@@ -63,12 +63,12 @@ public class HomeItemsController {
             System.out.println("Erreur dans l'entree du HomeItem");
         }else{
             if(homeItem.getImage().getID() > 0){
-                ImageRepo.putImage(homeItem.getImage());
+                ImageRepo.updateItem(homeItem.getImage());
             }else{
-                int imageID = ImageRepo.postImage(homeItem.getImage());
+                int imageID = ImageRepo.insertItem(homeItem.getImage());
                 homeItem.getImage().setID(imageID);
             }
-            HomeRepo.updateHomeItems(homeItem);
+            HomeRepo.updateItem(homeItem);
         }
         return homeItem;
     }
@@ -82,6 +82,6 @@ public class HomeItemsController {
             @PathVariable int homeItemID) {
         
         System.out.println("HomeItem DELETE : " + homeItemID);
-        HomeRepo.deleteHomeItems(homeItemID);
+        HomeRepo.deleteItem(homeItemID);
     }
 }

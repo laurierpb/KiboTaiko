@@ -19,7 +19,7 @@ public class ImageController {
     public @ResponseBody
     List<Image> getImages() {
         System.out.println("ImagesController : GET");
-        return ImageRepo.getImages();
+        return ImageRepo.getItems();
     }
 
     /**
@@ -32,7 +32,7 @@ public class ImageController {
     void deleteImage(
             @PathVariable int imageId) {
         System.out.println("Image DELETE : " + imageId);
-        ImageRepo.deleteImage(imageId);
+        ImageRepo.deleteItem(imageId);
 
     }
 
@@ -48,7 +48,7 @@ public class ImageController {
     public ResponseEntity<?> uploadFile(
             @RequestBody Image image) {
         System.out.println("Image Controller : POST");
-        ImageRepo.postImage(image);
+        ImageRepo.insertItem(image);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

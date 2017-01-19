@@ -14,7 +14,7 @@ public class HomeRepo {
      *
      * @return une liste de tous les home items de la base de données.
      */
-    public static List<HomeItem> getHomeItems() {
+    public static List<HomeItem> getItems() {
         String query = "select homeitems.id, homeitems.image, ordre, contenue, titre, images.image as imagebytea, images.name, imagealt\n"
                 + "from homeitems\n"
                 + "left join images on homeitems.image = images.id;";
@@ -40,7 +40,7 @@ public class HomeRepo {
      *
      * @param homeItem
      */
-    public static void insertHomeItems(HomeItem homeItem) {
+    public static void insertItem(HomeItem homeItem) {
         String query = "INSERT INTO homeitems("
                 + "Ordre, Image,  Contenue, Titre) "
                 + "VALUES (?, ?, ?, ?);";
@@ -58,7 +58,7 @@ public class HomeRepo {
      *
      * @param homeItem
      */
-    public static void updateHomeItems(HomeItem homeItem) {
+    public static void updateItem(HomeItem homeItem) {
         String query = "UPDATE homeItems "
                 + "SET Ordre = ?, Image = ?, Contenue = ?, Titre = ? "
                 + "WHERE id = ?;";
@@ -77,7 +77,7 @@ public class HomeRepo {
      *
      * @param id
      */
-    public static void deleteHomeItems(int id) {
+    public static void deleteItem(int id) {
         String sqlString = "DELETE FROM homeitems\n"
                 + "WHERE id = ?;";
 

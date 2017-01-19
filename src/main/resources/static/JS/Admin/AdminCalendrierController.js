@@ -3,7 +3,7 @@ app.controller('AdminCalendrierController', function ($scope, $http) {
     $scope.id;
     $scope.calendrier = {
         id: "",
-        titleText: "",
+        titre: "",
         contenue: "",
         image: {
             id: -1,

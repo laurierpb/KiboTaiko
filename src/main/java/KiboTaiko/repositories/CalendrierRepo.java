@@ -15,7 +15,7 @@ public class CalendrierRepo {
      *
      * @return une liste de tous les calendrier dans la base de données.
      */
-    public static List<Calendrier> getAllCalendrier() {
+    public static List<Calendrier> getItems() {
         String query = "SELECT calendrier.id, calendrier.image, Titre, contenue, images.image as imagebytea, name, imagealt\n"
                 + "FROM calendrier\n"
                 + "LEFT JOIN images ON calendrier.image = images.id;";
@@ -39,7 +39,7 @@ public class CalendrierRepo {
      *
      * @param cal calendrier
      */
-    public static void updateCalendrier(Calendrier cal) {
+    public static void updateItem(Calendrier cal) {
         String sqlString = "UPDATE calendrier\n"
                 + "SET Image = ?, Contenue = ?, Titre = ?\n"
                 + "WHERE Id = ?;";
@@ -58,7 +58,7 @@ public class CalendrierRepo {
      *
      * @param id
      */
-    public static void deleteCalendrier(int id) {
+    public static void deleteItem(int id) {
         String sqlString = "DELETE FROM calendrier WHERE Id = ?;";
         Application.app.jdbcTemplate.update(
                 sqlString,
@@ -72,7 +72,7 @@ public class CalendrierRepo {
      *
      * @param cal
      */
-    public static void insertCalendrier(Calendrier cal) {
+    public static void insertItem(Calendrier cal) {
         String sqlString = "INSERT INTO \n"
                 + "calendrier (Image, Contenue, Titre) \n"
                 + "VALUES (?,?,?);";

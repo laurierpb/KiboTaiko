@@ -1,3 +1,4 @@
+
 var app = angular.module('myApp', ['ngRoute', 'ngSanitize']);
 app.config(function ($routeProvider) {
     $routeProvider
@@ -50,9 +51,21 @@ app.controller('footerController', function ($rootScope, $scope, $http) {
         method: 'GET',
         url: '/AllItemsName'
     }).then(function successCallback(response) {
-        console.log(response.data);
         $scope.footerItems = response.data;
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');
     });
+});
+
+app.directive('hires', function () {
+    return {
+        restrict: 'A',
+        scope: {hires: '@'},
+        link: function (scope, element, attrs) {
+            element.one('load', function () {
+                element.attr('src', scope.hires);
+            });
+            element.attr("src", "Images/load.gif");
+        }
+    };
 });
