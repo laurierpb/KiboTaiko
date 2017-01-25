@@ -30,143 +30,96 @@ app.directive('myCanvas', function () {
             oppacity: '=oppacity'
         },
         controller: function ($scope) {
-            $(document).ready(function () {
-                var canvas = $('#myCanvas')[0];
-                var ctx = canvas.getContext("2d");
-                var canvasBaseSize = 300;
-                canvas.addEventListener("click", onCanvasClick, false);
-                canvas.addEventListener("mousemove", onCanvasMove, false);
-                canvas.style.backgroundImage = "url('" + $scope.elements.image + "')";
+            var canvas = $('#myCanvas')[0];
+            var ctx = canvas.getContext("2d");
+            var canvasBaseSize = 300;
+            canvas.addEventListener("click", onCanvasClick, false);
+            canvas.addEventListener("mousemove", onCanvasMove, false);
+            canvas.style.backgroundImage = "url('" + $scope.elements.image + "')";
+            drawElements();
+            function drawElements() {
+                if ($scope.newElement !== undefined) {
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+                    ctx.fillRect(
+                            $scope.newElement.x,
+                            $scope.newElement.y,
+                            $scope.newElement.larg,
+                            $scope.newElement.haut);
+                }
+
+                for (var i = 0; i < $scope.elements.list.length; i++) {
+                    ctx.fillStyle = "rgba(255, 255, 255, " + $scope.oppacity + ")";
+                    ctx.fillRect(
+                            $scope.elements.list[i].x,
+                            $scope.elements.list[i].y,
+                            $scope.elements.list[i].larg,
+                            $scope.elements.list[i].haut);
+                }
+            }
+            function clearElements() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            $scope.$watch('[newElement.nom, newElement.contenue, newElement.x, newElement.y, newElement.larg, newElement.haut]', function (newVal, oldVal) {
+                clearElements();
                 drawElements();
-
-
-                $('.myCanvasInput').on("change paste keyup", function () {
-                    clearElements();
-                    drawElements();
-                });
-                $('#newElementForCanvas').on("click", function () {
-                    addNewElementToCanvas();
-                });
-
-                function newElementClearValue() {
-                    $scope.newElement = {
-                        nom: "",
-                        contenue: "",
-                        x: 0,
-                        y: 0,
-                        larg: 0,
-                        haut: 0
-                    };
-                    $scope.$apply();
-                }
-
-                function drawElements() {
-                    if ($scope.newElement !== undefined) {
-                        ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
-                        ctx.fillRect(
-                                $scope.newElement.x,
-                                $scope.newElement.y,
-                                $scope.newElement.larg,
-                                $scope.newElement.haut);
-                    }
-
-                    for (var i = 0; i < $scope.elements.list.length; i++) {
-                        ctx.fillStyle = "rgba(255, 255, 255, " + $scope.oppacity + ")";
-                        ctx.fillRect(
-                                $scope.elements.list[i].x,
-                                $scope.elements.list[i].y,
-                                $scope.elements.list[i].larg,
-                                $scope.elements.list[i].haut);
-                    }
-                }
-                function clearElements() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                }
-                function addNewElementToCanvas() {
-                    if (validateNewElement()) {
-                        $scope.elements.list.push($scope.newElement);
-                        $scope.$apply();
-                        newElementClearValue();
-                        clearElements();
-                        drawElements();
-                    } else {
-                        alert("erreur");
-                    }
-                }
-                function validateNewElement() {
-                    var returnValue = true;
-                    for (var i = 0; i < $scope.elements.list.length; i++) {
-                        if ($scope.elements.list[i].nom === $scope.newElement.nom ||
-                                $scope.elements.list[i].larg === 0 ||
-                                $scope.elements.list[i].haut === 0)
-                        {
-                            returnValue = false;
-                        }
-                    }
-                    return returnValue;
-                }
-                function onCanvasMove(e) {
-                    var offset = document.getElementById("myCanvas").offsetWidth / 300;
-                    var position = getCursorPosition(e);
-                    var x = position[0];
-                    var y = position[1];
-                    this.style.cursor = 'initial';
-                    for (var i = 0; i < $scope.elements.list.length; i++) {
-                        if (isCursorOnElement($scope.elements.list[i], e)) {
-                            this.style.cursor = 'pointer';
-                            return;
-                        }
-                    }
-                    if (isCursorOnElement($scope.newElement, e)) {
-                        this.style.cursor = 'pointer';
-                    }
-                }
-
-                function onCanvasClick(e) {
-                    for (var i = 0; i < $scope.elements.list.length; i++) {
-                        if (isCursorOnElement($scope.elements.list[i], e)) {
-                            $("#" + $scope.elements.list[i].nom).collapse('show');
-                        } else {
-                            $("#" + $scope.elements.list[i].nom).collapse('hide');
-                        }
-                    }
-                    if ($scope.newElement !== undefined) {
-                        if (isCursorOnElement($scope.newElement, e)) {
-                            $("#" + $scope.newElement.nom).collapse('show');
-                        } else {
-                            $("#" + $scope.newElement.nom).collapse('hide');
-                        }
-                    }
-                }
-                function isCursorOnElement(element, e) {
-                    var offset = document.getElementById("myCanvas").offsetWidth / canvasBaseSize;
-                    var position = getCursorPosition(e);
-                    var x = position[0];
-                    var y = position[1];
-                    return (element !== undefined &&
-                            x > element.x * offset &&
-                            x < (element.x + element.larg) * offset &&
-                            y > element.y * offset &&
-                            y < (element.y + element.haut) * offset);
-                }
-                function getCursorPosition(e) {
-                    var x;
-                    var y;
-                    if (e.pageX !== undefined && e.pageY !== undefined) {
-                        x = e.pageX;
-                        y = e.pageY;
-                    } else {
-                        x = e.clientX + document.body.scrollLeft +
-                                document.documentElement.scrollLeft;
-                        y = e.clientY + document.body.scrollTop +
-                                document.documentElement.scrollTop;
-                    }
-                    x -= canvas.offsetLeft;
-                    y -= canvas.offsetTop;
-
-                    return [x, y];
-                }
             });
+            
+            function onCanvasMove(e) {
+                this.style.cursor = 'initial';
+                for (var i = 0; i < $scope.elements.list.length; i++) {
+                    if (isCursorOnElement($scope.elements.list[i], e)) {
+                        this.style.cursor = 'pointer';
+                        return;
+                    }
+                }
+                if (isCursorOnElement($scope.newElement, e)) {
+                    this.style.cursor = 'pointer';
+                }
+            }
+
+            function onCanvasClick(e) {
+                for (var i = 0; i < $scope.elements.list.length; i++) {
+                    if (isCursorOnElement($scope.elements.list[i], e)) {
+                        $("#" + $scope.elements.list[i].nom).collapse('show');
+                    } else {
+                        $("#" + $scope.elements.list[i].nom).collapse('hide');
+                    }
+                }
+                if ($scope.newElement !== undefined) {
+                    if (isCursorOnElement($scope.newElement, e)) {
+                        $("#" + $scope.newElement.nom).collapse('show');
+                    } else {
+                        $("#" + $scope.newElement.nom).collapse('hide');
+                    }
+                }
+            }
+            function isCursorOnElement(element, e) {
+                var offset = document.getElementById("myCanvas").offsetWidth / canvasBaseSize;
+                var position = getCursorPosition(e);
+                var x = position[0];
+                var y = position[1];
+                return (element !== undefined &&
+                        x > element.x * offset &&
+                        x < (element.x + element.larg) * offset &&
+                        y > element.y * offset &&
+                        y < (element.y + element.haut) * offset);
+            }
+            function getCursorPosition(e) {
+                var x;
+                var y;
+                if (e.pageX !== undefined && e.pageY !== undefined) {
+                    x = e.pageX;
+                    y = e.pageY;
+                } else {
+                    x = e.clientX + document.body.scrollLeft +
+                            document.documentElement.scrollLeft;
+                    y = e.clientY + document.body.scrollTop +
+                            document.documentElement.scrollTop;
+                }
+                x -= canvas.offsetLeft;
+                y -= canvas.offsetTop;
+                return [x, y];
+            }
         }
     };
 });
