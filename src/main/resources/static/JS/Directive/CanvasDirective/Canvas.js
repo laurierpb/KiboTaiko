@@ -121,10 +121,10 @@ app.directive('myCanvas', function () {
                 }else{
                     y -= canvas.offsetParent.offsetTop;
                 }
-                if(canvas.offsetLeft > 0){
+                if(canvas.offsetParent.offsetLeft === 0){
                     x -= canvas.offsetLeft;
                 }else{
-                    x -= canvas.offsetParent.offsetLeft;
+                    x -= canvas.offsetParent.offsetLeft + canvas.offsetLeft;
                 }
                 
                 return [x, y];
