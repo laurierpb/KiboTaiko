@@ -1,0 +1,57 @@
+<style>
+    .carousel-indicators{
+        margin-bottom: -1%;
+    }
+    .carousel-indicators li {
+        background-color: #999;
+        background-color: rgba(70,70,70,.25);
+    }
+    .carousel-indicators .active {
+        background-color: #444;
+    }
+    .roundBorder{
+        border-radius: 5px;
+    }
+    .item-image {
+        position: relative;
+
+        padding-bottom: 50%;
+    }
+    .item-image img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;    
+        right: 0;
+        margin: auto;
+        width: 100%;
+    }
+    @media screen and (min-width: 700px) {
+        .carousel-inner{
+            height: 300px;
+        }
+        .item-image {
+            padding-bottom: 35%;
+        }
+    }
+</style>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" ng-class="{active:$first}"
+            data-slide-to="{{$index}}" ng-repeat="element in images">
+        </li>
+    </ol>
+
+    <div class="carousel-inner" role="listbox">
+        <div ng-class="{item:true, active: $first}" ng-repeat="element in images">
+            <div class="item-image">
+                <img ng-src="{{element.url}}" alt="{{element.imageAlt}}">
+            </div>
+            <div class="carousel-caption">
+                <h3>{{element.titre}}</h3>
+                <p>{{element.text}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+

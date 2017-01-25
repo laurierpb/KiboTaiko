@@ -1,0 +1,24 @@
+<style>
+    .myCanvas{
+        background-repeat:no-repeat;
+        background-size:100% 100%;
+        background-position:center;
+
+        width: 100%;
+    }
+</style>
+<canvas id="myCanvas" class="myCanvas" style="border:1px solid black;"></canvas>
+<div id="{{element.nom}}" ng-repeat="element in elements.list" class="collapse">
+    <h2>{{element.nom}}</h2>
+    <p>{{element.contenue}}</p>
+</div>
+{{elements.list}}
+<br/>
+nom<input type="text" id="inputCanvasName" class="myCanvasInput"/><br/>
+contenue<input type="text" id="inputCanvasContenue" class="myCanvasInput"/><br/>
+x<input type="number" id="inputCanvasX" class="myCanvasInput"/><br/>
+y<input type="number" id="inputCanvasY" class="myCanvasInput"/><br/>
+larg<input type="number" id="inputCanvasLart" class="myCanvasInput"/><br/>
+haut<input type="number" id="inputCanvasHaut" class="myCanvasInput"/><br/>
+<br/>
+<input type="button" value="test" id="newElementForCanvas"/>

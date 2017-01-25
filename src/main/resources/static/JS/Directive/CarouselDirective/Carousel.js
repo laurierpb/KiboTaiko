@@ -15,16 +15,17 @@
 app.directive('myCarousel', function () {
     return {
         restrict: 'E',
-        templateUrl: '/Partial/DirectiveTemplate/CarouselDirective.html',
+        templateUrl: 'JS/Directive/CarouselDirective/Carousel.html',
         scope: {
-            images: '=data' ,
-            intervale:'=intervale'
+            images: '=data',
+            intervale: '=intervale'
         },
         link: function (scope, elem, attrs) {
-            if(scope.intervale === undefined) scope.intervale = 5000;
+            if (scope.intervale === undefined)
+                scope.intervale = 5000;
             for (var i = 0; i < scope.images.length; i++) {
                 if (!scope.images[i].url.includes("http")) {
-                    if(!scope.images[i].url.includes("base64")){
+                    if (!scope.images[i].url.includes("base64")) {
                         scope.images[i].url = "data:image/JPEG;base64," + scope.images[i].url;
                     }
                 }
