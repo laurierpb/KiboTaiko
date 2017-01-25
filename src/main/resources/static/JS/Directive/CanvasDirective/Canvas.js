@@ -56,14 +56,6 @@ app.directive('myCanvas', function () {
                     addNewElementToCanvas();
                 });
 
-
-
-
-
-
-
-
-
                 function newElementClearValue() {
                     newElement = {
                         nom: "",

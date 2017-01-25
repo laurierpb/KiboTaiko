@@ -21,7 +21,7 @@ app.controller('GalerieController', function ($scope, $http) {
         image: "http://www.edvardmunch.org/images/paintings/the-scream.jpg",
         list: [{
                 nom: "Premier",
-                contenue: "PremierPremierPremierPremierPremierPremierPremier",
+                contenue: "<h4>PremierPremier</h4>PremierPremierPremierPremierPremier",
                 x: 140,
                 y: 70,
                 larg: 40,
@@ -35,7 +35,4 @@ app.controller('GalerieController', function ($scope, $http) {
                 haut: 10
             }]
     };
-    setInterval(function () {
-        console.log($scope.elements);
-    }, 15000);
 });
