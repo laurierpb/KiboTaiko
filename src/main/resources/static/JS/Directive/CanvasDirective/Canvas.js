@@ -116,8 +116,17 @@ app.directive('myCanvas', function () {
                     y = e.clientY + document.body.scrollTop +
                             document.documentElement.scrollTop;
                 }
-                x -= canvas.offsetLeft;
-                y -= canvas.offsetTop;
+                if(canvas.offsetTop > 0){
+                    y -= canvas.offsetTop;
+                }else{
+                    y -= canvas.offsetParent.offsetTop;
+                }
+                if(canvas.offsetLeft > 0){
+                    x -= canvas.offsetLeft;
+                }else{
+                    x -= canvas.offsetParent.offsetLeft;
+                }
+                
                 return [x, y];
             }
         }
