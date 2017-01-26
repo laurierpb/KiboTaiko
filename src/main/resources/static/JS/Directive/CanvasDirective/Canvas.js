@@ -37,10 +37,11 @@ app.directive('myCanvas', function () {
             canvas.addEventListener("mousemove", onCanvasMove, false);
             canvas.style.backgroundImage = "url('" + $scope.elements.image + "')";
             drawElements();
+            
             function drawElements() {
                 if ($scope.newElement !== undefined) {
                     ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
-                    ctx.fillRect(
+                    ctx.fillRect(    
                             $scope.newElement.x,
                             $scope.newElement.y,
                             $scope.newElement.larg,
@@ -126,7 +127,6 @@ app.directive('myCanvas', function () {
                 }else{
                     x -= canvas.offsetParent.offsetLeft + canvas.offsetLeft;
                 }
-                
                 return [x, y];
             }
         }

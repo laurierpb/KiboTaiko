@@ -7,14 +7,13 @@
         width: 100%;
     }
 </style>
-<div id="test">
-    <canvas id="myCanvas" class="myCanvas" style="border:1px solid black;"></canvas>
-    <div id="{{element.nom}}" ng-repeat="element in elements.list" class="collapse">
-        <h2>{{element.nom}}</h2>
-        <p ng-bind-html="element.contenue"></p>
-    </div>
-    <div id="{{newElement.nom}}" class="collapse">
-        <h2>{{newElement.nom}}</h2>
-        <p ng-bind-html="newElement.contenue"></p>
-    </div>
+<canvas id="myCanvas" class="myCanvas" style="border:1px solid black;"></canvas>
+
+<div id="{{element.nom}}" ng-repeat="element in elements.list" class="collapse">
+    <h2>{{element.nom}}</h2>
+    <p ng-bind-html="element.contenue"></p>
+</div>
+<div id="{{newElement.nom}}" class="collapse">
+    <h2>{{newElement.nom}}</h2>
+    <p ng-bind-html="newElement.contenue"></p>
 </div>
