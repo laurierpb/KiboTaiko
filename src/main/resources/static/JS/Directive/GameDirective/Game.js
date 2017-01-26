@@ -63,9 +63,9 @@ app.directive('myGame', function () {
             var enemyMoveVectorHorizontal = 3;
             var enemyVerticalMovement = 20;
             var enemySpawnIntervale = 0;
-            var enemyBaseSpawnIntervale = 40;
+            var enemyBaseSpawnIntervale = 20;
             var enemeyProjSpeed = 10;
-            var enemyFireRate = [30, 50];
+            var enemyFireRate = [20, 30];
             var enemyAimOffset = 60;
 
             /*
@@ -83,8 +83,6 @@ app.directive('myGame', function () {
             var upgradeDropSpeed = 4;
             var upgradeSpawnIntervale = 0;
             var upgradeBaseSpawnIntervale = 50;
-
-
 
             document.onkeydown = function (e) {
                 if (
@@ -125,7 +123,6 @@ app.directive('myGame', function () {
                             element[i].larg,
                             element[i].haut);
                 }
-
             }
             function processPlayerMotion(key, event) {
                 if (event === 'down') {
@@ -163,7 +160,6 @@ app.directive('myGame', function () {
                         playerSpeedVector.y -= moveSpeed;
                     }
                 }
-
             }
 
             function clearCanvas() {
@@ -368,7 +364,6 @@ app.directive('myGame', function () {
                 setEnemiesFirePosition();
                 setUpgradePosition();
                 playerHit();
-
 
                 addEnemyToList();
                 fireingIntervale--;
