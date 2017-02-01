@@ -4,11 +4,12 @@ var enemyList = [];
 var enemyProjectileList = [];
 var enemyStartingYPosition = 0;
 var enemy = {
-    larg: 20,
-    haut: 10,
+    larg: 40,
+    haut: 20,
     color: "rgba(255, 255, 0, 1)",
     direction: 1,
-    fireIntervale: 0
+    fireIntervale: 0,
+    image:"enemy1"
 };
 var enemyProjectile = {
     larg: 5,
@@ -17,12 +18,12 @@ var enemyProjectile = {
     moveX: 0,
     moveY: 0
 };
-var enemyMoveVectorHorizontal = 3;
+var enemyMoveVectorHorizontal = 5;
 var enemyVerticalMovement = 20;
 var enemySpawnIntervale = 0;
 var enemyBaseSpawnIntervale = 20;
 var enemeyProjSpeed = 10;
-var enemyFireRate = [20, 30];
+var enemyFireRate = [20, 80];
 var enemyAimOffset = 60;
 function setEnemyPosition() {
     for (var i = 0; i < enemyList.length; i++) {
@@ -42,6 +43,7 @@ function setEnemyPosition() {
         }
         for (var j = 0; j < playerNormalProjectileList.length; j++) {
             if (isHit(enemyList[i], playerNormalProjectileList[j])) {
+                deleteMissile(enemyList[i]);
                 enemyList.splice(i, 1);
                 playerNormalProjectileList.splice(i, 1);
                 break;
@@ -49,10 +51,18 @@ function setEnemyPosition() {
         }
         for (var j = 0; j < playerMissileProjectileList.length; j++) {
             if (isHit(enemyList[i], playerMissileProjectileList[j])) {
+                deleteMissile(enemyList[i]);
                 enemyList.splice(i, 1);
-                playerMissileProjectileList.splice(j, 1);
-                break;
             }
+        }
+    }
+}
+function deleteMissile(enemy) {
+    for (var i = 0; i < playerMissileProjectileList.length; i++) {
+        if (playerMissileProjectileList[i].target === enemy) {
+            console.log("succes");
+            playerMissileProjectileList.splice(i, 1);
+            i--;
         }
     }
 }
@@ -70,7 +80,8 @@ function addEnemyToList() {
             haut: enemy.haut,
             color: enemy.color,
             direction: enemy.direction,
-            fireIntervale: Math.random() * (enemyFireRate[0] - enemyFireRate[1]) + enemyFireRate[0]
+            fireIntervale: Math.random() * (enemyFireRate[0] - enemyFireRate[1]) + enemyFireRate[0],
+            image:"enemy1"
         });
         enemySpawnIntervale = enemyBaseSpawnIntervale;
     }
@@ -89,7 +100,7 @@ function enemiesFire() {
     for (var i = 0; i < enemyList.length; i++) {
         if (enemyList[i].fireIntervale <= 0) {
             addEnemyProjToList(enemyList[i]);
-            enemyList[i].fireIntervale = Math.random() * (enemyFireRate[0] - enemyFireRate[1]) + enemyFireRate[0];
+            enemyList[i].fireIntervale = Math.random() * (enemyFireRate[1] - enemyFireRate[0]) + enemyFireRate[0];
         } else {
             enemyList[i].fireIntervale -= 1;
         }

@@ -33,18 +33,31 @@ function drawTriangleElement(elements) {
         ctx.fillStyle = "#FFCC00";
         ctx.fill();
     }
+}
+function drawCircleElement(elements) {
+    for (var i = 0; i < elements.length; i++) {
+        ctx.beginPath();
+        ctx.arc(elements[i].x, elements[i].y, elements[i].larg, 0, 2 * Math.PI);
 
-
-
+        // the fill color
+        ctx.fillStyle = elements[i].color;
+        ctx.fill();
+    }
+}
+function drawImageToCanvas(elements) {
+    for (var i = 0; i < elements.length; i++) {
+        var img = document.getElementById(elements[i].image);
+        ctx.drawImage(img, elements[i].x, elements[i].y, elements[i].larg, elements[i].haut);
+    }
 }
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 function drawCanvas() {
-    drawRectangleElement([player]);
-    drawRectangleElement(playerNormalProjectileList);
+    drawImageToCanvas([player]);
+    drawCircleElement(playerNormalProjectileList);
     drawTriangleElement(playerMissileProjectileList);
-    drawRectangleElement(enemyList);
+    drawImageToCanvas(enemyList);
     drawRectangleElement(enemyProjectileList);
-    drawRectangleElement(upgradeList);
+    drawImageToCanvas(upgradeList);
 }

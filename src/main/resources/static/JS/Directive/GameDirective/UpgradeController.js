@@ -9,7 +9,8 @@ var upgrade = {
     larg: 30,
     haut: 30,
     color: "rgba(0, 0, 255, 1)",
-    upgrade: 0
+    upgrade: 0,
+    image:"crate"
 };
 
 var upgradeValueList = [5, 2, 1, 5, 5];
@@ -32,7 +33,8 @@ function setUpgradePosition() {
             haut: upgrade.haut,
             color: upgrade.color,
             upgrade: Math.floor(Math.random() * ((max + 1) - min) + min),
-            upgradeValue: upgrade.upgradeValue
+            upgradeValue: upgrade.upgradeValue,
+            image:"crate"
         });
         upgradeSpawnIntervale = upgradeBaseSpawnIntervale;
     }
@@ -84,7 +86,9 @@ function addUpgradeToPlayer(upgrade) {
             }
             break;
         case 4:
-            player.upgrades[4]++;
+            if (player.upgrades[4] < upgradeMaxValueList[4]) {
+                player.upgrades[4]++;
+            }
             break;
     }
 }

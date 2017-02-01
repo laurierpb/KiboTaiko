@@ -2,11 +2,12 @@
 var player = {
     x: 245,
     y: 490,
-    larg: 10,
-    haut: 10,
+    larg: 18,
+    haut: 30,
     color: "rgba(255, 255, 255, 1)",
     fireingIntervale: 0,
-    upgrades: [0, 0, 0, 0, 0]
+    upgrades: [0, 0, 0, 0, 0],
+    image:"battleShip"
 };
 var playerNormalProjectile = {
     larg: 5,
@@ -31,7 +32,7 @@ var playerLazerProjectile = {
     color: "rgba(255, 0, 255, 0.25)",
     duration: 5
 };
-
+var maxY = 500 - player.haut;
 var moveSpeed = 0;
 var baseMoveSpeed = 10;
 var playerSpeedVector = {x: 0, y: 0};
@@ -61,8 +62,8 @@ function setPlayerPosition() {
     if (player.x < 0) {
         player.x = 0;
     }
-    if (player.y > 490) {
-        player.y = 490;
+    if (player.y > maxY) {
+        player.y = maxY;
     }
     if (player.y < 0) {
         player.y = 0;
@@ -183,7 +184,6 @@ function executePlayerAction() {
             }
         }
     }
-    deleteLostProjectile();
     if (player.fireingIntervale === 1000000) {
         player.fireingIntervale = 0;
     } else {
@@ -191,18 +191,10 @@ function executePlayerAction() {
     }
 }
 
-function deleteLostProjectile(){
-    for(var i = 0 ; i < playerMissileProjectileList.length ; i++){
-        if(playerMissileProjectileList[i].target === undefined){
-            playerMissileProjectileList.splice(i, 1);
-        }
-    }
-}
-
 function addNormalShotToList() {
     playerNormalProjectileList.push({
-        x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
-        y: player.y - player.haut,
+        x: player.x + player.larg / 2 - (playerNormalProjectile.larg + player.upgrades[0] * upgradeValueList[0]) / 2,
+        y: player.y,
         larg: (playerNormalProjectile.larg) + upgradeValueList[0] * player.upgrades[0],
         haut: playerNormalProjectile.haut,
         color: playerNormalProjectile.color,
@@ -213,7 +205,7 @@ function addNormalShotToList() {
 function addMultishotToList() {
     playerNormalProjectileList.push({
         x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
-        y: player.y - player.haut,
+        y: player.y,
         larg: playerNormalProjectile.larg,
         haut: playerNormalProjectile.haut,
         color: playerNormalProjectile.color,
@@ -222,7 +214,7 @@ function addMultishotToList() {
     });
     playerNormalProjectileList.push({
         x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
-        y: player.y - player.haut,
+        y: player.y,
         larg: playerNormalProjectile.larg,
         haut: playerNormalProjectile.haut,
         color: playerNormalProjectile.color,
@@ -233,7 +225,7 @@ function addMultishotToList() {
 function addMissileShotToList() {
     playerMissileProjectileList.push({
         x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
-        y: player.y - player.haut,
+        y: player.y,
         larg: playerMissileProjectile.larg,
         haut: playerMissileProjectile.haut,
         color: playerMissileProjectile.color,
