@@ -1,4 +1,4 @@
-/* global enemyProjectileList, canvasHeight, upgradeValueList, enemyList */
+/* global enemyProjectileList, canvasHeight, upgradeValueList, enemyList, canvas */
 var player = {
     x: 245,
     y: 490,
@@ -6,8 +6,8 @@ var player = {
     haut: 30,
     color: "rgba(255, 255, 255, 1)",
     fireingIntervale: 0,
-    upgrades: [0, 0, 0, 0, 0],
-    image:"battleShip"
+    upgrades: [0, 0, 0, 0, 0, 0],
+    image: "battleShip"
 };
 var playerNormalProjectile = {
     larg: 5,
@@ -32,11 +32,12 @@ var playerLazerProjectile = {
     color: "rgba(255, 0, 255, 0.25)",
     duration: 5
 };
-var maxY = 500 - player.haut;
+var maxY = canvas.height - player.haut;
+var maxX = canvas.width - player.larg / 2;
 var moveSpeed = 0;
 var baseMoveSpeed = 10;
 var playerSpeedVector = {x: 0, y: 0};
-var playerMissileProjectileSpeed = 10;
+var playerMissileProjectileSpeed = 15;
 
 var playerNormalProjectileList = [];
 var playerMissileProjectileList = [];
@@ -45,19 +46,19 @@ var playerLazerProjectileList = [];
 var baseFireingIntervale = 10;
 var baseMultishotIntervale = 40;
 var baseLazerIntervale = 50;
-var baseMissileIntervale = 40;
+var baseMissileIntervale = 50;
 
 
 function setPlayerPosition() {
     var normalisedSpeed = generateNormalisedSpeed(
             playerSpeedVector.x,
             playerSpeedVector.y,
-            moveSpeed + player.upgrades[1] * upgradeValueList[1]);
+            moveSpeed);
     player.x += normalisedSpeed[0];
     player.y += normalisedSpeed[1];
 
-    if (player.x > 490) {
-        player.x = 490;
+    if (player.x > maxX) {
+        player.x = maxX;
     }
     if (player.x < 0) {
         player.x = 0;
@@ -72,8 +73,12 @@ function setPlayerPosition() {
 function playerHit() {
     for (var i = 0; i < enemyProjectileList.length; i++) {
         if (isHit(player, enemyProjectileList[i])) {
-            for (var j = 0; j < player.upgrades.length; j++) {
-                player.upgrades[j] = 0;
+            if (player.upgrades[5] > 0) {
+                player.upgrades[5]--;
+            } else {
+                for (var j = 0; j < player.upgrades.length; j++) {
+                    player.upgrades[j] = 0;
+                }
             }
             break;
         }
@@ -89,16 +94,16 @@ function setProjectilePosition() {
     }
     for (var i = 0; i < playerMissileProjectileList.length; i++) {
         setMissileDirection(playerMissileProjectileList[i]);
-        
+
         playerMissileProjectileList[i].y -= playerMissileProjectileList[i].velY;
         playerMissileProjectileList[i].x += playerMissileProjectileList[i].velX;
-        
+
         if (playerMissileProjectileList[i].y < -10) {
             playerMissileProjectileList.splice(i, 1);
         }
     }
 }
-function setMissileDirection(missile){
+function setMissileDirection(missile) {
     var target = missile.target;
     var x = target.x - missile.x;
     var y = missile.y - target.y;
@@ -177,7 +182,7 @@ function executePlayerAction() {
         }
     }
     if (player.upgrades[4] > 0) {
-        var missileFireingIntervale = (baseMultishotIntervale - player.upgrades[3] * upgradeValueList[3]);
+        var missileFireingIntervale = (baseMissileIntervale - player.upgrades[4] * upgradeValueList[4]);
         if (player.fireingIntervale % missileFireingIntervale === 0) {
             if (enemyList.length > 0) {
                 addMissileShotToList();
@@ -223,6 +228,9 @@ function addMultishotToList() {
     });
 }
 function addMissileShotToList() {
+    var target = enemyList[Math.floor(Math.random() * enemyList.length)];
+    target.x = target.x + target.larg / 2;
+    target.y = target.y + target.haut / 2;
     playerMissileProjectileList.push({
         x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
         y: player.y,
@@ -231,6 +239,6 @@ function addMissileShotToList() {
         color: playerMissileProjectile.color,
         velX: playerMissileProjectile.velX,
         velY: playerMissileProjectile.velY,
-        target: enemyList[Math.floor(Math.random() * enemyList.length)]
+        target: target
     });
 }

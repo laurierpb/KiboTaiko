@@ -1,4 +1,4 @@
-/* global playerNormalProjectileList, player, playerMissileProjectileList */
+/* global playerNormalProjectileList, player, playerMissileProjectileList, canvas */
 
 var enemyList = [];
 var enemyProjectileList = [];
@@ -21,15 +21,18 @@ var enemyProjectile = {
 var enemyMoveVectorHorizontal = 5;
 var enemyVerticalMovement = 20;
 var enemySpawnIntervale = 0;
-var enemyBaseSpawnIntervale = 20;
+var enemyBaseSpawnIntervale = 10;
 var enemeyProjSpeed = 10;
-var enemyFireRate = [20, 80];
-var enemyAimOffset = 60;
+var enemyFireRate = [20, 40];
+var enemyAimOffset = 30;
+
+
+
 function setEnemyPosition() {
     for (var i = 0; i < enemyList.length; i++) {
         enemyList[i].x += enemyMoveVectorHorizontal * enemyList[i].direction;
-        if (enemyList[i].x > 480) {
-            enemyList[i].x = 480;
+        if (enemyList[i].x > canvas.width - enemy.larg / 2) {
+            enemyList[i].x = canvas.width - enemy.larg / 2;
             enemyList[i].y += enemyVerticalMovement;
             enemyList[i].direction = enemyList[i].direction * -1;
         }
@@ -38,7 +41,7 @@ function setEnemyPosition() {
             enemyList[i].y += enemyVerticalMovement;
             enemyList[i].direction = enemyList[i].direction * -1;
         }
-        if (enemyList[i].y > 480) {
+        if (enemyList[i].y > canvas.width - enemy.larg / 2) {
             enemyList.splice(i, 1);
         }
         for (var j = 0; j < playerNormalProjectileList.length; j++) {
@@ -60,7 +63,6 @@ function setEnemyPosition() {
 function deleteMissile(enemy) {
     for (var i = 0; i < playerMissileProjectileList.length; i++) {
         if (playerMissileProjectileList[i].target === enemy) {
-            console.log("succes");
             playerMissileProjectileList.splice(i, 1);
             i--;
         }
@@ -70,7 +72,7 @@ function addEnemyToList() {
     if (enemySpawnIntervale <= 0) {
         var randomXValue;
         do {
-            randomXValue = Math.random() * (480 - 0) + 0;
+            randomXValue = Math.random() * (canvas.width - enemy.larg / 2 - 0) + 0;
         } while (canEnemyNotSpawn(randomXValue));
 
         enemyList.push({
@@ -80,7 +82,7 @@ function addEnemyToList() {
             haut: enemy.haut,
             color: enemy.color,
             direction: enemy.direction,
-            fireIntervale: Math.random() * (enemyFireRate[0] - enemyFireRate[1]) + enemyFireRate[0],
+            fireIntervale: Math.random() * (enemyFireRate[1] - enemyFireRate[0]) + enemyFireRate[0],
             image:"enemy1"
         });
         enemySpawnIntervale = enemyBaseSpawnIntervale;

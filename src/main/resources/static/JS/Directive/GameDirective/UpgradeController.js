@@ -10,22 +10,22 @@ var upgrade = {
     haut: 30,
     color: "rgba(0, 0, 255, 1)",
     upgrade: 0,
-    image:"crate"
+    image: "crate"
 };
 
-var upgradeValueList = [5, 2, 1, 5, 5];
-var upgradeMaxValueList = [20, 5, 9, 6, 5];
+var upgradeValueList = [5, 2, 1, 5, 5, 1];
+var upgradeMaxValueList = [0, 5, 7, 6, 5, 3];
 
 
 var upgradeList = [];
 var upgradeDropSpeed = 4;
 var upgradeSpawnIntervale = 0;
-var upgradeBaseSpawnIntervale = 48;
+var upgradeBaseSpawnIntervale = 30;
 
 function setUpgradePosition() {
     if (upgradeSpawnIntervale <= 0) {
         var min = Math.ceil(0);
-        var max = Math.floor(5);
+        var max = Math.floor(upgradeValueList.length);
         upgradeList.push({
             x: (Math.random() * (470 - 0) + 0),
             y: upgrade.y,
@@ -34,7 +34,7 @@ function setUpgradePosition() {
             color: upgrade.color,
             upgrade: Math.floor(Math.random() * ((max + 1) - min) + min),
             upgradeValue: upgrade.upgradeValue,
-            image:"crate"
+            image: "crate"
         });
         upgradeSpawnIntervale = upgradeBaseSpawnIntervale;
     }
@@ -88,6 +88,14 @@ function addUpgradeToPlayer(upgrade) {
         case 4:
             if (player.upgrades[4] < upgradeMaxValueList[4]) {
                 player.upgrades[4]++;
+            } else {
+                upgrade.upgrade++;
+                addUpgradeToPlayer(upgrade);
+            }
+            break;
+        case 5:
+            if (player.upgrades[5] < upgradeMaxValueList[5]) {
+                player.upgrades[5]++;
             }
             break;
     }

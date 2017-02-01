@@ -19,15 +19,22 @@ function drawRectangleElement(element) {
 }
 function drawTriangleElement(elements) {
     for (var i = 0; i < elements.length; i++) {
+        var coord = generatePointsForTrianglePointing(elements[i], elements[i].target);
         ctx.beginPath();
-        ctx.moveTo(elements[i].x - elements[i].larg / 2, elements[i].y + elements[i].haut / 2);
-        ctx.lineTo(elements[i].x + elements[i].larg / 2, elements[i].y + elements[i].haut / 2);
-        ctx.lineTo(elements[i].x, elements[i].y - elements[i].haut / 2);
+        ctx.moveTo(
+                coord[0][0],
+                coord[0][1]
+                );
+        ctx.lineTo(
+                coord[1][0],
+                coord[1][1]
+                );
+        ctx.lineTo(
+                coord[2][0],
+                coord[2][1]
+                );
         ctx.closePath();
         // the outline
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = '#666666';
-        ctx.stroke();
 
         // the fill color
         ctx.fillStyle = "#FFCC00";
@@ -50,8 +57,29 @@ function drawImageToCanvas(elements) {
         ctx.drawImage(img, elements[i].x, elements[i].y, elements[i].larg, elements[i].haut);
     }
 }
+function drawArc(element) {
+    ctx.beginPath();
+    ctx.arc(
+            player.x + player.larg / 2,
+            player.y + player.larg / 2 + 5,
+            35,
+            Math.PI * 1.15,
+            Math.PI * (1.85)
+            );
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "rgba(0, 255, 255, " + element + ")";
+    ctx.stroke();
+}
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+function drawMenu(elements) {
+    for (var i = 0; i < elements.length; i++) {
+        ctx.font = elements[i].font;
+        ctx.fillStyle = "red";
+        ctx.textAlign = "center";
+        ctx.fillText(elements[i].fillText, canvas.width / 2, elements[i].y + 50);
+    }
 }
 function drawCanvas() {
     drawImageToCanvas([player]);
@@ -60,4 +88,5 @@ function drawCanvas() {
     drawImageToCanvas(enemyList);
     drawRectangleElement(enemyProjectileList);
     drawImageToCanvas(upgradeList);
+    drawArc(player.upgrades[5] / 10);
 }
