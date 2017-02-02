@@ -1,3 +1,5 @@
+/* global points, enemyList, upgradeList, playerMissileProjectileList, playerNormalProjectileList, vie, player, enemyProjectileList, gameExecution */
+
 var projHitOffsetY = 10;
 function isHit(target, proj) {
     if (target === undefined || proj === undefined) {
@@ -57,5 +59,19 @@ function generatePointsForTrianglePointing(missile, enemy) {
         coordBasMissile[1] - (missile.larg / 2) * (largeurEchaile / hipoEchaile)
     ];
     return [coordHautMissile, coordBasGaucheMissile, coordBasDroitMissile];
-
+}
+function addPoints(point) {
+    points += point;
+}
+function playerLostLife() {
+    vie--;
+    enemyList = [];
+    upgradeList = [];
+    playerMissileProjectileList = [];
+    playerNormalProjectileList = [];
+    enemyProjectileList = [];
+    for (var i = 0; i < player.upgrades.length; i++) {
+        player.upgrades[i] = 0;
+    }
+    setStartMenu();
 }

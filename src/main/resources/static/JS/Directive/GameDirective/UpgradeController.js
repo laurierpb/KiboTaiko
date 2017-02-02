@@ -22,6 +22,8 @@ var upgradeDropSpeed = 4;
 var upgradeSpawnIntervale = 0;
 var upgradeBaseSpawnIntervale = 30;
 
+var upgradePoints = 25;
+
 function setUpgradePosition() {
     if (upgradeSpawnIntervale <= 0) {
         var min = Math.ceil(0);
@@ -38,19 +40,22 @@ function setUpgradePosition() {
         });
         upgradeSpawnIntervale = upgradeBaseSpawnIntervale;
     }
+    upgradeHit();
+    upgradeSpawnIntervale--;
+}
+function upgradeHit() {
     for (var i = 0; i < upgradeList.length; i++) {
         if (upgradeList[i].y > 500) {
             upgradeList.splice(i, 1);
         } else if (isHit(player, upgradeList[i])) {
             addUpgradeToPlayer(upgradeList[i]);
             upgradeList.splice(i, 1);
+            addPoints(upgradePoints);
         } else {
             upgradeList[i].y += upgradeDropSpeed;
         }
     }
-    upgradeSpawnIntervale--;
 }
-
 function addUpgradeToPlayer(upgrade) {
     switch (upgrade.upgrade) {
         case 0:

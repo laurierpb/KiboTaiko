@@ -1,4 +1,4 @@
-/* global ctx, canvas, playerNormalProjectileList, player, enemyList, enemyProjectileList, upgradeList, playerMissileProjectileList */
+/* global ctx, canvas, playerNormalProjectileList, player, enemyList, enemyProjectileList, upgradeList, playerMissileProjectileList, enemy, points, vie, showPoints, bombExplosion */
 
 var canvas = document.getElementById('gameCanvas');
 var canvasHeight = 500;
@@ -15,6 +15,20 @@ function drawRectangleElement(element) {
                 element[i].y,
                 element[i].larg,
                 element[i].haut);
+    }
+}
+function drawEnemyHpBar(element) {
+    var width = enemy.larg;
+    for (var i = 0; i < element.length; i++) {
+        var percentageHP = element[i].hp / enemy.hp;
+        var temp = {
+            x: element[i].x,
+            y: element[i].y - 5,
+            larg: element[i].larg * percentageHP,
+            haut: 5,
+            color: enemy.color
+        };
+        drawRectangleElement([temp]);
     }
 }
 function drawTriangleElement(elements) {
@@ -78,15 +92,49 @@ function drawMenu(elements) {
         ctx.font = elements[i].font;
         ctx.fillStyle = "red";
         ctx.textAlign = "center";
-        ctx.fillText(elements[i].fillText, canvas.width / 2, elements[i].y + 50);
+        ctx.fillText(
+                elements[i].fillText,
+                elements[i].x + elements[i].larg / 2,
+                elements[i].y + elements[i].haut / 1.5
+                );
     }
+}
+function drawPoints() {
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText(
+            "Points : " + points,
+            canvasWidth - 100,
+            30 );
+}
+function drawVie() {
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText(
+            "Vie : " + vie,
+            70,
+            30 );
 }
 function drawCanvas() {
     drawImageToCanvas([player]);
     drawCircleElement(playerNormalProjectileList);
     drawTriangleElement(playerMissileProjectileList);
     drawImageToCanvas(enemyList);
+    if (enemy.hp > 1) {
+        drawEnemyHpBar(enemyList);
+    }
     drawRectangleElement(enemyProjectileList);
     drawImageToCanvas(upgradeList);
     drawArc(player.upgrades[5] / 10);
+    drawVie();
+    if (showPoints) {
+        drawPoints();
+    }
+    if(bombExplosion.explosionTime > 0){
+        drawCircleElement([bombExplosion]);
+        bombExplosion.explosionTime--;
+        bombExplosion.haut += 30;
+    }
 }

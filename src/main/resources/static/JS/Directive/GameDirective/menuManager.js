@@ -1,35 +1,174 @@
 
 /* global ctx */
 
-/* global canvas */
-
+/* global canvas, canvasWidth, canvasHeight, points */
 var menuElement = [];
 var optionValue = {
     difficulte: 1,
     nombreDeVie: 1,
-    vitesse:1,
+    vitesse: 1,
     points: false
 };
 function setStartMenu() {
+    menuElement = [];
+    clearCanvas();
     canvas.addEventListener("click", onCanvasClick, false);
     canvas.addEventListener("mousemove", onCanvasMove, false);
     menuElement.push({
         x: 0,
-        y: 0,
-        larg: canvas.width,
-        haut: 80,
-        font: "30px Arial",
+        y: 30,
+        larg: canvasWidth,
+        haut: 0,
+        font: "20px Arial",
+        fillText: "difficulte: " + optionValue.difficulte +
+                "  vie : " + optionValue.nombreDeVie +
+                "  Vitesse : " + optionValue.vitesse +
+                "  Afficher points : " + optionValue.points,
+        utilisation: "display"
+    });
+    menuElement.push({
+        x: 0,
+        y: canvasHeight - 50,
+        larg: canvasWidth,
+        haut: 50,
+        font: "60px Arial",
         fillText: "Start Game",
         utilisation: "startGame"
     });
     menuElement.push({
         x: 0,
-        y: 100,
+        y: 30,
         larg: canvas.width,
-        haut: 80,
+        haut: 50,
         font: "30px Arial",
         fillText: "Option",
         utilisation: "option"
+    });
+    if(points > 0 && optionValue.points){
+        menuElement.push({
+        x: 0,
+        y: canvasHeight - 150,
+        larg: canvas.width,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "points : " + points,
+        utilisation: ""
+    });
+    }
+    drawMenu(menuElement);
+}
+function setOptionMenu() {
+    menuElement = [];
+    clearCanvas();
+    canvas.addEventListener("click", onCanvasClick, false);
+    canvas.addEventListener("mousemove", onCanvasMove, false);
+    menuElement.push({
+        x: 0,
+        y: 30,
+        larg: canvas.width,
+        haut: 0,
+        font: "20px Arial",
+        fillText: "difficulte: " + optionValue.difficulte +
+                "  vie : " + optionValue.nombreDeVie +
+                "  Vitesse : " + optionValue.vitesse +
+                "  Afficher points : " + optionValue.points,
+        utilisation: "display"
+    });
+    menuElement.push({
+        x: 0,
+        y: 30,
+        larg: canvas.width / 2,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Vitesse +",
+        utilisation: "vitesse +"
+    });
+    menuElement.push({
+        x: canvas.width / 2,
+        y: 30,
+        larg: canvas.width / 2,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Vitesse -",
+        utilisation: "vitesse -"
+    });
+
+
+    menuElement.push({
+        x: (canvas.width / 3) * 0,
+        y: 80,
+        larg: canvas.width / 3,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Facile 1",
+        utilisation: "facile"
+    });
+    menuElement.push({
+        x: (canvas.width / 3) * 1,
+        y: 80,
+        larg: canvas.width / 3,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Moyen 2",
+        utilisation: "moyen"
+    });
+    menuElement.push({
+        x: (canvas.width / 3) * 2,
+        y: 80,
+        larg: canvas.width / 3,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Difficile 3",
+        utilisation: "difficile"
+    });
+    menuElement.push({
+        x: 0,
+        y: 130,
+        larg: canvas.width,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Afficher points",
+        utilisation: "points"
+    });
+    menuElement.push({
+        x: 0,
+        y: 180,
+        larg: canvas.width / 2,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Ajouter une vie",
+        utilisation: "vie+"
+    });
+    menuElement.push({
+        x: canvas.width / 2,
+        y: 180,
+        larg: canvas.width / 2,
+        haut: 50,
+        font: "30px Arial",
+        fillText: "Enlever une vie",
+        utilisation: "vie-"
+    });
+
+
+
+
+    menuElement.push({
+        x: 0,
+        y: canvasHeight - 160,
+        larg: canvasWidth,
+        haut: 80,
+        font: "60px Arial",
+        fillText: "Test",
+        utilisation: "test"
+    });
+    menuElement.push({
+        x: 0,
+        y: canvasHeight - 80,
+        larg: canvasWidth,
+        haut: 80,
+        font: "60px Arial",
+        fillText: "Main Menu",
+        utilisation: "mainMenu"
     });
     drawMenu(menuElement);
 }
@@ -45,9 +184,68 @@ function onCanvasMove(e) {
 function onCanvasClick(e) {
     for (var i = 0; i < menuElement.length; i++) {
         if (isCursorOnElement(menuElement[i], e)) {
-            if (menuElement[i].utilisation === "startGame") {
-                this.style.cursor = 'initial';
-                startGame();
+            switch (menuElement[i].utilisation) {
+                case "startGame":
+                    this.style.cursor = 'initial';
+                    removeButtonFromMenu();
+                    startGame(optionValue);
+                    break;
+                case "option":
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "vitesse +":
+                    optionValue.vitesse++;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "vitesse -":
+                    if (optionValue.vitesse === 1) {
+                        break;
+                    }
+                    optionValue.vitesse--;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "facile":
+                    optionValue.difficulte = 1;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "moyen":
+                    optionValue.difficulte = 2;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "difficile":
+                    optionValue.difficulte = 3;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "test":
+                    optionValue.difficulte = 0;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "mainMenu":
+                    removeButtonFromMenu();
+                    setStartMenu();
+                    break;
+                case "points":
+                    optionValue.points = true;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "vie+":
+                    optionValue.nombreDeVie++;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
+                case "vie-":
+                    optionValue.nombreDeVie--;
+                    removeButtonFromMenu();
+                    setOptionMenu();
+                    break;
             }
         }
     }
@@ -85,4 +283,10 @@ function getCursorPosition(e) {
         x -= canvas.offsetParent.offsetLeft + canvas.offsetLeft;
     }
     return [x, y];
+}
+
+
+function removeButtonFromMenu() {
+    canvas.removeEventListener("click", onCanvasClick, false);
+    canvas.removeEventListener("mousemove", onCanvasMove, false);
 }

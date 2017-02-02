@@ -2,14 +2,15 @@
 
 var enemyList = [];
 var enemyProjectileList = [];
-var enemyStartingYPosition = 0;
+var enemyStartingYPosition = 5;
 var enemy = {
     larg: 40,
     haut: 20,
-    color: "rgba(255, 255, 0, 1)",
+    color: "rgba(255, 0, 0, 1)",
     direction: 1,
     fireIntervale: 0,
-    image:"enemy1"
+    image: "enemy1",
+    hp: 1
 };
 var enemyProjectile = {
     larg: 5,
@@ -26,7 +27,7 @@ var enemeyProjSpeed = 10;
 var enemyFireRate = [20, 40];
 var enemyAimOffset = 30;
 
-
+var enemyPoints = 10;
 
 function setEnemyPosition() {
     for (var i = 0; i < enemyList.length; i++) {
@@ -41,23 +42,40 @@ function setEnemyPosition() {
             enemyList[i].y += enemyVerticalMovement;
             enemyList[i].direction = enemyList[i].direction * -1;
         }
-        if (enemyList[i].y > canvas.width - enemy.larg / 2) {
+        if (enemyList[i].y > canvas.height - enemy.haut) {
             enemyList.splice(i, 1);
         }
-        for (var j = 0; j < playerNormalProjectileList.length; j++) {
-            if (isHit(enemyList[i], playerNormalProjectileList[j])) {
-                deleteMissile(enemyList[i]);
-                enemyList.splice(i, 1);
-                playerNormalProjectileList.splice(i, 1);
-                break;
+        checkForColision(i);
+    }
+}
+function checkForColision(i) {
+    for (var j = 0; j < playerNormalProjectileList.length; j++) {
+        if (isHit(enemyList[i], playerNormalProjectileList[j])) {
+            deleteMissile(enemyList[i]);
+            enemyHit(enemyList, i);
+
+            playerNormalProjectileList.splice(j, 1);
+            break;
+        }
+    }
+    for (var j = 0; j < playerMissileProjectileList.length; j++) {
+        if (isHit(enemyList[i], playerMissileProjectileList[j])) {
+
+            if (!enemyHit(enemyList, i)) {
+                playerMissileProjectileList.splice(j, 1);
             }
         }
-        for (var j = 0; j < playerMissileProjectileList.length; j++) {
-            if (isHit(enemyList[i], playerMissileProjectileList[j])) {
-                deleteMissile(enemyList[i]);
-                enemyList.splice(i, 1);
-            }
-        }
+    }
+}
+function enemyHit(enemyList, i) {
+    if (enemyList[i].hp <= 1) {
+        deleteMissile(enemyList[i]);
+        enemyList.splice(i, 1);
+        addPoints(enemy.hp * enemyPoints);
+        return true;
+    } else {
+        enemyList[i].hp--;
+        return false;
     }
 }
 function deleteMissile(enemy) {
@@ -70,9 +88,12 @@ function deleteMissile(enemy) {
 }
 function addEnemyToList() {
     if (enemySpawnIntervale <= 0) {
-        var randomXValue;
+        var randomXValue = Math.random() * (canvas.width - enemy.larg / 2 - 0) + 0;
         do {
-            randomXValue = Math.random() * (canvas.width - enemy.larg / 2 - 0) + 0;
+            randomXValue--;
+            if (randomXValue < 0) {
+                return;
+            }
         } while (canEnemyNotSpawn(randomXValue));
 
         enemyList.push({
@@ -83,7 +104,8 @@ function addEnemyToList() {
             color: enemy.color,
             direction: enemy.direction,
             fireIntervale: Math.random() * (enemyFireRate[1] - enemyFireRate[0]) + enemyFireRate[0],
-            image:"enemy1"
+            image: "enemy1",
+            hp: enemy.hp
         });
         enemySpawnIntervale = enemyBaseSpawnIntervale;
     }
@@ -91,7 +113,9 @@ function addEnemyToList() {
 }
 function canEnemyNotSpawn(xValue) {
     for (var i = 0; i < enemyList.length; i++) {
-        if (enemyList[i].y === 0 && enemyList[i].x < xValue && enemyList[i].x + enemyList[i].larg > xValue) {
+        if (enemyList[i].y === enemyStartingYPosition &&
+                (xValue < enemyList[i].x && xValue + enemy.larg > enemyList[i].x ||
+                        enemyList[i].x < xValue && enemyList[i].x + enemy.larg > xValue)) {
             return true;
         }
     }
