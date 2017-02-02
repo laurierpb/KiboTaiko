@@ -44,16 +44,16 @@ function setStartMenu() {
         fillText: "Option",
         utilisation: "option"
     });
-    if(points > 0 && optionValue.points){
+    if (points > 0 && optionValue.points) {
         menuElement.push({
-        x: 0,
-        y: canvasHeight - 150,
-        larg: canvas.width,
-        haut: 50,
-        font: "30px Arial",
-        fillText: "points : " + points,
-        utilisation: ""
-    });
+            x: 0,
+            y: canvasHeight - 150,
+            larg: canvas.width,
+            haut: 50,
+            font: "30px Arial",
+            fillText: "points : " + points,
+            utilisation: ""
+        });
     }
     drawMenu(menuElement);
 }
@@ -195,15 +195,22 @@ function onCanvasClick(e) {
                     setOptionMenu();
                     break;
                 case "vitesse +":
-                    optionValue.vitesse++;
+                    if (optionValue.vitesse <= 1) {
+                        optionValue.vitesse += 0.1;
+                    } else {
+                        optionValue.vitesse++;
+                    }
                     removeButtonFromMenu();
                     setOptionMenu();
                     break;
                 case "vitesse -":
-                    if (optionValue.vitesse === 1) {
-                        break;
+                    if (optionValue.vitesse <= 0) {
+                        break
+                    } else if (optionValue.vitesse <= 1) {
+                        optionValue.vitesse = optionValue.vitesse - 0.1;
+                    } else {
+                        optionValue.vitesse--;
                     }
-                    optionValue.vitesse--;
                     removeButtonFromMenu();
                     setOptionMenu();
                     break;

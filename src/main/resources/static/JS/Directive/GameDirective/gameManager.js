@@ -10,11 +10,9 @@ var gameExecution = function () {
     setPlayerPosition();
     executePlayerAction();
     setProjectilePosition();
-    
     setEnemyPosition();
     enemiesFire();
     setEnemiesFirePosition();
-
     setUpgradePosition();
 
     addEnemyToList();
