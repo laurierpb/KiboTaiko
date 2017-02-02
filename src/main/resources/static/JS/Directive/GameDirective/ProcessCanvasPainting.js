@@ -1,4 +1,4 @@
-/* global ctx, canvas, playerNormalProjectileList, player, enemyList, enemyProjectileList, upgradeList, playerMissileProjectileList, enemy, points, vie, showPoints, bombExplosion */
+/* global ctx, canvas, playerNormalProjectileList, player, enemyList, enemyProjectileList, upgradeList, playerMissileProjectileList, enemy, points, vie, showPoints, bombExplosion, bomb, isBombFired */
 
 var canvas = document.getElementById('gameCanvas');
 var canvasHeight = 500;
@@ -122,19 +122,30 @@ function drawCanvas() {
     drawCircleElement(playerNormalProjectileList);
     drawTriangleElement(playerMissileProjectileList);
     drawImageToCanvas(enemyList);
-    if (enemy.hp > 1) {
-        drawEnemyHpBar(enemyList);
-    }
     drawRectangleElement(enemyProjectileList);
     drawImageToCanvas(upgradeList);
     drawArc(player.upgrades[5] / 10);
+    
+    
     drawVie();
     if (showPoints) {
         drawPoints();
     }
+    if (enemy.hp > 1) {
+        drawEnemyHpBar(enemyList);
+    }
+    
+    if(isBombFired){
+        drawCircleElement([bomb]);
+    }
     if(bombExplosion.explosionTime > 0){
         drawCircleElement([bombExplosion]);
+        
         bombExplosion.explosionTime--;
-        bombExplosion.haut += 30;
+        bombExplosion.larg += 20;
+        bombExplosion.haut += 20;
+    }else{
+        bombExplosion.larg = 0;
+        bombExplosion.haut = 0;
     }
 }

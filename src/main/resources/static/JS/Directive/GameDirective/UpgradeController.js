@@ -47,9 +47,11 @@ function upgradeHit() {
     for (var i = 0; i < upgradeList.length; i++) {
         if (upgradeList[i].y > 500) {
             upgradeList.splice(i, 1);
+            i--;
         } else if (isHit(player, upgradeList[i])) {
             addUpgradeToPlayer(upgradeList[i]);
             upgradeList.splice(i, 1);
+            i--;
             addPoints(upgradePoints);
         } else {
             upgradeList[i].y += upgradeDropSpeed;

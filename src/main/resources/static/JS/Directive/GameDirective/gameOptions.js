@@ -12,7 +12,7 @@ function setOptions(startGameValue) {
     vie = startGameValue.nombreDeVie;
     
     generateDefaultValue();
-    console.log("test");
+    
     processOptions();
 }
 function processOptions() {
@@ -24,7 +24,7 @@ function processOptions() {
         upgradeBaseSpawnIntervale = 24000;
         player.upgrades[4] = 1;
         baseMissileIntervale = 3;
-        baseFireingIntervale = 1000000;
+        baseFireingIntervale = 1;
         enemyBaseSpawnIntervale = 10;
         enemy.hp = 5;
     } else if (difficulte === 1) {
@@ -33,6 +33,7 @@ function processOptions() {
         enemyBaseSpawnIntervale = 24;
         upgradeDropSpeed = 3;
         upgradeBaseSpawnIntervale = 24;
+        bombLeft = 5;
         for (var i = 0; i < player.upgrades.length; i++) {
             player.upgrades[i] = 0;
         }
@@ -42,6 +43,7 @@ function processOptions() {
         enemyBaseSpawnIntervale = 32;
         upgradeDropSpeed = 4;
         upgradeBaseSpawnIntervale = 32;
+        bombLeft = 2;
         for (var i = 0; i < player.upgrades.length; i++) {
             player.upgrades[i] = 0;
         }
@@ -52,6 +54,7 @@ function processOptions() {
         upgradeDropSpeed = 4;
         upgradeBaseSpawnIntervale = 42;
         enemy.hp = 2;
+        bombLeft = 1;
         for (var i = 0; i < player.upgrades.length; i++) {
             player.upgrades[i] = 0;
         }

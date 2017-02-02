@@ -10,6 +10,8 @@
                 ) {
             event.preventDefault();
             processPlayerMotion(e.keyCode, "down");
+        }else if(e.keyCode === 32){
+            event.preventDefault();
         }
     };
     document.onkeyup = function (e) {

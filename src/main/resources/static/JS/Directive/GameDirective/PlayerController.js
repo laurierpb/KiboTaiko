@@ -10,48 +10,6 @@ var player = {
     image: "battleShip",
     life: 1
 };
-var playerNormalProjectile = {
-    larg: 5,
-    haut: 5,
-    color: "rgba(255, 0, 0, 0.25)",
-    velX: 0,
-    velY: 15
-};
-playerNormalProjectileDefault = 5;
-
-var playerMissileProjectile = {
-    larg: 10,
-    haut: 20,
-    color: "rgba(255, 0, 0, 0.25)",
-    velX: 0,
-    velY: 0,
-    target: null
-};
-var playerLazerProjectile = {
-    larg: 10,
-    haut: canvasHeight,
-    color: "rgba(255, 0, 255, 0.25)",
-    duration: 5
-};
-var bomb = {
-    haut: 20,
-    color: "rgba(255, 0, 255, 1)",
-    moveVector: [0, 0],
-    frameLeftBeforeImpact: 0
-};
-var bombExplosion = {
-    x:canvasWidth/2,
-    y:canvasHeight/2,
-    haut: 0,
-    color: "rgba(255, 255, 255, 0.75)",
-    color1: "rgba(255, 255, 255, 0.75)",
-    color2: "rgba(255, 255, 255, 0.5)",
-    explosionTime = 0
-};
-var bombBaseFrameLeftBeforeImpact = 24;
-var bombBaseExplosionTime = 24;
-var isBombFired = false;
-var bombLeft = 0;
 
 var maxY = canvas.height - player.haut;
 var maxX = canvas.width - player.larg / 2;
@@ -59,15 +17,6 @@ var moveSpeed = 0;
 var baseMoveSpeed = 10;
 var playerSpeedVector = {x: 0, y: 0};
 var playerMissileProjectileSpeed = 15;
-
-var playerNormalProjectileList = [];
-var playerMissileProjectileList = [];
-var playerLazerProjectileList = [];
-
-var baseFireingIntervale = 10;
-var baseMultishotIntervale = 40;
-var baseLazerIntervale = 50;
-var baseMissileIntervale = 50;
 
 function setPlayerPosition() {
     var normalisedSpeed = generateNormalisedSpeed(
@@ -96,6 +45,7 @@ function playerHit() {
             if (player.upgrades[5] > 0) {
                 player.upgrades[5]--;
                 enemyProjectileList.splice(i, 1);
+                i--;
             } else {
                 if (vie >= 1) {
                     playerLostLife();
@@ -104,33 +54,6 @@ function playerHit() {
             break;
         }
     }
-}
-function setProjectilePosition() {
-    for (var i = 0; i < playerNormalProjectileList.length; i++) {
-        playerNormalProjectileList[i].y -= playerNormalProjectileList[i].velY;
-        playerNormalProjectileList[i].x += playerNormalProjectileList[i].velX;
-        if (playerNormalProjectileList[i].y < -10) {
-            playerNormalProjectileList.splice(i, 1);
-        }
-    }
-    for (var i = 0; i < playerMissileProjectileList.length; i++) {
-        setMissileDirection(playerMissileProjectileList[i]);
-
-        playerMissileProjectileList[i].y -= playerMissileProjectileList[i].velY;
-        playerMissileProjectileList[i].x += playerMissileProjectileList[i].velX;
-
-        if (playerMissileProjectileList[i].y < -10) {
-            playerMissileProjectileList.splice(i, 1);
-        }
-    }
-}
-function setMissileDirection(missile) {
-    var target = missile.target;
-    var x = target.x + target.larg / 2 - missile.x;
-    var y = missile.y - target.y + target.haut / 2;
-    var normXY = (generateNormalisedSpeed(x, y, playerMissileProjectileSpeed));
-    missile.velX = normXY[0];
-    missile.velY = normXY[1];
 }
 function processPlayerMotion(key, event) {
     moveSpeed = baseMoveSpeed + upgradeValueList[1] * player.upgrades[1];
@@ -214,71 +137,5 @@ function executePlayerAction() {
         player.fireingIntervale = 0;
     } else {
         player.fireingIntervale++;
-    }
-}
-
-function addNormalShotToList() {
-    playerNormalProjectileList.push({
-        x: player.x + player.larg / 2 - (playerNormalProjectile.larg + player.upgrades[0] * upgradeValueList[0]) / 2,
-        y: player.y,
-        larg: (playerNormalProjectile.larg) + upgradeValueList[0] * player.upgrades[0],
-        haut: playerNormalProjectile.haut,
-        color: playerNormalProjectile.color,
-        velX: playerNormalProjectile.velX,
-        velY: playerNormalProjectile.velY
-    });
-}
-function addMultishotToList() {
-    playerNormalProjectileList.push({
-        x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
-        y: player.y,
-        larg: playerNormalProjectile.larg,
-        haut: playerNormalProjectile.haut,
-        color: playerNormalProjectile.color,
-        velX: playerNormalProjectile.velX + 3,
-        velY: playerNormalProjectile.velY
-    });
-    playerNormalProjectileList.push({
-        x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
-        y: player.y,
-        larg: playerNormalProjectile.larg,
-        haut: playerNormalProjectile.haut,
-        color: playerNormalProjectile.color,
-        velX: playerNormalProjectile.velX - 3,
-        velY: playerNormalProjectile.velY
-    });
-}
-function addMissileShotToList() {
-    var target = enemyList[Math.floor(Math.random() * enemyList.length)];
-    playerMissileProjectileList.push({
-        x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
-        y: player.y,
-        larg: playerMissileProjectile.larg,
-        haut: playerMissileProjectile.haut,
-        color: playerMissileProjectile.color,
-        velX: playerMissileProjectile.velX,
-        velY: playerMissileProjectile.velY,
-        target: target
-    });
-}
-
-function fireBomb() {
-    if (bombLeft > 0 && !isBombFired) {
-        bombLeft--;
-        bomb.x = player.x;
-        bomb.y = player.y;
-        bomb.moveVector[0] = (canvasWidth / 2 - bomb.x) / bomb.frameLeftBeforeImpact;
-        bomb.moveVector[1] = (canvasHeight - bomb.y) / bomb.frameLeftBeforeImpact;
-        bomb.frameLeftBeforeImpact = bombBaseFrameLeftBeforeImpact;
-        isBombFired = true;
-    }
-}
-function executeBombAction(){
-    bomb.x += bomb.moveVector[0];
-    bomb.y += bomb.moveVector[1];
-    bomb.frameLeftBeforeImpact --;
-    if(bomb.frameLeftBeforeImpact <= 0){
-        isBombFired = false;
-        bombExplosion.explosionTime = bombBaseExplosionTime;
     }
 }

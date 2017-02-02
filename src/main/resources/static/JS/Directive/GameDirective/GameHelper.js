@@ -1,11 +1,11 @@
 /* global points, enemyList, upgradeList, playerMissileProjectileList, playerNormalProjectileList, vie, player, enemyProjectileList, gameExecution */
 
 var projHitOffsetY = 10;
+
 function isHit(target, proj) {
     if (target === undefined || proj === undefined) {
         return;
     }
-
     if (
             target.x + target.larg < proj.x ||
             target.y + target.haut < proj.y ||

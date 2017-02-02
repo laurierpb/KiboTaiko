@@ -1,4 +1,4 @@
-/* global playerNormalProjectileList, player, playerMissileProjectileList, canvas */
+/* global playerNormalProjectileList, player, playerMissileProjectileList, canvas, bombExplosion, canvasHeight */
 
 var enemyList = [];
 var enemyProjectileList = [];
@@ -49,23 +49,32 @@ function setEnemyPosition() {
     }
 }
 function checkForColision(i) {
+    for (var j = 0; j < playerMissileProjectileList.length; j++) {
+        if (isHit(enemyList[i], playerMissileProjectileList[j])) {
+            if (!enemyHit(enemyList, i)) {
+                playerMissileProjectileList.splice(j, 1);
+                j--;
+            } else {
+                deleteMissile(enemyList[i]);
+            }
+        }
+    }
     for (var j = 0; j < playerNormalProjectileList.length; j++) {
         if (isHit(enemyList[i], playerNormalProjectileList[j])) {
-            deleteMissile(enemyList[i]);
-            enemyHit(enemyList, i);
+            if (enemyHit(enemyList, i)) {
+                deleteMissile(enemyList[i]);
+            }
 
             playerNormalProjectileList.splice(j, 1);
             break;
         }
     }
-    for (var j = 0; j < playerMissileProjectileList.length; j++) {
-        if (isHit(enemyList[i], playerMissileProjectileList[j])) {
-
-            if (!enemyHit(enemyList, i)) {
-                playerMissileProjectileList.splice(j, 1);
-            }
+    if (enemyList[i] !== undefined) {
+        if (enemyList[i].y > canvasHeight / 2 - bombExplosion.haut) {
+            enemyHit(enemyList, i);
         }
     }
+
 }
 function enemyHit(enemyList, i) {
     if (enemyList[i].hp <= 1) {
@@ -78,14 +87,7 @@ function enemyHit(enemyList, i) {
         return false;
     }
 }
-function deleteMissile(enemy) {
-    for (var i = 0; i < playerMissileProjectileList.length; i++) {
-        if (playerMissileProjectileList[i].target === enemy) {
-            playerMissileProjectileList.splice(i, 1);
-            i--;
-        }
-    }
-}
+
 function addEnemyToList() {
     if (enemySpawnIntervale <= 0) {
         var randomXValue = Math.random() * (canvas.width - enemy.larg / 2 - 0) + 0;
