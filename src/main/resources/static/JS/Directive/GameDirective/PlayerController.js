@@ -1,4 +1,14 @@
-/* global enemyProjectileList, canvasHeight, upgradeValueList, enemyList, canvas, vie, canvasWidth */
+/* global enemyProjectileList, canvasHeight, upgradeValueList, enemyList, canvas, vie, canvasWidth, baseFireingIntervale, baseMultishotIntervale, baseMissileIntervale, bossProjectileList, bossIsSpawn, bossProjectileWallList */
+
+/*
+ * upgrade:
+ * 0 = grosseur de balle
+ * 1 = speed
+ * 2 = vitesse de tire
+ * 3 = multishot
+ * 4 = missile
+ * 5 = shield
+ */
 var player = {
     x: 245,
     y: 490,
@@ -16,7 +26,6 @@ var maxX = canvas.width - player.larg / 2;
 var moveSpeed = 0;
 var baseMoveSpeed = 10;
 var playerSpeedVector = {x: 0, y: 0};
-var playerMissileProjectileSpeed = 15;
 
 function setPlayerPosition() {
     var normalisedSpeed = generateNormalisedSpeed(
@@ -52,6 +61,36 @@ function playerHit() {
                 }
             }
             break;
+        }
+    }
+    if (bossIsSpawn) {
+        for (var i = 0; i < bossProjectileList.length; i++) {
+            if (isHit(player, bossProjectileList[i])) {
+                if (player.upgrades[5] > 0) {
+                    player.upgrades[5]--;
+                    bossProjectileList.splice(i, 1);
+                    i--;
+                } else {
+                    if (vie >= 1) {
+                        playerLostLife();
+                    }
+                }
+                break;
+            }
+        }
+        for (var i = 0; i < bossProjectileWallList.length; i++) {
+            if (isHit(player, bossProjectileWallList[i])) {
+                if (player.upgrades[5] > 0) {
+                    player.upgrades[5]--;
+                    bossProjectileWallList.splice(i, 1);
+                    i--;
+                } else {
+                    if (vie >= 1) {
+                        playerLostLife();
+                    }
+                }
+                break;
+            }
         }
     }
 }
@@ -128,9 +167,7 @@ function executePlayerAction() {
     if (player.upgrades[4] > 0) {
         var missileFireingIntervale = (baseMissileIntervale - player.upgrades[4] * upgradeValueList[4]);
         if (player.fireingIntervale % missileFireingIntervale === 0) {
-            if (enemyList.length > 0) {
-                addMissileShotToList();
-            }
+            addMissileShotToList();
         }
     }
     if (player.fireingIntervale === 1000000) {

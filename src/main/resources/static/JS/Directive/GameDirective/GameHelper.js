@@ -1,4 +1,4 @@
-/* global points, enemyList, upgradeList, playerMissileProjectileList, playerNormalProjectileList, vie, player, enemyProjectileList, gameExecution */
+/* global points, enemyList, upgradeList, playerMissileProjectileList, playerNormalProjectileList, vie, player, enemyProjectileList, gameExecution, bombLeft, progressiveDifficulty, bossIsSpawn, bossSpawnPoint, enemyUpgrade */
 
 var projHitOffsetY = 10;
 
@@ -61,6 +61,17 @@ function generatePointsForTrianglePointing(missile, enemy) {
     return [coordHautMissile, coordBasGaucheMissile, coordBasDroitMissile];
 }
 function addPoints(point) {
+    if (points % enemyUpgrade + point >= enemyUpgrade) {
+        bombLeft++;
+        if (progressiveDifficulty) {
+            upgradeDifficultyProg();
+        }
+    }
+    if (points % bossSpawnPoint + point >= bossSpawnPoint) {
+        if (!bossIsSpawn) {
+            spawnBoss();
+        }
+    }
     points += point;
 }
 function playerLostLife() {
@@ -70,8 +81,15 @@ function playerLostLife() {
     playerMissileProjectileList = [];
     playerNormalProjectileList = [];
     enemyProjectileList = [];
+    bossProjectileList = [];
+    bossProjectileWallList = [];
     for (var i = 0; i < player.upgrades.length; i++) {
         player.upgrades[i] = 0;
     }
-    setStartMenu();
+}
+function toDegrees(angle) {
+    return angle * (180 / Math.PI);
+}
+function toRadians(angle) {
+    return angle * (Math.PI / 180);
 }

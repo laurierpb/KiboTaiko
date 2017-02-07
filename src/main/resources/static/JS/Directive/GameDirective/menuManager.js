@@ -7,11 +7,11 @@ var optionValue = {
     difficulte: 1,
     nombreDeVie: 1,
     vitesse: 1,
-    points: false
+    points: true
 };
 function setStartMenu() {
-    menuElement = [];
     clearCanvas();
+    menuElement = [];
     canvas.addEventListener("click", onCanvasClick, false);
     canvas.addEventListener("mousemove", onCanvasMove, false);
     menuElement.push({
@@ -149,9 +149,6 @@ function setOptionMenu() {
         utilisation: "vie-"
     });
 
-
-
-
     menuElement.push({
         x: 0,
         y: canvasHeight - 160,
@@ -195,21 +192,15 @@ function onCanvasClick(e) {
                     setOptionMenu();
                     break;
                 case "vitesse +":
-                    if (optionValue.vitesse <= 1) {
-                        optionValue.vitesse += 0.1;
-                    } else {
-                        optionValue.vitesse++;
-                    }
+                    optionValue.vitesse += 0.1;
                     removeButtonFromMenu();
                     setOptionMenu();
                     break;
                 case "vitesse -":
-                    if (optionValue.vitesse <= 0) {
+                    if (optionValue.vitesse <= 0.1) {
                         break
-                    } else if (optionValue.vitesse <= 1) {
-                        optionValue.vitesse = optionValue.vitesse - 0.1;
-                    } else {
-                        optionValue.vitesse--;
+                    } else{
+                        optionValue.vitesse -= 0.1;
                     }
                     removeButtonFromMenu();
                     setOptionMenu();

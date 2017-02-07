@@ -1,4 +1,4 @@
-/* global fps, vitesse, vie, isBombFired */
+/* global fps, vitesse, vie, isBombFired, bossIsSpawn */
 var points = 0;
 var interval = null;
 function startGame(startGameValue) {
@@ -7,21 +7,28 @@ function startGame(startGameValue) {
 }
 
 var gameExecution = function () {
+
     setPlayerPosition();
     executePlayerAction();
-    setProjectilePosition();
+    setPlayerProjectilePosition();
+
+    addEnemyToList();
     setEnemyPosition();
     enemiesFire();
     setEnemiesFirePosition();
-    setUpgradePosition();
 
-    addEnemyToList();
+    setUpgradePosition();
+    if (bossIsSpawn) {
+        executeBossAction();
+    }
+    if (isBombFired) {
+        executeBombAction();
+    }
+
+
 
     clearCanvas();
     drawCanvas();
-    if(isBombFired){
-        executeBombAction();
-    }
     if (vie === 0) {
         setStartMenu();
         clearInterval(interval);

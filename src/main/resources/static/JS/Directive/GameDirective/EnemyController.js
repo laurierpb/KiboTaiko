@@ -1,4 +1,4 @@
-/* global playerNormalProjectileList, player, playerMissileProjectileList, canvas, bombExplosion, canvasHeight */
+/* global playerNormalProjectileList, player, playerMissileProjectileList, canvas, bombExplosion, canvasHeight, difficulte */
 
 var enemyList = [];
 var enemyProjectileList = [];
@@ -10,7 +10,8 @@ var enemy = {
     direction: 1,
     fireIntervale: 0,
     image: "enemy1",
-    hp: 1
+    hp: 1,
+    maxHp:1
 };
 var enemyProjectile = {
     larg: 5,
@@ -97,7 +98,7 @@ function addEnemyToList() {
                 return;
             }
         } while (canEnemyNotSpawn(randomXValue));
-
+        var hp = generateEnemyHp();
         enemyList.push({
             x: randomXValue,
             y: enemyStartingYPosition,
@@ -107,11 +108,19 @@ function addEnemyToList() {
             direction: enemy.direction,
             fireIntervale: Math.random() * (enemyFireRate[1] - enemyFireRate[0]) + enemyFireRate[0],
             image: "enemy1",
-            hp: enemy.hp
+            hp: hp,
+            maxHp:hp
         });
         enemySpawnIntervale = enemyBaseSpawnIntervale;
     }
     enemySpawnIntervale -= 1;
+}
+function generateEnemyHp() {
+    if (difficulte === 2 || difficulte === 1) {
+        return Math.ceil(Math.random() * (enemy.hp - 0) + 0);
+    }else{
+        return enemy.hp;
+    }
 }
 function canEnemyNotSpawn(xValue) {
     for (var i = 0; i < enemyList.length; i++) {

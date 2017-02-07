@@ -1,4 +1,4 @@
-/* global ctx, canvas, playerNormalProjectileList, player, enemyList, enemyProjectileList, upgradeList, playerMissileProjectileList, enemy, points, vie, showPoints, bombExplosion, bomb, isBombFired */
+/* global ctx, canvas, playerNormalProjectileList, player, enemyList, enemyProjectileList, upgradeList, playerMissileProjectileList, enemy, points, vie, showPoints, bombExplosion, bomb, isBombFired, bombLeft, bossIsSpawn, boss, bossProjectileList, bossProjectileWallList */
 
 var canvas = document.getElementById('gameCanvas');
 var canvasHeight = 500;
@@ -18,17 +18,18 @@ function drawRectangleElement(element) {
     }
 }
 function drawEnemyHpBar(element) {
-    var width = enemy.larg;
     for (var i = 0; i < element.length; i++) {
-        var percentageHP = element[i].hp / enemy.hp;
-        var temp = {
-            x: element[i].x,
-            y: element[i].y - 5,
-            larg: element[i].larg * percentageHP,
-            haut: 5,
-            color: enemy.color
-        };
-        drawRectangleElement([temp]);
+        if (element[i].hp > 1) {
+            var percentageHP = element[i].hp / element[i].maxHp;
+            var temp = {
+                x: element[i].x,
+                y: element[i].y - 5,
+                larg: element[i].larg * percentageHP,
+                haut: 5,
+                color: enemy.color
+            };
+            drawRectangleElement([temp]);
+        }
     }
 }
 function drawTriangleElement(elements) {
@@ -71,7 +72,7 @@ function drawImageToCanvas(elements) {
         ctx.drawImage(img, elements[i].x, elements[i].y, elements[i].larg, elements[i].haut);
     }
 }
-function drawArc(element) {
+function drawShield(element) {
     ctx.beginPath();
     ctx.arc(
             player.x + player.larg / 2,
@@ -80,7 +81,7 @@ function drawArc(element) {
             Math.PI * 1.15,
             Math.PI * (1.85)
             );
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 2 * player.upgrades[5];
     ctx.strokeStyle = "rgba(0, 255, 255, " + element + ")";
     ctx.stroke();
 }
@@ -106,16 +107,24 @@ function drawPoints() {
     ctx.fillText(
             "Points : " + points,
             canvasWidth - 100,
-            30 );
+            30);
 }
-function drawVie() {
+function drawGameGUI() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "red";
     ctx.textAlign = "center";
     ctx.fillText(
             "Vie : " + vie,
+            50,
+            30);
+
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText(
+            "Bomb : " + bombLeft,
             70,
-            30 );
+            60);
 }
 function drawCanvas() {
     drawImageToCanvas([player]);
@@ -124,27 +133,32 @@ function drawCanvas() {
     drawImageToCanvas(enemyList);
     drawRectangleElement(enemyProjectileList);
     drawImageToCanvas(upgradeList);
-    drawArc(player.upgrades[5] / 10);
-    
-    
-    drawVie();
+    drawShield(player.upgrades[5] / 10);
+
+    drawGameGUI();
     if (showPoints) {
         drawPoints();
     }
     if (enemy.hp > 1) {
         drawEnemyHpBar(enemyList);
     }
-    
-    if(isBombFired){
-        drawCircleElement([bomb]);
+
+    if (isBombFired) {
+        drawImageToCanvas([bomb]);
     }
-    if(bombExplosion.explosionTime > 0){
+    if (bossIsSpawn) {
+        drawImageToCanvas([boss]);
+        drawEnemyHpBar([boss]);
+        drawRectangleElement(bossProjectileList);
+        drawRectangleElement(bossProjectileWallList);
+    }
+    if (bombExplosion.explosionTime > 0) {
         drawCircleElement([bombExplosion]);
-        
+
         bombExplosion.explosionTime--;
         bombExplosion.larg += 20;
         bombExplosion.haut += 20;
-    }else{
+    } else {
         bombExplosion.larg = 0;
         bombExplosion.haut = 0;
     }

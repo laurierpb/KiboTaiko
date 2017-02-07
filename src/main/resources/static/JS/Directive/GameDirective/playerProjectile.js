@@ -1,9 +1,11 @@
-/* global canvasHeight, upgradeValueList, player, enemyList, canvasWidth, playerMissileProjectileSpeed */
+/* global canvasHeight, upgradeValueList, player, enemyList, canvasWidth, playerMissileProjectileSpeed, boss, bossIsSpawn */
 var bomb = {
-    larg: 15,
+    larg: 25,
+    haut:25,
     color: "rgba(255, 255, 255, 1)",
     moveVector: [0, 0],
-    frameLeftBeforeImpact: 0
+    frameLeftBeforeImpact: 0,
+    image:"bomb"
 };
 var bombExplosion = {
     x:0, 
@@ -50,6 +52,7 @@ var baseFireingIntervale = 10;
 var baseMultishotIntervale = 40;
 var baseLazerIntervale = 50;
 var baseMissileIntervale = 50;
+var playerMissileProjectileSpeed = 15;
 
 
 function addNormalShotToList() {
@@ -84,7 +87,14 @@ function addMultishotToList() {
     });
 }
 function addMissileShotToList() {
-    var target = enemyList[Math.floor(Math.random() * enemyList.length)];
+    var target;
+    if (enemyList.length > 0){
+        target = enemyList[Math.floor(Math.random() * enemyList.length)];
+    }else if(bossIsSpawn){
+        target = boss;
+    }else{
+        return;
+    }
     playerMissileProjectileList.push({
         x: player.x + player.larg / 2 - playerNormalProjectile.larg / 2,
         y: player.y,
@@ -97,7 +107,6 @@ function addMissileShotToList() {
     });
 }
 function fireBomb() {
-    console.log(bombLeft);
     if (bombLeft > 0 && !isBombFired) {
         bombLeft--;
         bomb.x = player.x;
@@ -106,7 +115,6 @@ function fireBomb() {
         bomb.moveVector[1] = (canvasHeight / 2 - player.y) / bombBaseFrameLeftBeforeImpact;
         bomb.frameLeftBeforeImpact = bombBaseFrameLeftBeforeImpact;
         isBombFired = true;
-        console.log(bomb.moveVector[0]);
     }
 }
 function executeBombAction() {
@@ -124,7 +132,7 @@ function executeBombAction() {
     }
 }
 
-function setProjectilePosition() {
+function setPlayerProjectilePosition() {
     for (var i = 0; i < playerNormalProjectileList.length; i++) {
         playerNormalProjectileList[i].y -= playerNormalProjectileList[i].velY;
         playerNormalProjectileList[i].x += playerNormalProjectileList[i].velX;

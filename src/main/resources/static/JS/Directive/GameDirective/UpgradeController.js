@@ -25,25 +25,7 @@ var upgradeBaseSpawnIntervale = 30;
 var upgradePoints = 25;
 
 function setUpgradePosition() {
-    if (upgradeSpawnIntervale <= 0) {
-        var min = Math.ceil(0);
-        var max = Math.floor(upgradeValueList.length);
-        upgradeList.push({
-            x: (Math.random() * (470 - 0) + 0),
-            y: upgrade.y,
-            larg: upgrade.larg,
-            haut: upgrade.haut,
-            color: upgrade.color,
-            upgrade: Math.floor(Math.random() * ((max + 1) - min) + min),
-            upgradeValue: upgrade.upgradeValue,
-            image: "crate"
-        });
-        upgradeSpawnIntervale = upgradeBaseSpawnIntervale;
-    }
-    upgradeHit();
-    upgradeSpawnIntervale--;
-}
-function upgradeHit() {
+    spawnUpgrade();
     for (var i = 0; i < upgradeList.length; i++) {
         if (upgradeList[i].y > 500) {
             upgradeList.splice(i, 1);
@@ -56,6 +38,27 @@ function upgradeHit() {
         } else {
             upgradeList[i].y += upgradeDropSpeed;
         }
+    }
+
+}
+function spawnUpgrade() {
+    if (upgradeSpawnIntervale <= 0) {
+        var min = Math.ceil(0);
+        var max = Math.floor(upgradeValueList.length);
+        var upgradeValue = Math.floor(Math.random() * ((max + 1) - min) + min);
+        upgradeList.push({
+            x: (Math.random() * (470 - 0) + 0),
+            y: upgrade.y,
+            larg: upgrade.larg,
+            haut: upgrade.haut,
+            color: upgrade.color,
+            upgrade: upgradeValue,
+            upgradeValue: upgrade.upgradeValue,
+            image: "crate"
+        });
+        upgradeSpawnIntervale = upgradeBaseSpawnIntervale;
+    } else {
+        upgradeSpawnIntervale--;
     }
 }
 function addUpgradeToPlayer(upgrade) {
