@@ -7,7 +7,9 @@
             <div id="GalerieController" class="panel-collapse collapse">
                 <div class="panel-body">
                     <my-canvasEdit elements="elements" image="image" oppacity="0.5"/>
-                    
+                    {{image.substring(0,50)}}
+                    <img ng-src="{{image}}"/>
+                    <br/>
                     <my-imageselector image="image"/>
                     
                     <div class="row">

@@ -9,9 +9,12 @@ app.directive('myCanvasedit', function () {
             elements: '=elements',
             newElement: '=newElement',
             oppacity: '=oppacity',
-            image: '=image'
+            image: '='
         },
         controller: function ($scope) {
+            $scope.$watch("image", function (newValue, oldValue) {
+                //This gets called when data changes.
+            });
             $(document).ready(function () {
                 $('#newElementForCanvas').on("click", function () {
                     addNewElementToCanvas();
@@ -31,7 +34,7 @@ app.directive('myCanvasedit', function () {
 
             function addNewElementToCanvas() {
                 if (validateNewElement()) {
-                    $scope.elements.list.push($scope.newElement);
+                    $scope.elements.push($scope.newElement);
 
                     newElementClearValue();
                 } else {
@@ -40,10 +43,10 @@ app.directive('myCanvasedit', function () {
             }
             function validateNewElement() {
                 var returnValue = true;
-                for (var i = 0; i < $scope.elements.list.length; i++) {
-                    if ($scope.elements.list[i].nom === $scope.newElement.nom ||
-                            $scope.elements.list[i].larg === 0 ||
-                            $scope.elements.list[i].haut === 0)
+                for (var i = 0; i < $scope.elements.length; i++) {
+                    if ($scope.elements[i].nom === $scope.newElement.nom ||
+                            $scope.elements[i].larg === 0 ||
+                            $scope.elements[i].haut === 0)
                     {
                         returnValue = false;
                     }

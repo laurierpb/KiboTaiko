@@ -9,7 +9,7 @@
 </style>
 <canvas id="myCanvas" class="myCanvas" style="border:1px solid black;"></canvas>
 
-<div id="{{element.nom}}" ng-repeat="element in elements.list" class="collapse">
+<div id="{{element.nom}}" ng-repeat="element in elements" class="collapse">
     <h2>{{element.nom}}</h2>
     <p ng-bind-html="element.contenue"></p>
 </div>

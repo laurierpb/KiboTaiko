@@ -50,13 +50,13 @@ app.directive('myCanvas', function () {
                             $scope.newElement.haut);
                 }
 
-                for (var i = 0; i < $scope.elements.list.length; i++) {
+                for (var i = 0; i < $scope.elements.length; i++) {
                     ctx.fillStyle = "rgba(255, 255, 255, " + $scope.oppacity + ")";
                     ctx.fillRect(
-                            $scope.elements.list[i].x,
-                            $scope.elements.list[i].y,
-                            $scope.elements.list[i].larg,
-                            $scope.elements.list[i].haut);
+                            $scope.elements[i].x,
+                            $scope.elements[i].y,
+                            $scope.elements[i].larg,
+                            $scope.elements[i].haut);
                 }
             }
             function clearElements() {
@@ -69,8 +69,8 @@ app.directive('myCanvas', function () {
             
             function onCanvasMove(e) {
                 this.style.cursor = 'initial';
-                for (var i = 0; i < $scope.elements.list.length; i++) {
-                    if (isCursorOnElement($scope.elements.list[i], e)) {
+                for (var i = 0; i < $scope.elements.length; i++) {
+                    if (isCursorOnElement($scope.elements[i], e)) {
                         this.style.cursor = 'pointer';
                         return;
                     }
@@ -81,11 +81,11 @@ app.directive('myCanvas', function () {
             }
 
             function onCanvasClick(e) {
-                for (var i = 0; i < $scope.elements.list.length; i++) {
-                    if (isCursorOnElement($scope.elements.list[i], e)) {
-                        $("#" + $scope.elements.list[i].nom).collapse('show');
+                for (var i = 0; i < $scope.elements.length; i++) {
+                    if (isCursorOnElement($scope.elements[i], e)) {
+                        $("#" + $scope.elements[i].nom).collapse('show');
                     } else {
-                        $("#" + $scope.elements.list[i].nom).collapse('hide');
+                        $("#" + $scope.elements[i].nom).collapse('hide');
                     }
                 }
                 if ($scope.newElement !== undefined) {

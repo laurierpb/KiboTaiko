@@ -20,19 +20,19 @@ app.directive('myCarousel', function () {
             images: '=data',
             intervale: '=intervale'
         },
-        link: function (scope, elem, attrs) {
-            if (scope.intervale === undefined)
-                scope.intervale = 5000;
-            for (var i = 0; i < scope.images.length; i++) {
-                if (!scope.images[i].url.includes("http")) {
-                    if (!scope.images[i].url.includes("base64")) {
-                        scope.images[i].url = "data:image/JPEG;base64," + scope.images[i].url;
+        controller: function ($scope) {
+            if ($scope.intervale === undefined)
+                $scope.intervale = 5000;
+            for (var i = 0; i < $scope.images.length; i++) {
+                if (!$scope.images[i].url.includes("http")) {
+                    if (!$scope.images[i].url.includes("base64")) {
+                        $scope.images[i].url = "data:image/JPEG;base64," + $scope.images[i].url;
                     }
                 }
             }
             $(document).ready(function () {
                 $('.carousel').carousel({
-                    interval: scope.intervale
+                    interval: $scope.intervale
                 });
             });
         }
