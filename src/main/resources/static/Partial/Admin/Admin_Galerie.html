@@ -1,0 +1,38 @@
+<div id="adminImagesPage" class="row" ng-controller="AdminGalerieController">
+    <div class="col-xs-12" style="text-align: center">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="button" data-toggle="collapse" data-target="#GalerieController">
+                <h4>Galerie</h4>
+            </div>
+            <div id="GalerieController" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <my-canvasEdit elements="elements" image="image" oppacity="0.5"/>
+                    
+                    <my-imageselector image="image"/>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label for="imageAltUpload">
+                                Image alt
+                                <input id="imageAltUpload" type="text" ng-model="currentImage.imageAlt">
+                            </label>
+                        </div>
+                        <div class="col-xs-12 center">
+                            <label for="uploadImage" class="btn btn-default btn-file">
+                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"/>
+                                Naviger 
+                                <input id="uploadImage" accept="image/*" type="file" name="uploadfile" style="display: none;" 
+                                       onchange="angular.element(this).scope().imageChange(this)"/>
+                            </label>
+                            <label class="btn btn-success btn-file">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                Sauvegarder 
+                                <input ng-click="uploadImage(currentImage)" type="button" style="display: none;" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,8 +17,6 @@ app.controller('AdminHomeController', function ($scope, $http) {
         method: 'GET',
         url: '/HomeItems'
     }).then(function successCallback(response) {
-        console.log("HomeItem get: ");
-        console.log(response.data);
         $scope.HomeItems = response.data;
     }, function errorCallback(data, status, headers, config) {
         console.log('Le GET vers la ressourse s\'est mal fait');

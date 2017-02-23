@@ -8,7 +8,8 @@ app.directive('myCanvasedit', function () {
         scope: {
             elements: '=elements',
             newElement: '=newElement',
-            oppacity: '=oppacity'
+            oppacity: '=oppacity',
+            image: '=image'
         },
         controller: function ($scope) {
             $(document).ready(function () {

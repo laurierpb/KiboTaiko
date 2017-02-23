@@ -27,15 +27,17 @@ app.directive('myCanvas', function () {
         scope: {
             elements: '=elements',
             newElement: '=newElement',
-            oppacity: '=oppacity'
+            oppacity: '=oppacity',
+            image: '=image'
         },
         controller: function ($scope) {
             var canvas = $('#myCanvas')[0];
             var ctx = canvas.getContext("2d");
             var canvasBaseSize = 300;
+            
             canvas.addEventListener("click", onCanvasClick, false);
             canvas.addEventListener("mousemove", onCanvasMove, false);
-            canvas.style.backgroundImage = "url('" + $scope.elements.image + "')";
+            canvas.style.backgroundImage = "url('" + $scope.image + "')";
             drawElements();
             
             function drawElements() {
@@ -106,6 +108,8 @@ app.directive('myCanvas', function () {
                         y < (element.y + element.haut) * offset);
             }
             function getCursorPosition(e) {
+                var offsetTop = 0;
+                var canvasParent;
                 var x;
                 var y;
                 if (e.pageX !== undefined && e.pageY !== undefined) {
@@ -117,8 +121,13 @@ app.directive('myCanvas', function () {
                     y = e.clientY + document.body.scrollTop +
                             document.documentElement.scrollTop;
                 }
-                if(canvas.offsetTop > 0){
-                    y -= canvas.offsetTop;
+                canvasParent = canvas;
+                while(canvasParent.offsetTop > 0){
+                    offsetTop += canvasParent.offsetTop;
+                    canvasParent = canvasParent.offsetParent;
+                }
+                if(offsetTop > 0){
+                    y -= offsetTop;
                 }else{
                     y -= canvas.offsetParent.offsetTop;
                 }

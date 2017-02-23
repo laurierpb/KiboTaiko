@@ -1,15 +1,16 @@
-<my-canvas elements="elements" new-element="newElement" oppacity="oppacity"/>
+<my-canvas elements="elements" image="image" new-element="newElement" oppacity="oppacity"/>
 
 <div id="{{newElement.nom}}" class="collapse">
     <h2>{{newElement.nom}}</h2>
     <p ng-bind-html="newElement.contenue"></p>
 </div>
-
-nom<input type="text" id="inputCanvasName" class="myCanvasInput" ng-model="newElement.nom"/><br/>
-contenue<input type="text" id="inputCanvasContenue" class="myCanvasInput" ng-model="newElement.contenue"/><br/>
-x<input type="number" id="inputCanvasX" class="myCanvasInput" ng-model="newElement.x"/><br/>
-y<input type="number" id="inputCanvasY" class="myCanvasInput" ng-model="newElement.y"/><br/>
-larg<input type="number" id="inputCanvasLart" class="myCanvasInput" ng-model="newElement.larg"/><br/>
-haut<input type="number" id="inputCanvasHaut" class="myCanvasInput" ng-model="newElement.haut"/><br/>
-<br/>
-<input type="button" value="test" id="newElementForCanvas"/>
+<div style="text-align: left">
+    nom<input type="text" id="inputCanvasName" ng-model="newElement.nom"/><br/>
+    contenue<input type="text" id="inputCanvasContenue" ng-model="newElement.contenue"/><br/>
+    x<input type="number" id="inputCanvasX" ng-model="newElement.x"/><br/>
+    y<input type="number" id="inputCanvasY" ng-model="newElement.y"/><br/>
+    larg<input type="number" id="inputCanvasLart" ng-model="newElement.larg"/><br/>
+    haut<input type="number" id="inputCanvasHaut" ng-model="newElement.haut"/><br/>
+    <br/>
+    <input type="button" value="test" id="newElementForCanvas"/>
+</div>
